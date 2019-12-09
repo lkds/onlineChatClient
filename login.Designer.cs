@@ -66,6 +66,7 @@
             this.loginBtn.TabIndex = 2;
             this.loginBtn.Text = "登录";
             this.loginBtn.UseVisualStyleBackColor = true;
+            this.loginBtn.Click += new System.EventHandler(this.LoginBtn_Click);
             // 
             // serverIPBox
             // 

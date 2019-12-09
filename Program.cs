@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Net;
 
 namespace onlineChat  
 {
@@ -18,5 +19,13 @@ namespace onlineChat
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new mainPage());
         }
+    }
+
+    //全局变量
+    static class globalVar
+    {
+        public static user mainUser=new user();//当前用户
+
+
     }
 }
