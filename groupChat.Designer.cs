@@ -28,92 +28,126 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.listBox2 = new System.Windows.Forms.ListBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(groupChat));
+            this.chatUserListBox = new System.Windows.Forms.ListBox();
+            this.chatQuitGroupBtn = new System.Windows.Forms.Button();
+            this.chatMessageBox = new System.Windows.Forms.ListBox();
+            this.chatSendBox = new System.Windows.Forms.TextBox();
+            this.chatSendBtn = new System.Windows.Forms.Button();
+            this.chatGroupName = new System.Windows.Forms.Label();
+            this.fileSelectBox = new System.Windows.Forms.PictureBox();
+            this.imageSelectBox = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.fileSelectBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imageSelectBox)).BeginInit();
             this.SuspendLayout();
             // 
-            // listBox1
+            // chatUserListBox
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 15;
-            this.listBox1.Location = new System.Drawing.Point(3, 49);
-            this.listBox1.Margin = new System.Windows.Forms.Padding(4);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(219, 454);
-            this.listBox1.TabIndex = 0;
+            this.chatUserListBox.FormattingEnabled = true;
+            this.chatUserListBox.ItemHeight = 15;
+            this.chatUserListBox.Location = new System.Drawing.Point(3, 49);
+            this.chatUserListBox.Margin = new System.Windows.Forms.Padding(4);
+            this.chatUserListBox.Name = "chatUserListBox";
+            this.chatUserListBox.Size = new System.Drawing.Size(219, 454);
+            this.chatUserListBox.TabIndex = 0;
             // 
-            // button1
+            // chatQuitGroupBtn
             // 
-            this.button1.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
-            this.button1.ForeColor = System.Drawing.Color.Red;
-            this.button1.Location = new System.Drawing.Point(65, 511);
-            this.button1.Margin = new System.Windows.Forms.Padding(4);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(100, 36);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "退出群聊";
-            this.button1.UseVisualStyleBackColor = true;
+            this.chatQuitGroupBtn.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
+            this.chatQuitGroupBtn.ForeColor = System.Drawing.Color.Red;
+            this.chatQuitGroupBtn.Location = new System.Drawing.Point(65, 511);
+            this.chatQuitGroupBtn.Margin = new System.Windows.Forms.Padding(4);
+            this.chatQuitGroupBtn.Name = "chatQuitGroupBtn";
+            this.chatQuitGroupBtn.Size = new System.Drawing.Size(100, 36);
+            this.chatQuitGroupBtn.TabIndex = 1;
+            this.chatQuitGroupBtn.Text = "退出群聊";
+            this.chatQuitGroupBtn.UseVisualStyleBackColor = true;
             // 
-            // listBox2
+            // chatMessageBox
             // 
-            this.listBox2.FormattingEnabled = true;
-            this.listBox2.ItemHeight = 15;
-            this.listBox2.Location = new System.Drawing.Point(243, 4);
-            this.listBox2.Margin = new System.Windows.Forms.Padding(4);
-            this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(759, 409);
-            this.listBox2.TabIndex = 2;
+            this.chatMessageBox.FormattingEnabled = true;
+            this.chatMessageBox.ItemHeight = 15;
+            this.chatMessageBox.Location = new System.Drawing.Point(243, 4);
+            this.chatMessageBox.Margin = new System.Windows.Forms.Padding(4);
+            this.chatMessageBox.Name = "chatMessageBox";
+            this.chatMessageBox.Size = new System.Drawing.Size(759, 409);
+            this.chatMessageBox.TabIndex = 2;
+            this.chatMessageBox.SelectedIndexChanged += new System.EventHandler(this.ListBox2_SelectedIndexChanged);
             // 
-            // textBox1
+            // chatSendBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(243, 436);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(620, 110);
-            this.textBox1.TabIndex = 3;
+            this.chatSendBox.Location = new System.Drawing.Point(243, 436);
+            this.chatSendBox.Margin = new System.Windows.Forms.Padding(4);
+            this.chatSendBox.Multiline = true;
+            this.chatSendBox.Name = "chatSendBox";
+            this.chatSendBox.Size = new System.Drawing.Size(620, 110);
+            this.chatSendBox.TabIndex = 3;
             // 
-            // button2
+            // chatSendBtn
             // 
-            this.button2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button2.ForeColor = System.Drawing.Color.Green;
-            this.button2.Location = new System.Drawing.Point(885, 510);
-            this.button2.Margin = new System.Windows.Forms.Padding(4);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(105, 38);
-            this.button2.TabIndex = 4;
-            this.button2.Text = "发送";
-            this.button2.UseVisualStyleBackColor = true;
+            this.chatSendBtn.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.chatSendBtn.ForeColor = System.Drawing.Color.Green;
+            this.chatSendBtn.Location = new System.Drawing.Point(889, 508);
+            this.chatSendBtn.Margin = new System.Windows.Forms.Padding(4);
+            this.chatSendBtn.Name = "chatSendBtn";
+            this.chatSendBtn.Size = new System.Drawing.Size(105, 38);
+            this.chatSendBtn.TabIndex = 4;
+            this.chatSendBtn.Text = "发送";
+            this.chatSendBtn.UseVisualStyleBackColor = true;
             // 
-            // label1
+            // chatGroupName
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(16, 11);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(92, 27);
-            this.label1.TabIndex = 7;
-            this.label1.Text = "群聊名称";
+            this.chatGroupName.AutoSize = true;
+            this.chatGroupName.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.chatGroupName.Location = new System.Drawing.Point(13, 9);
+            this.chatGroupName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.chatGroupName.Name = "chatGroupName";
+            this.chatGroupName.Size = new System.Drawing.Size(92, 27);
+            this.chatGroupName.TabIndex = 7;
+            this.chatGroupName.Text = "群聊名称";
+            this.chatGroupName.Click += new System.EventHandler(this.Label1_Click);
+            // 
+            // fileSelectBox
+            // 
+            this.fileSelectBox.Image = ((System.Drawing.Image)(resources.GetObject("fileSelectBox.Image")));
+            this.fileSelectBox.Location = new System.Drawing.Point(950, 436);
+            this.fileSelectBox.Margin = new System.Windows.Forms.Padding(4);
+            this.fileSelectBox.Name = "fileSelectBox";
+            this.fileSelectBox.Size = new System.Drawing.Size(44, 40);
+            this.fileSelectBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.fileSelectBox.TabIndex = 9;
+            this.fileSelectBox.TabStop = false;
+            // 
+            // imageSelectBox
+            // 
+            this.imageSelectBox.Image = ((System.Drawing.Image)(resources.GetObject("imageSelectBox.Image")));
+            this.imageSelectBox.Location = new System.Drawing.Point(889, 436);
+            this.imageSelectBox.Margin = new System.Windows.Forms.Padding(4);
+            this.imageSelectBox.Name = "imageSelectBox";
+            this.imageSelectBox.Size = new System.Drawing.Size(44, 40);
+            this.imageSelectBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.imageSelectBox.TabIndex = 8;
+            this.imageSelectBox.TabStop = false;
             // 
             // groupChat
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1007, 562);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.listBox2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.listBox1);
+            this.Controls.Add(this.fileSelectBox);
+            this.Controls.Add(this.imageSelectBox);
+            this.Controls.Add(this.chatGroupName);
+            this.Controls.Add(this.chatSendBtn);
+            this.Controls.Add(this.chatSendBox);
+            this.Controls.Add(this.chatMessageBox);
+            this.Controls.Add(this.chatQuitGroupBtn);
+            this.Controls.Add(this.chatUserListBox);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "groupChat";
-            this.Text = "groupChat";
+            this.Text = "群聊";
+            ((System.ComponentModel.ISupportInitialize)(this.fileSelectBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imageSelectBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -121,11 +155,13 @@
 
         #endregion
 
-        private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.ListBox listBox2;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ListBox chatUserListBox;
+        private System.Windows.Forms.Button chatQuitGroupBtn;
+        private System.Windows.Forms.ListBox chatMessageBox;
+        private System.Windows.Forms.TextBox chatSendBox;
+        private System.Windows.Forms.Button chatSendBtn;
+        private System.Windows.Forms.Label chatGroupName;
+        private System.Windows.Forms.PictureBox fileSelectBox;
+        private System.Windows.Forms.PictureBox imageSelectBox;
     }
 }

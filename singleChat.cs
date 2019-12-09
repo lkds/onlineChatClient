@@ -33,5 +33,10 @@ namespace onlineChat
         {
 
         }
+
+        private void PictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

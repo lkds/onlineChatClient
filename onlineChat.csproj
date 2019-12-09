@@ -106,6 +106,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="singleChat.resx">
+      <DependentUpon>singleChat.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="singleUserBox.resx">
       <DependentUpon>singleUserBox.cs</DependentUpon>
     </EmbeddedResource>
