@@ -32,18 +32,22 @@
             this.avatar = new System.Windows.Forms.PictureBox();
             this.userName = new System.Windows.Forms.Label();
             this.IPAddress = new System.Windows.Forms.Label();
-            this.chatBox = new System.Windows.Forms.RichTextBox();
-            this.textInputBox = new System.Windows.Forms.TextBox();
-            this.sendBtn = new System.Windows.Forms.Button();
-            this.onlineList = new System.Windows.Forms.ListBox();
+            this.recentUserList = new System.Windows.Forms.ListBox();
+            this.seeeionTab = new System.Windows.Forms.TabControl();
+            this.onlineTab = new System.Windows.Forms.TabPage();
+            this.onlineUserList = new System.Windows.Forms.ListBox();
+            this.recentSessionTab = new System.Windows.Forms.TabPage();
             ((System.ComponentModel.ISupportInitialize)(this.avatar)).BeginInit();
+            this.seeeionTab.SuspendLayout();
+            this.onlineTab.SuspendLayout();
+            this.recentSessionTab.SuspendLayout();
             this.SuspendLayout();
             // 
             // avatar
             // 
             this.avatar.BackColor = System.Drawing.Color.CadetBlue;
             this.avatar.Image = ((System.Drawing.Image)(resources.GetObject("avatar.Image")));
-            this.avatar.Location = new System.Drawing.Point(26, 24);
+            this.avatar.Location = new System.Drawing.Point(26, 46);
             this.avatar.Name = "avatar";
             this.avatar.Size = new System.Drawing.Size(100, 100);
             this.avatar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -54,9 +58,9 @@
             // userName
             // 
             this.userName.Font = new System.Drawing.Font("黑体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.userName.Location = new System.Drawing.Point(153, 24);
+            this.userName.Location = new System.Drawing.Point(149, 46);
             this.userName.Name = "userName";
-            this.userName.Size = new System.Drawing.Size(200, 30);
+            this.userName.Size = new System.Drawing.Size(253, 30);
             this.userName.TabIndex = 1;
             this.userName.Text = "黄伟业";
             this.userName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -64,73 +68,87 @@
             // IPAddress
             // 
             this.IPAddress.Font = new System.Drawing.Font("黑体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.IPAddress.Location = new System.Drawing.Point(153, 78);
+            this.IPAddress.Location = new System.Drawing.Point(149, 116);
             this.IPAddress.Name = "IPAddress";
-            this.IPAddress.Size = new System.Drawing.Size(200, 30);
+            this.IPAddress.Size = new System.Drawing.Size(253, 30);
             this.IPAddress.TabIndex = 2;
             this.IPAddress.Text = "127.0.0.1";
             this.IPAddress.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // chatBox
+            // recentUserList
             // 
-            this.chatBox.BackColor = System.Drawing.SystemColors.Info;
-            this.chatBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.chatBox.Location = new System.Drawing.Point(25, 161);
-            this.chatBox.Name = "chatBox";
-            this.chatBox.ReadOnly = true;
-            this.chatBox.Size = new System.Drawing.Size(500, 300);
-            this.chatBox.TabIndex = 3;
-            this.chatBox.Text = "赵晗泽 2019.12.25    18:56:49\n黄伟业是沙雕\n黄伟业 2019.12.25    18:57:16\n给爷爬\nzigzag 2019.12.2" +
-    "5    18:58:46\n撒刁";
-            // 
-            // textInputBox
-            // 
-            this.textInputBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textInputBox.Location = new System.Drawing.Point(25, 482);
-            this.textInputBox.Multiline = true;
-            this.textInputBox.Name = "textInputBox";
-            this.textInputBox.Size = new System.Drawing.Size(500, 75);
-            this.textInputBox.TabIndex = 4;
-            // 
-            // sendBtn
-            // 
-            this.sendBtn.BackColor = System.Drawing.SystemColors.MenuHighlight;
-            this.sendBtn.Font = new System.Drawing.Font("微软雅黑", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.sendBtn.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.sendBtn.Location = new System.Drawing.Point(425, 507);
-            this.sendBtn.Name = "sendBtn";
-            this.sendBtn.Size = new System.Drawing.Size(100, 50);
-            this.sendBtn.TabIndex = 5;
-            this.sendBtn.Text = "发送";
-            this.sendBtn.UseVisualStyleBackColor = false;
-            // 
-            // onlineList
-            // 
-            this.onlineList.BackColor = System.Drawing.SystemColors.Window;
-            this.onlineList.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.onlineList.Font = new System.Drawing.Font("微软雅黑", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.onlineList.FormattingEnabled = true;
-            this.onlineList.ItemHeight = 24;
-            this.onlineList.Items.AddRange(new object[] {
+            this.recentUserList.BackColor = System.Drawing.SystemColors.Window;
+            this.recentUserList.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.recentUserList.Font = new System.Drawing.Font("微软雅黑", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.recentUserList.FormattingEnabled = true;
+            this.recentUserList.ItemHeight = 24;
+            this.recentUserList.Items.AddRange(new object[] {
             "鼠辈（192.168.43.12）",
             "江某民（192.168.43.26）",
             "pilotWei（192.168.43.22）",
             "zigzag（192.168.43.55）"});
-            this.onlineList.Location = new System.Drawing.Point(569, 161);
-            this.onlineList.Name = "onlineList";
-            this.onlineList.Size = new System.Drawing.Size(380, 384);
-            this.onlineList.TabIndex = 6;
-            this.onlineList.SelectedIndexChanged += new System.EventHandler(this.OnlineList_SelectedIndexChanged);
+            this.recentUserList.Location = new System.Drawing.Point(0, -1);
+            this.recentUserList.Name = "recentUserList";
+            this.recentUserList.Size = new System.Drawing.Size(372, 744);
+            this.recentUserList.TabIndex = 6;
+            this.recentUserList.SelectedIndexChanged += new System.EventHandler(this.OnlineList_SelectedIndexChanged);
+            // 
+            // seeeionTab
+            // 
+            this.seeeionTab.Controls.Add(this.onlineTab);
+            this.seeeionTab.Controls.Add(this.recentSessionTab);
+            this.seeeionTab.Location = new System.Drawing.Point(26, 163);
+            this.seeeionTab.Name = "seeeionTab";
+            this.seeeionTab.SelectedIndex = 0;
+            this.seeeionTab.Size = new System.Drawing.Size(380, 778);
+            this.seeeionTab.TabIndex = 7;
+            // 
+            // onlineTab
+            // 
+            this.onlineTab.Controls.Add(this.onlineUserList);
+            this.onlineTab.Location = new System.Drawing.Point(4, 25);
+            this.onlineTab.Name = "onlineTab";
+            this.onlineTab.Padding = new System.Windows.Forms.Padding(3);
+            this.onlineTab.Size = new System.Drawing.Size(372, 749);
+            this.onlineTab.TabIndex = 0;
+            this.onlineTab.Text = "在线用户";
+            this.onlineTab.UseVisualStyleBackColor = true;
+            // 
+            // onlineUserList
+            // 
+            this.onlineUserList.BackColor = System.Drawing.SystemColors.Window;
+            this.onlineUserList.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.onlineUserList.Font = new System.Drawing.Font("微软雅黑", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.onlineUserList.FormattingEnabled = true;
+            this.onlineUserList.ItemHeight = 24;
+            this.onlineUserList.Items.AddRange(new object[] {
+            "鼠辈（192.168.43.12）",
+            "江某民（192.168.43.26）",
+            "pilotWei（192.168.43.22）",
+            "zigzag（192.168.43.55）"});
+            this.onlineUserList.Location = new System.Drawing.Point(0, -1);
+            this.onlineUserList.Name = "onlineUserList";
+            this.onlineUserList.Size = new System.Drawing.Size(372, 744);
+            this.onlineUserList.TabIndex = 7;
+            this.onlineUserList.SelectedIndexChanged += new System.EventHandler(this.ListBox1_SelectedIndexChanged);
+            // 
+            // recentSessionTab
+            // 
+            this.recentSessionTab.Controls.Add(this.recentUserList);
+            this.recentSessionTab.Location = new System.Drawing.Point(4, 25);
+            this.recentSessionTab.Name = "recentSessionTab";
+            this.recentSessionTab.Padding = new System.Windows.Forms.Padding(3);
+            this.recentSessionTab.Size = new System.Drawing.Size(372, 749);
+            this.recentSessionTab.TabIndex = 1;
+            this.recentSessionTab.Text = "最近会话";
+            this.recentSessionTab.UseVisualStyleBackColor = true;
             // 
             // mainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(982, 571);
-            this.Controls.Add(this.onlineList);
-            this.Controls.Add(this.sendBtn);
-            this.Controls.Add(this.textInputBox);
-            this.Controls.Add(this.chatBox);
+            this.ClientSize = new System.Drawing.Size(432, 953);
+            this.Controls.Add(this.seeeionTab);
             this.Controls.Add(this.IPAddress);
             this.Controls.Add(this.userName);
             this.Controls.Add(this.avatar);
@@ -140,8 +158,10 @@
             this.Name = "mainWindow";
             this.Text = "onlineChat";
             ((System.ComponentModel.ISupportInitialize)(this.avatar)).EndInit();
+            this.seeeionTab.ResumeLayout(false);
+            this.onlineTab.ResumeLayout(false);
+            this.recentSessionTab.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -150,10 +170,11 @@
         private System.Windows.Forms.PictureBox avatar;
         private System.Windows.Forms.Label userName;
         private System.Windows.Forms.Label IPAddress;
-        private System.Windows.Forms.RichTextBox chatBox;
-        private System.Windows.Forms.TextBox textInputBox;
-        private System.Windows.Forms.Button sendBtn;
-        private System.Windows.Forms.ListBox onlineList;
+        private System.Windows.Forms.ListBox recentUserList;
+        private System.Windows.Forms.TabControl seeeionTab;
+        private System.Windows.Forms.TabPage onlineTab;
+        private System.Windows.Forms.TabPage recentSessionTab;
+        private System.Windows.Forms.ListBox onlineUserList;
     }
 }
 
