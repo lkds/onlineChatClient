@@ -50,17 +50,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="chatWindow.cs">
+    <Compile Include="groupChat.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="chatWindow.Designer.cs">
-      <DependentUpon>chatWindow.cs</DependentUpon>
+    <Compile Include="groupChat.Designer.cs">
+      <DependentUpon>groupChat.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form1.cs">
+    <Compile Include="mainPage.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="mainPage.Designer.cs">
+      <DependentUpon>mainPage.cs</DependentUpon>
     </Compile>
     <Compile Include="login.cs">
       <SubType>Form</SubType>
@@ -79,11 +79,11 @@
     <EmbeddedResource Include="chatWindow.resx">
       <DependentUpon>chatWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="login.resx">
       <DependentUpon>login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="mainPage.resx">
+      <DependentUpon>mainPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

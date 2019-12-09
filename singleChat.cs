@@ -11,19 +11,14 @@ using CCWin;
 
 namespace onlineChat
 {
-    public partial class mainWindow : Skin_Metro
+    public partial class singleChat : Form
     {
-        public mainWindow()
+        public singleChat()
         {
             InitializeComponent();
         }
 
-        private void Avatar_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void OnlineList_SelectedIndexChanged(object sender, EventArgs e)
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
