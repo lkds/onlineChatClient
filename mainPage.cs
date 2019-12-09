@@ -10,21 +10,11 @@ using System.Windows.Forms;
 
 namespace onlineChat
 {
-    public partial class mainWindow : Form
+    public partial class mainPage : Form
     {
-        public mainWindow()
+        public mainPage()
         {
             InitializeComponent();
-        }
-
-        private void Avatar_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void OnlineList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }
