@@ -50,6 +50,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="singleChat.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="singleChat.Designer.cs">
+      <DependentUpon>singleChat.cs</DependentUpon>
+    </Compile>
+    <Compile Include="common.cs" />
     <Compile Include="groupChat.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -76,8 +83,13 @@
     <Compile Include="singleUserBox.Designer.cs">
       <DependentUpon>singleUserBox.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="chatWindow.resx">
+    <!--<EmbeddedResource Include="chatWindow.resx">
       <DependentUpon>chatWindow.cs</DependentUpon>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>chatWindow.Designer.cs</LastGenOutput>
+    </EmbeddedResource>-->
+    <EmbeddedResource Include="groupChat.resx">
+      <DependentUpon>groupChat.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="login.resx">
       <DependentUpon>login.cs</DependentUpon>
