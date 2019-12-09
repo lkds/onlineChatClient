@@ -15,6 +15,39 @@ namespace onlineChat
         public login()
         {
             InitializeComponent();
+            userNameCheckPicture.Hide();
+            sameNameWarning.Hide();
+            loginBtn.Enabled = false;
+            userNameBox.LostFocus += new EventHandler(this.userNameCheck);
+        }
+
+        private void userNameCheck(object sender ,EventArgs e)
+        {
+            if (userNameBox.Text == "hwy")
+            {
+                userNameCheckPicture.ImageLocation = "../..//src/img/greenYes.png";
+                userNameCheckPicture.Show();
+                sameNameWarning.Hide();
+                loginBtn.Enabled = true;
+            }
+            else if (userNameBox.Text == "")
+            {
+                userNameCheckPicture.Hide();
+                sameNameWarning.Hide();
+                loginBtn.Enabled = false;
+            }
+            else
+            {
+                userNameCheckPicture.ImageLocation = "../..//src/img/redNo.png";
+                sameNameWarning.Show();
+                userNameCheckPicture.Show();
+                loginBtn.Enabled = false;
+            }
+        }
+
+        private void loginBtn_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void LoginBtn_Click(object sender, EventArgs e)
