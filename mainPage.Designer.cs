@@ -88,7 +88,7 @@
             // 
             this.onlineUserList.Location = new System.Drawing.Point(4, 22);
             this.onlineUserList.Name = "onlineUserList";
-            this.onlineUserList.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.onlineUserList.Padding = new System.Windows.Forms.Padding(3);
             this.onlineUserList.Size = new System.Drawing.Size(244, 411);
             this.onlineUserList.TabIndex = 0;
             this.onlineUserList.Text = "在线用户";
@@ -98,7 +98,7 @@
             // 
             this.recentChatList.Location = new System.Drawing.Point(4, 22);
             this.recentChatList.Name = "recentChatList";
-            this.recentChatList.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.recentChatList.Padding = new System.Windows.Forms.Padding(3);
             this.recentChatList.Size = new System.Drawing.Size(244, 411);
             this.recentChatList.TabIndex = 1;
             this.recentChatList.Text = "最近会话";
@@ -124,6 +124,7 @@
             this.startNewGroupBtn.TabIndex = 0;
             this.startNewGroupBtn.Text = "发起新的群聊";
             this.startNewGroupBtn.UseVisualStyleBackColor = true;
+            this.startNewGroupBtn.Click += new System.EventHandler(this.startNewGroupBtn_Click);
             // 
             // mainPage
             // 
