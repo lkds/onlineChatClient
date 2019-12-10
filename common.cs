@@ -16,9 +16,9 @@ namespace onlineChat
         //########################公共变量#############################
         public static user mainUser;//当前用户
         public static Dictionary<int, chatSession> myChat = new Dictionary<int, chatSession>();//保存本地聊天会话
-
-
-
+        public static clientSocket cSocket;
+        public static List<int> serverPorts;
+        public static IPAddress serverIP;
 
         //########################公共方法################################
         //获取本机IP地址
@@ -257,6 +257,33 @@ namespace onlineChat
             //TODO
             //保存文件
             //解析
+        }
+
+        public bool sendSysMsg(string msg)
+        {
+            try
+            {
+                //转化为字节流
+                byte[] strbyte = Encoding.UTF8.GetBytes(msg);
+                cSockets[0].Send(strbyte);
+                return true;
+            }
+            catch(ArgumentNullException)
+            {
+                Console.WriteLine("byte为空");
+                return false;
+            }
+            catch(SocketException)
+            {
+                Console.WriteLine("访问套接字出错");
+                return false;
+
+            }
+            catch (ObjectDisposedException)
+            {
+                Console.WriteLine("用户离线");
+                return false;
+            }
         }
     }
 }

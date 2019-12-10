@@ -62,13 +62,9 @@ namespace onlineChat
                 {
                     if(passwordBox.Text!="")//新建账户并进入
                     {
-                        List<int> ports = new List<int>();
-                        ports.Add(8888);
-                        ports.Add(8889);
-                        ports.Add(8890);
-                        ports.Add(8891);
-                        clientSocket c1 = new clientSocket(IPAddress.Parse("127.0.0.1"), ports);
-                        c1.connectSocket();
+                        publicClass.cSocket = new clientSocket(IPAddress.Parse("127.0.0.1"), publicClass.serverPorts);
+                        publicClass.cSocket.connectSocket();
+                        publicClass.cSocket.sendSysMsg("我干你！");
                         this.DialogResult = DialogResult.OK;
                         Close();
                     }
@@ -95,6 +91,12 @@ namespace onlineChat
         private void Label1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void ServerConfigBtn_Click(object sender, EventArgs e)
+        {
+            serverConfig s1 = new serverConfig();
+            s1.Show();
         }
     }
 }

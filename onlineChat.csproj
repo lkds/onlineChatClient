@@ -71,6 +71,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="serverConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="serverConfig.Designer.cs">
+      <DependentUpon>serverConfig.cs</DependentUpon>
+    </Compile>
     <Compile Include="singleChat.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -127,6 +133,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="serverConfig.resx">
+      <DependentUpon>serverConfig.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="singleChat.resx">
       <DependentUpon>singleChat.cs</DependentUpon>
     </EmbeddedResource>
