@@ -26,5 +26,11 @@ namespace onlineChat
         {
 
         }
+
+        private void startNewGroupBtn_Click(object sender, EventArgs e)
+        {
+            startNewGroup startNewGroup1 = new startNewGroup();
+            startNewGroup1.Show();
+        }
     }
 }

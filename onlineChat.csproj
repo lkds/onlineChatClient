@@ -110,6 +110,12 @@
     <Compile Include="singleUserBox.Designer.cs">
       <DependentUpon>singleUserBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="startNewGroup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="startNewGroup.Designer.cs">
+      <DependentUpon>startNewGroup.cs</DependentUpon>
+    </Compile>
     <!--<EmbeddedResource Include="chatWindow.resx">
       <DependentUpon>chatWindow.cs</DependentUpon>
       <Generator>ResXFileCodeGenerator</Generator>
@@ -141,6 +147,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="singleUserBox.resx">
       <DependentUpon>singleUserBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="startNewGroup.resx">
+      <DependentUpon>startNewGroup.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
