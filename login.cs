@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Net;
 
 namespace onlineChat
 {
@@ -48,7 +49,16 @@ namespace onlineChat
 
         private void loginBtn_Click(object sender, EventArgs e)
         {
+            List<int> ports = new List<int>();
+            ports.Add(8888);
+            ports.Add(8889);
+            ports.Add(8890);
+            ports.Add(8891);
+            clientSocket c1 = new clientSocket(IPAddress.Parse("127.0.0.1"), ports);
+            c1.connectSocket();
+
             this.DialogResult = DialogResult.OK;
+
             Close();
         }
     }

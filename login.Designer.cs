@@ -45,17 +45,19 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
-            this.label1.Location = new System.Drawing.Point(92, 68);
+            this.label1.Location = new System.Drawing.Point(123, 85);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(79, 19);
+            this.label1.Size = new System.Drawing.Size(95, 24);
             this.label1.TabIndex = 0;
             this.label1.Text = "请输入昵称";
             // 
             // userNameBox
             // 
-            this.userNameBox.Location = new System.Drawing.Point(177, 66);
+            this.userNameBox.Location = new System.Drawing.Point(236, 82);
+            this.userNameBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.userNameBox.Name = "userNameBox";
-            this.userNameBox.Size = new System.Drawing.Size(151, 21);
+            this.userNameBox.Size = new System.Drawing.Size(200, 25);
             this.userNameBox.TabIndex = 1;
             // 
             // loginBtn
@@ -63,9 +65,10 @@
             this.loginBtn.BackColor = System.Drawing.Color.LimeGreen;
             this.loginBtn.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.loginBtn.ForeColor = System.Drawing.Color.Transparent;
-            this.loginBtn.Location = new System.Drawing.Point(146, 243);
+            this.loginBtn.Location = new System.Drawing.Point(195, 304);
+            this.loginBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.loginBtn.Name = "loginBtn";
-            this.loginBtn.Size = new System.Drawing.Size(137, 38);
+            this.loginBtn.Size = new System.Drawing.Size(183, 48);
             this.loginBtn.TabIndex = 2;
             this.loginBtn.Text = "进入DogChat";
             this.loginBtn.UseVisualStyleBackColor = false;
@@ -73,9 +76,10 @@
             // 
             // serverIPBox
             // 
-            this.serverIPBox.Location = new System.Drawing.Point(177, 187);
+            this.serverIPBox.Location = new System.Drawing.Point(236, 234);
+            this.serverIPBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.serverIPBox.Name = "serverIPBox";
-            this.serverIPBox.Size = new System.Drawing.Size(150, 21);
+            this.serverIPBox.Size = new System.Drawing.Size(199, 25);
             this.serverIPBox.TabIndex = 4;
             this.serverIPBox.Text = "127.0.0.1";
             // 
@@ -83,18 +87,20 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
-            this.label2.Location = new System.Drawing.Point(92, 189);
+            this.label2.Location = new System.Drawing.Point(123, 236);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(65, 19);
+            this.label2.Size = new System.Drawing.Size(78, 24);
             this.label2.TabIndex = 3;
             this.label2.Text = "服务器IP";
             // 
             // userNameCheckPicture
             // 
             this.userNameCheckPicture.Image = ((System.Drawing.Image)(resources.GetObject("userNameCheckPicture.Image")));
-            this.userNameCheckPicture.Location = new System.Drawing.Point(334, 66);
+            this.userNameCheckPicture.Location = new System.Drawing.Point(445, 82);
+            this.userNameCheckPicture.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.userNameCheckPicture.Name = "userNameCheckPicture";
-            this.userNameCheckPicture.Size = new System.Drawing.Size(22, 21);
+            this.userNameCheckPicture.Size = new System.Drawing.Size(29, 26);
             this.userNameCheckPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.userNameCheckPicture.TabIndex = 5;
             this.userNameCheckPicture.TabStop = false;
@@ -104,9 +110,10 @@
             this.sameNameWarning.AutoSize = true;
             this.sameNameWarning.Font = new System.Drawing.Font("微软雅黑", 7.75F);
             this.sameNameWarning.ForeColor = System.Drawing.Color.Red;
-            this.sameNameWarning.Location = new System.Drawing.Point(218, 90);
+            this.sameNameWarning.Location = new System.Drawing.Point(291, 112);
+            this.sameNameWarning.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.sameNameWarning.Name = "sameNameWarning";
-            this.sameNameWarning.Size = new System.Drawing.Size(74, 16);
+            this.sameNameWarning.Size = new System.Drawing.Size(87, 19);
             this.sameNameWarning.TabIndex = 6;
             this.sameNameWarning.Text = "存在重名用户";
             // 
@@ -114,24 +121,26 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
-            this.label3.Location = new System.Drawing.Point(92, 131);
+            this.label3.Location = new System.Drawing.Point(123, 164);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(79, 19);
+            this.label3.Size = new System.Drawing.Size(95, 24);
             this.label3.TabIndex = 7;
             this.label3.Text = "请输入密码";
             // 
             // passwordBox
             // 
-            this.passwordBox.Location = new System.Drawing.Point(177, 131);
+            this.passwordBox.Location = new System.Drawing.Point(236, 164);
+            this.passwordBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.passwordBox.Name = "passwordBox";
-            this.passwordBox.Size = new System.Drawing.Size(151, 21);
+            this.passwordBox.Size = new System.Drawing.Size(200, 25);
             this.passwordBox.TabIndex = 8;
             // 
             // login
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(435, 293);
+            this.ClientSize = new System.Drawing.Size(580, 366);
             this.Controls.Add(this.passwordBox);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.sameNameWarning);
@@ -143,6 +152,7 @@
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
             this.Name = "login";
             this.Text = "登录";
