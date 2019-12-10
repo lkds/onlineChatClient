@@ -23,13 +23,12 @@ namespace onlineChat
 
         private void inputTipCancel(object sender, EventArgs e)  //消息框得到焦点取消文字提示
         {
-            if (inputBox.Text != "此处输入文字消息......")
-                inputBox.ForeColor = Color.Black;
-            else
+            if (inputBox.ForeColor == Color.Gray)
             {
                 inputBox.ForeColor = Color.Black;
                 inputBox.Text = "";
             }
+ 
         }
 
         private void inputTip(object sender, EventArgs e)  //消息框失焦提示文字
@@ -53,7 +52,7 @@ namespace onlineChat
 
         private void chatSendBtn_Click(object sender, EventArgs e)
         {
-
+            if (inputBox.Text != "") ;
         }
     }
 }

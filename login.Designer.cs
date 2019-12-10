@@ -35,7 +35,7 @@
             this.serverIPBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.userNameCheckPicture = new System.Windows.Forms.PictureBox();
-            this.sameNameWarning = new System.Windows.Forms.Label();
+            this.userNameTips = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.passwordBox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.userNameCheckPicture)).BeginInit();
@@ -99,22 +99,22 @@
             this.userNameCheckPicture.TabIndex = 5;
             this.userNameCheckPicture.TabStop = false;
             // 
-            // sameNameWarning
+            // userNameTips
             // 
-            this.sameNameWarning.AutoSize = true;
-            this.sameNameWarning.Font = new System.Drawing.Font("微软雅黑", 7.75F);
-            this.sameNameWarning.ForeColor = System.Drawing.Color.Red;
-            this.sameNameWarning.Location = new System.Drawing.Point(218, 90);
-            this.sameNameWarning.Name = "sameNameWarning";
-            this.sameNameWarning.Size = new System.Drawing.Size(74, 16);
-            this.sameNameWarning.TabIndex = 6;
-            this.sameNameWarning.Text = "存在重名用户";
+            this.userNameTips.AutoSize = true;
+            this.userNameTips.Font = new System.Drawing.Font("微软雅黑", 7.75F);
+            this.userNameTips.ForeColor = System.Drawing.Color.Blue;
+            this.userNameTips.Location = new System.Drawing.Point(68, 90);
+            this.userNameTips.Name = "userNameTips";
+            this.userNameTips.Size = new System.Drawing.Size(325, 16);
+            this.userNameTips.TabIndex = 6;
+            this.userNameTips.Text = "提示:这个账户目前不存在,若继续操作,我们会为您新创建这个账户";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
-            this.label3.Location = new System.Drawing.Point(92, 131);
+            this.label3.Location = new System.Drawing.Point(92, 129);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(79, 19);
             this.label3.TabIndex = 7;
@@ -122,7 +122,7 @@
             // 
             // passwordBox
             // 
-            this.passwordBox.Location = new System.Drawing.Point(177, 131);
+            this.passwordBox.Location = new System.Drawing.Point(177, 129);
             this.passwordBox.Name = "passwordBox";
             this.passwordBox.Size = new System.Drawing.Size(151, 21);
             this.passwordBox.TabIndex = 8;
@@ -134,7 +134,7 @@
             this.ClientSize = new System.Drawing.Size(435, 293);
             this.Controls.Add(this.passwordBox);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.sameNameWarning);
+            this.Controls.Add(this.userNameTips);
             this.Controls.Add(this.userNameCheckPicture);
             this.Controls.Add(this.serverIPBox);
             this.Controls.Add(this.label2);
@@ -160,7 +160,7 @@
         private System.Windows.Forms.TextBox serverIPBox;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.PictureBox userNameCheckPicture;
-        private System.Windows.Forms.Label sameNameWarning;
+        private System.Windows.Forms.Label userNameTips;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox passwordBox;
     }
