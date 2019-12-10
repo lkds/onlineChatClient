@@ -7,6 +7,8 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+
 
 namespace onlineChat
 {
@@ -17,8 +19,8 @@ namespace onlineChat
         public static user mainUser;//当前用户
         public static Dictionary<int, chatSession> myChat = new Dictionary<int, chatSession>();//保存本地聊天会话
         public static clientSocket cSocket;
-        public static List<int> serverPorts;
-        public static IPAddress serverIP;
+        public static List<int> serverPorts=new List<int>() { 2333,2334,2335,2336};
+        public static IPAddress serverIP=IPAddress.Parse("127.0.0.1");
 
         //########################公共方法################################
         //获取本机IP地址
@@ -173,6 +175,13 @@ namespace onlineChat
         private List<Thread> messageThread;//消息接收线程列表
 
         //构造函数
+        public clientSocket()
+        {
+            serverIPAddress = publicClass.serverIP;
+            serverPorts = publicClass.serverPorts;
+            cSockets = new List<Socket>();
+            messageThread = new List<Thread>();
+        }
         public clientSocket(IPAddress sIP, List<int> sP)
         {
             serverIPAddress = sIP;
@@ -198,6 +207,11 @@ namespace onlineChat
                 messageThread.Add(new Thread(receiveImage));
                 messageThread.Add(new Thread(receiveFile));
                 return true;
+            }
+            catch(SocketException)
+            {
+                MessageBox.Show("服务器连接失败，请重试");
+                return false;
             }
             catch
             {

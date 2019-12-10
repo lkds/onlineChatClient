@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Net;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace onlineChat
 {
@@ -62,9 +64,13 @@ namespace onlineChat
                 {
                     if(passwordBox.Text!="")//新建账户并进入
                     {
-                        publicClass.cSocket = new clientSocket(IPAddress.Parse("127.0.0.1"), publicClass.serverPorts);
+                        publicClass.cSocket = new clientSocket();
                         publicClass.cSocket.connectSocket();
-                        publicClass.cSocket.sendSysMsg("我干你！");
+                        user u1 = new user(-1, userNameBox.Text, publicClass.getIPAddress(), 0, false);
+                        string secUser = JsonConvert.SerializeObject(u1);//序列化
+                        JObject sendMsg = new JObject { { "type", 0 }, { "data", secUser } };
+
+                        publicClass.cSocket.sendSysMsg(JsonConvert.SerializeObject(sendMsg));
                         this.DialogResult = DialogResult.OK;
                         Close();
                     }
