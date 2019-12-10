@@ -12,6 +12,7 @@ namespace onlineChat
 {
     public partial class login : Form
     {
+        public bool isLogin = false;
         public login()
         {
             InitializeComponent();
@@ -47,12 +48,8 @@ namespace onlineChat
 
         private void loginBtn_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void LoginBtn_Click(object sender, EventArgs e)
-        {
-            
+            this.DialogResult = DialogResult.OK;
+            Close();
         }
     }
 }

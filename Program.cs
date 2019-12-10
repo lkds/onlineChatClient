@@ -17,15 +17,23 @@ namespace onlineChat
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new mainPage());
+            login l1 = new login();
+            l1.ShowDialog();
+            if(l1.DialogResult == DialogResult.OK)
+            {
+                Application.Run(new mainPage());
+            }else
+            {
+                return;
+            }
         }
     }
 
     //全局变量
-    static class globalVar
-    {
-        public static user mainUser=new user();//当前用户
+    //static class globalVar
+    //{
+    //    //public static user mainUser=new user();//当前用户
+    //    //public static Dictionary<int,chatSession> myChat = new Dictionary<int, chatSession>();//保存本地聊天会话
 
-
-    }
+    //}
 }

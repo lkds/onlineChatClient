@@ -50,6 +50,7 @@
             this.mainUserAvatarBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.mainUserAvatarBox.TabIndex = 0;
             this.mainUserAvatarBox.TabStop = false;
+            this.mainUserAvatarBox.Click += new System.EventHandler(this.MainUserAvatarBox_Click);
             // 
             // mainUserNameLabel
             // 
@@ -117,6 +118,7 @@
             this.mainStartGroupBtn.TabIndex = 4;
             this.mainStartGroupBtn.Text = "发起群聊";
             this.mainStartGroupBtn.UseVisualStyleBackColor = true;
+            this.mainStartGroupBtn.Click += new System.EventHandler(this.MainStartGroupBtn_Click);
             // 
             // mainPage
             // 

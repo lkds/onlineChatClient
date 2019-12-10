@@ -37,18 +37,20 @@
             this.chatGroupName = new System.Windows.Forms.Label();
             this.fileSelectBox = new System.Windows.Forms.PictureBox();
             this.imageSelectBox = new System.Windows.Forms.PictureBox();
+            this.groupAvatarBox = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.fileSelectBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageSelectBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupAvatarBox)).BeginInit();
             this.SuspendLayout();
             // 
             // chatUserListBox
             // 
             this.chatUserListBox.FormattingEnabled = true;
             this.chatUserListBox.ItemHeight = 15;
-            this.chatUserListBox.Location = new System.Drawing.Point(3, 49);
+            this.chatUserListBox.Location = new System.Drawing.Point(3, 71);
             this.chatUserListBox.Margin = new System.Windows.Forms.Padding(4);
             this.chatUserListBox.Name = "chatUserListBox";
-            this.chatUserListBox.Size = new System.Drawing.Size(219, 454);
+            this.chatUserListBox.Size = new System.Drawing.Size(219, 424);
             this.chatUserListBox.TabIndex = 0;
             // 
             // chatQuitGroupBtn
@@ -67,20 +69,20 @@
             // 
             this.chatMessageBox.FormattingEnabled = true;
             this.chatMessageBox.ItemHeight = 15;
-            this.chatMessageBox.Location = new System.Drawing.Point(243, 4);
+            this.chatMessageBox.Location = new System.Drawing.Point(230, 4);
             this.chatMessageBox.Margin = new System.Windows.Forms.Padding(4);
             this.chatMessageBox.Name = "chatMessageBox";
-            this.chatMessageBox.Size = new System.Drawing.Size(759, 409);
+            this.chatMessageBox.Size = new System.Drawing.Size(772, 409);
             this.chatMessageBox.TabIndex = 2;
             this.chatMessageBox.SelectedIndexChanged += new System.EventHandler(this.ListBox2_SelectedIndexChanged);
             // 
             // chatSendBox
             // 
-            this.chatSendBox.Location = new System.Drawing.Point(243, 436);
+            this.chatSendBox.Location = new System.Drawing.Point(230, 436);
             this.chatSendBox.Margin = new System.Windows.Forms.Padding(4);
             this.chatSendBox.Multiline = true;
             this.chatSendBox.Name = "chatSendBox";
-            this.chatSendBox.Size = new System.Drawing.Size(620, 110);
+            this.chatSendBox.Size = new System.Drawing.Size(633, 110);
             this.chatSendBox.TabIndex = 3;
             // 
             // chatSendBtn
@@ -99,12 +101,12 @@
             // 
             this.chatGroupName.AutoSize = true;
             this.chatGroupName.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.chatGroupName.Location = new System.Drawing.Point(13, 9);
+            this.chatGroupName.Location = new System.Drawing.Point(70, 4);
             this.chatGroupName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.chatGroupName.Name = "chatGroupName";
-            this.chatGroupName.Size = new System.Drawing.Size(92, 27);
+            this.chatGroupName.Size = new System.Drawing.Size(112, 27);
             this.chatGroupName.TabIndex = 7;
-            this.chatGroupName.Text = "群聊名称";
+            this.chatGroupName.Text = "西瓜俱乐部";
             this.chatGroupName.Click += new System.EventHandler(this.Label1_Click);
             // 
             // fileSelectBox
@@ -129,11 +131,22 @@
             this.imageSelectBox.TabIndex = 8;
             this.imageSelectBox.TabStop = false;
             // 
+            // groupAvatarBox
+            // 
+            this.groupAvatarBox.Image = ((System.Drawing.Image)(resources.GetObject("groupAvatarBox.Image")));
+            this.groupAvatarBox.Location = new System.Drawing.Point(3, 4);
+            this.groupAvatarBox.Name = "groupAvatarBox";
+            this.groupAvatarBox.Size = new System.Drawing.Size(60, 60);
+            this.groupAvatarBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.groupAvatarBox.TabIndex = 10;
+            this.groupAvatarBox.TabStop = false;
+            // 
             // groupChat
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1007, 562);
+            this.Controls.Add(this.groupAvatarBox);
             this.Controls.Add(this.fileSelectBox);
             this.Controls.Add(this.imageSelectBox);
             this.Controls.Add(this.chatGroupName);
@@ -148,6 +161,7 @@
             this.Text = "群聊";
             ((System.ComponentModel.ISupportInitialize)(this.fileSelectBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageSelectBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupAvatarBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -163,5 +177,6 @@
         private System.Windows.Forms.Label chatGroupName;
         private System.Windows.Forms.PictureBox fileSelectBox;
         private System.Windows.Forms.PictureBox imageSelectBox;
+        private System.Windows.Forms.PictureBox groupAvatarBox;
     }
 }

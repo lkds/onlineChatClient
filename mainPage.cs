@@ -16,5 +16,15 @@ namespace onlineChat
         {
             InitializeComponent();
         }
+
+        private void MainStartGroupBtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MainUserAvatarBox_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

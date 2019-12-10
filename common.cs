@@ -10,17 +10,19 @@ using System.Threading.Tasks;
 
 namespace onlineChat
 {
-    //用户类
-    class user
+    //公共类，包含全局变量和方法
+    class publicClass
     {
-        public string userName;
-        public string IPAddress;
-        //public string port;
-        public string isOnline;
-        public int avatar;//头像编号
+        //########################公共变量#############################
+        public static user mainUser;//当前用户
+        public static Dictionary<int, chatSession> myChat = new Dictionary<int, chatSession>();//保存本地聊天会话
 
+
+
+
+        //########################公共方法################################
         //获取本机IP地址
-        public string getIPAddress()
+        public static string getIPAddress()
         {
             string ip_addr;         //声明ip_addr变量存储ip地址
             string hostname = Dns.GetHostName();    //得到主机名，存储在hostname变量里面
@@ -32,7 +34,7 @@ namespace onlineChat
             {
                 if (ip.AddressList[i].AddressFamily == AddressFamily.InterNetwork)
                 //判断ip类型：
-                //对于 IPv4，返回 System.Net.Sockets.AddressFamily.InterNetwork；
+                //对于 IPv4，返回 System.Net.Sockets.AddressFamily.InterNetwork；     
                 //对于 IPv6，返回 System.Net.Sockets.AddressFamily.InterNetworkV6
                 {
                     ip_addr = ip.AddressList[i].ToString();
@@ -42,20 +44,71 @@ namespace onlineChat
             }
             return "false";
         }
-        public user(string userName="admin")
+    }
+
+    //用户类
+    class user
+    {
+        public int id;//用户身份ID
+        public string userName;
+        public string IPAddress;
+        public string password;
+        //public string port;
+        public bool isOnline;
+        public int avatar;//头像编号
+
+        public user(int cID, string cUserName, string cIPAddress, int cAvatar, bool cIsOnline)
         {
-            userName = userName;
-            string tmp = getIPAddress();
-            IPAddress = tmp!="false" ? tmp : "127.0.0.1";
+            id = cID;
+            userName = cUserName;
+            IPAddress = cIPAddress;
+            avatar = cAvatar;
+            isOnline = cIsOnline;
         }
+    }
+
+    //群组类
+    class group
+    {
+        public int id;//
+        public string groupName;
+        public List<user> groupUserList;
+        public int groupAvatar;//群组头像编号
+
+        public group(int cID, string cGroupName, List<user> cGroupUserList, int cGroupAvatar)
+        {
+            id = cID;
+            groupName = cGroupName;
+            groupUserList = cGroupUserList;
+            groupAvatar = cGroupAvatar;
+        }
+
+        //添加一个用户
+        public void addUser(user targetUaer)
+        {
+            groupUserList.Add(targetUaer);
+        }
+        
+        //删除一个用户
+        public void deleteUser(user targetUser)
+        {
+            groupUserList.Remove(targetUser);
+        }
+
+        //退出群组,删除
+        //public void quitGroup()
+        //{
+            
+        //}
     }
 
     //消息基类
     class baseMessage
     {
-        public user sendUser;
+        public user sendUser;//消息发送者
         public DateTime sendTime;
-        public bool isValid;
+        public bool isValid;//暂时用不到
+        public int target;//目标用户或者群组
     }
 
     //文本消息
@@ -73,31 +126,35 @@ namespace onlineChat
         public string filePath;
     }
 
-    //某个聊天连接
+    //某个聊天连接,可以是群组也可以是单聊
     class chatSession
     {
         public string createTime;
-        public List<user> userList;
+        public user targetUser;//单聊用户
+        public group userList;//群组
+        public int chatSessionType;//类型，0单聊，1群聊
         public List<baseMessage> messageList;
 
         //构造函数
-        public chatSession()
+        public chatSession(string time, int type, dynamic target, List<baseMessage> messages)
         {
-            createTime = DateTime.Now.ToString();
-            userList = new List<user>();
-            messageList = new List<baseMessage>();
+            createTime = time;//创建时间
+            chatSessionType = type;
+            if (type == 0)
+            {
+                targetUser = target;
+            }
+            else
+            {
+                userList = target;
+            }
+            messageList = messages;//消息
         }
 
         //添加一条聊天记录，可以是文字，图片，文件
         public void addMessage(baseMessage message)
         {
             messageList.Add(message);//添加到数组末尾
-        }
-
-        //添加一个用户
-        public void addUser(user targetUaer)
-        {
-            userList.Add(targetUaer);
         }
 
     }
@@ -122,6 +179,7 @@ namespace onlineChat
             serverPorts = sP;
             cSockets = new List<Socket>();
             messageThread = new List<Thread>();
+
         }
 
         //连接到服务器
@@ -131,14 +189,14 @@ namespace onlineChat
             {
                 for (int i = 0; i < 3; i++)
                 {
-                    cSockets[i] = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                    cSockets.Add(new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp));
                     IPEndPoint point = new IPEndPoint(serverIPAddress, Convert.ToInt32(serverPorts[i]));
                     cSockets[i].Connect(point);
                 }
                 //线程接收消息
-                //messageThread.Add(new Thread(receiveText));
-                //messageThread.Add(new Thread(receiveImage));
-                //messageThread.Add(new Thread(receiveFile));
+                messageThread.Add(new Thread(receiveText));
+                messageThread.Add(new Thread(receiveImage));
+                messageThread.Add(new Thread(receiveFile));
                 return true;
             }
             catch
@@ -148,9 +206,57 @@ namespace onlineChat
         }
 
         //接收消息函数簇
-        //public textMessage receiveText()
-        //{
+        public void receiveText()
+        {
+            byte[] textRec = new byte[4096];//创建接收消息的buffer
+            int length = -1;
+            try
+            {
+                length = cSockets[0].Receive(textRec);//接收消息长度计数
 
-        //}
+            }
+            catch
+            {
+                return;
+            }
+            string strMsg = System.Text.Encoding.UTF8.GetString(textRec, 0, length - 1);// 将接受到的字节数据转化成字符串
+            //解析
+        }
+
+        public void receiveImage()
+        {
+            byte[] imgRec = new byte[1024*1024*10];//创建接收消息的buffer
+            int length = -1;
+            try
+            {
+                length = cSockets[1].Receive(imgRec);//接收消息长度计数
+
+            }
+            catch
+            {
+                return;
+            }
+            //TODO
+            //保存图片，显示图片
+            //解析
+        }
+
+        public void receiveFile()
+        {
+            byte[] fileRec = new byte[1024*1024*2];//创建接收消息的buffer
+            int length = -1;
+            try
+            {
+                length = cSockets[2].Receive(fileRec);//接收消息长度计数
+
+            }
+            catch
+            {
+                return;
+            }
+            //TODO
+            //保存文件
+            //解析
+        }
     }
 }
