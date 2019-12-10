@@ -36,6 +36,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.userNameCheckPicture = new System.Windows.Forms.PictureBox();
             this.sameNameWarning = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.passwordBox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.userNameCheckPicture)).BeginInit();
             this.SuspendLayout();
             // 
@@ -43,11 +45,11 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
-            this.label1.Location = new System.Drawing.Point(92, 66);
+            this.label1.Location = new System.Drawing.Point(92, 68);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(79, 19);
             this.label1.TabIndex = 0;
-            this.label1.Text = "请设定昵称";
+            this.label1.Text = "请输入昵称";
             // 
             // userNameBox
             // 
@@ -58,19 +60,20 @@
             // 
             // loginBtn
             // 
+            this.loginBtn.BackColor = System.Drawing.Color.LimeGreen;
             this.loginBtn.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.loginBtn.ForeColor = System.Drawing.Color.Green;
-            this.loginBtn.Location = new System.Drawing.Point(178, 197);
+            this.loginBtn.ForeColor = System.Drawing.Color.Transparent;
+            this.loginBtn.Location = new System.Drawing.Point(146, 243);
             this.loginBtn.Name = "loginBtn";
-            this.loginBtn.Size = new System.Drawing.Size(81, 38);
+            this.loginBtn.Size = new System.Drawing.Size(137, 38);
             this.loginBtn.TabIndex = 2;
-            this.loginBtn.Text = "登录";
-            this.loginBtn.UseVisualStyleBackColor = true;
+            this.loginBtn.Text = "进入DogChat";
+            this.loginBtn.UseVisualStyleBackColor = false;
             this.loginBtn.Click += new System.EventHandler(this.loginBtn_Click);
             // 
             // serverIPBox
             // 
-            this.serverIPBox.Location = new System.Drawing.Point(178, 123);
+            this.serverIPBox.Location = new System.Drawing.Point(177, 187);
             this.serverIPBox.Name = "serverIPBox";
             this.serverIPBox.Size = new System.Drawing.Size(150, 21);
             this.serverIPBox.TabIndex = 4;
@@ -80,7 +83,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
-            this.label2.Location = new System.Drawing.Point(93, 123);
+            this.label2.Location = new System.Drawing.Point(92, 189);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(65, 19);
             this.label2.TabIndex = 3;
@@ -107,11 +110,30 @@
             this.sameNameWarning.TabIndex = 6;
             this.sameNameWarning.Text = "存在重名用户";
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
+            this.label3.Location = new System.Drawing.Point(92, 131);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(79, 19);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "请输入密码";
+            // 
+            // passwordBox
+            // 
+            this.passwordBox.Location = new System.Drawing.Point(177, 131);
+            this.passwordBox.Name = "passwordBox";
+            this.passwordBox.Size = new System.Drawing.Size(151, 21);
+            this.passwordBox.TabIndex = 8;
+            // 
             // login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(435, 266);
+            this.ClientSize = new System.Drawing.Size(435, 293);
+            this.Controls.Add(this.passwordBox);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.sameNameWarning);
             this.Controls.Add(this.userNameCheckPicture);
             this.Controls.Add(this.serverIPBox);
@@ -139,5 +161,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.PictureBox userNameCheckPicture;
         private System.Windows.Forms.Label sameNameWarning;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox passwordBox;
     }
 }

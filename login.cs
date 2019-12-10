@@ -18,10 +18,10 @@ namespace onlineChat
             userNameCheckPicture.Hide();
             sameNameWarning.Hide();
             loginBtn.Enabled = false;
-            userNameBox.LostFocus += new EventHandler(this.userNameCheck);
+            userNameBox.LostFocus += new EventHandler(this.userNameCheck);  //用户名输入框失焦
         }
 
-        private void userNameCheck(object sender ,EventArgs e)
+        private void userNameCheck(object sender ,EventArgs e) //用户名输入框失焦操作
         {
             if (userNameBox.Text == "hwy")
             {
