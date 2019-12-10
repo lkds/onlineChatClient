@@ -24,9 +24,7 @@ namespace onlineChat
 
         private void inputTipCancel(object sender, EventArgs e)  //消息框得到焦点取消文字提示
         {
-            if(inputBox.Text!= "此处输入文字消息......")
-                inputBox.ForeColor = Color.Black;
-            else
+            if (inputBox.ForeColor == Color.Gray)
             {
                 inputBox.ForeColor = Color.Black;
                 inputBox.Text = "";
