@@ -17,9 +17,9 @@ namespace onlineChat
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            login l1 = new login();
-            l1.ShowDialog();
-            if(l1.DialogResult == DialogResult.OK)
+            publicClass.l1 = new login();
+            publicClass.l1.ShowDialog();
+            if (publicClass.l1.DialogResult == DialogResult.OK)
             {
                 Application.Run(new mainPage());
             }else
