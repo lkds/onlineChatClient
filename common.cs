@@ -8,6 +8,8 @@ using System.Net.Sockets;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 
 namespace onlineChat
@@ -21,6 +23,8 @@ namespace onlineChat
         public static clientSocket cSocket;
         public static List<int> serverPorts=new List<int>() { 2333,2334,2335,2336};
         public static IPAddress serverIP=IPAddress.Parse("127.0.0.1");
+
+        public static login l1;
 
         //########################公共方法################################
         //获取本机IP地址
@@ -46,6 +50,41 @@ namespace onlineChat
             }
             return "false";
         }
+
+        //通用解析函数分发函数
+        public static void decodeCommand(command cComand)
+        {
+            if(cComand.type==0)//系统消息
+            {
+                switch (cComand.subType)
+                {
+                    case ("login"):decodeLogin(cComand);
+                        break;
+                }
+
+            }else if (cComand.type == 1)//普通消息
+            {
+
+            }
+        }
+
+
+        //解析函数簇
+        //登录解析
+        public static void decodeLogin(command cCommand)
+        {
+            if(cCommand.res == "OK")
+            {
+                mainUser = (user)cCommand.data;//赋值给主用户
+                l1.DialogResult = DialogResult.OK;
+                l1.Close();
+            }
+            else
+            {
+                MessageBox.Show("登录错误，请重试！");
+            }
+
+        }
     }
 
     //用户类
@@ -59,6 +98,15 @@ namespace onlineChat
         public bool isOnline;
         public int avatar;//头像编号
 
+        //注册、登录构造函数
+        public user(string cUserName, string cIPAddress, string cPass)
+        {
+            userName = cUserName;
+            password = cPass;
+            IPAddress = cIPAddress;
+        }
+
+        //
         public user(int cID, string cUserName, string cIPAddress, int cAvatar, bool cIsOnline)
         {
             id = cID;
@@ -161,6 +209,15 @@ namespace onlineChat
 
     }
 
+    //command类
+    class command
+    {
+        public object data { set; get; }//数据
+        public int type{ set; get; }//类型，系统消息、普通消息
+        public string subType{ set; get; }//详细类型
+        public string res{ set; get; }//结果
+    }
+
     //客户端socket
     class clientSocket
     {
@@ -181,6 +238,7 @@ namespace onlineChat
             serverPorts = publicClass.serverPorts;
             cSockets = new List<Socket>();
             messageThread = new List<Thread>();
+            isRun = true;
         }
         public clientSocket(IPAddress sIP, List<int> sP)
         {
@@ -188,7 +246,17 @@ namespace onlineChat
             serverPorts = sP;
             cSockets = new List<Socket>();
             messageThread = new List<Thread>();
+            isRun = true;
+        }
 
+        public void startService()
+        {
+            isRun = true;
+        }
+
+        public void stopService()
+        {
+            isRun = false;
         }
 
         //连接到服务器
@@ -196,30 +264,60 @@ namespace onlineChat
         {
             try
             {
-                for (int i = 0; i < 3; i++)
+                for (int i = 0; i < 4; i++)
                 {
                     cSockets.Add(new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp));
                     IPEndPoint point = new IPEndPoint(serverIPAddress, Convert.ToInt32(serverPorts[i]));
                     cSockets[i].Connect(point);
                 }
                 //线程接收消息
-                messageThread.Add(new Thread(receiveText));
-                messageThread.Add(new Thread(receiveImage));
-                messageThread.Add(new Thread(receiveFile));
+                Thread t0 = new Thread(receiveSysMsg);
+                t0.Start();
+                messageThread.Add(t0);
+                Thread t1 = new Thread(receiveText);
+                t1.Start();
+                messageThread.Add(t1);
+                Thread t2 = new Thread(receiveImage);
+                t2.Start();
+                messageThread.Add(t2);
+                Thread t3 = new Thread(receiveFile);
+                t3.Start();
+                messageThread.Add(t3);
                 return true;
             }
             catch(SocketException)
             {
-                MessageBox.Show("服务器连接失败，请重试");
+                MessageBox.Show("服务器连接失败，请确认服务器配置正确！");
                 return false;
             }
             catch
             {
+                MessageBox.Show("服务器连接失败，请重试");
                 return false;
             }
         }
 
         //接收消息函数簇
+        public void receiveSysMsg()
+        {
+            while (isRun)
+            {
+                byte[] textRec = new byte[4096];//创建接收消息的buffer
+                int length = -1;
+                try
+                {
+                    length = cSockets[0].Receive(textRec);//接收消息长度计数
+                }
+                catch
+                {
+                    return;
+                }
+                string strMsg = System.Text.Encoding.UTF8.GetString(textRec, 0, length - 1);// 将接受到的字节数据转化成字符串
+                command c1 = JsonConvert.DeserializeObject<command>(strMsg);//解析
+                publicClass.decodeCommand(c1);
+            }
+        }
+
         public void receiveText()
         {
             byte[] textRec = new byte[4096];//创建接收消息的buffer
@@ -234,7 +332,7 @@ namespace onlineChat
                 return;
             }
             string strMsg = System.Text.Encoding.UTF8.GetString(textRec, 0, length - 1);// 将接受到的字节数据转化成字符串
-            //解析
+             //解析
         }
 
         public void receiveImage()

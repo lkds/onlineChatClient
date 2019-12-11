@@ -62,17 +62,13 @@ namespace onlineChat
             {
                 if (MessageBox.Show("确定要新创建这个账户吗？","提示",MessageBoxButtons.OKCancel) == DialogResult.OK)
                 {
-                    if(passwordBox.Text!="")//新建账户并进入
+                    if (passwordBox.Text != "")//新建账户并进入
                     {
                         publicClass.cSocket = new clientSocket();
                         publicClass.cSocket.connectSocket();
-                        user u1 = new user(-1, userNameBox.Text, publicClass.getIPAddress(), 0, false);
-                        string secUser = JsonConvert.SerializeObject(u1);//序列化
-                        JObject sendMsg = new JObject { { "type", 0 }, { "data", secUser } };
-
-                        publicClass.cSocket.sendSysMsg(JsonConvert.SerializeObject(sendMsg));
-                        this.DialogResult = DialogResult.OK;
-                        Close();
+                        user u1 = new user(userNameBox.Text, publicClass.getIPAddress(),passwordBox.Text);
+                        string secUser = JsonConvert.SerializeObject(new command() { data=u1,type=0,subType="login"});//序列化
+                        publicClass.cSocket.sendSysMsg(secUser);
                     }
                     else
                     {
