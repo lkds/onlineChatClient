@@ -30,20 +30,36 @@ namespace onlineChat
 
         private void userNameCheck(object sender ,EventArgs e) //用户名输入框失焦操作
         {
-            if (userNameBox.Text == "hwy")
-            {
-                userNameCheckPicture.ImageLocation = "../..//src/img/greenYes.png";
-                userNameCheckPicture.Show();
-                userNameTips.Hide();
-                isExist = 1;
-            }
-            else if (userNameBox.Text == "")
-            {
-                userNameCheckPicture.Hide();
-                userNameTips.Hide();
-                isExist = 0;
-            }
-            else
+            publicClass.cSocket = new clientSocket();
+            string secUser = JsonConvert.SerializeObject(new command() { data = userNameBox.Text, type = 0, subType = "checkUserName" });//序列化
+            //publicClass.cSocket.sendSysMsg(secUser);
+            //if (userNameBox.Text == "hwy")
+            //{
+            //    userNameCheckPicture.ImageLocation = "../..//src/img/greenYes.png";
+            //    userNameCheckPicture.Show();
+            //    userNameTips.Hide();
+            //    isExist = 1;
+            //}
+            //else 
+            //if (userNameBox.Text == "")
+            //{
+            //    userNameCheckPicture.Hide();
+            //    userNameTips.Hide();
+            //    isExist = 0;
+            //}
+            //else
+            //{
+            //    userNameCheckPicture.ImageLocation = "../..//src/img/blueQues.png";
+            //    userNameTips.Show();
+            //    userNameCheckPicture.Show();
+            //    isExist = -1;
+            //}
+        }
+
+        //用户名检测与提示显示
+        public void userNameCheck(bool nameExist)
+        {
+            if (!nameExist)//用户名不存在
             {
                 userNameCheckPicture.ImageLocation = "../..//src/img/blueQues.png";
                 userNameTips.Show();
@@ -64,7 +80,6 @@ namespace onlineChat
                 {
                     if (passwordBox.Text != "")//新建账户并进入
                     {
-                        publicClass.cSocket = new clientSocket();
                         publicClass.cSocket.connectSocket();
                         user u1 = new user(userNameBox.Text, publicClass.getIPAddress(),passwordBox.Text);
                         string secUser = JsonConvert.SerializeObject(new command() { data=u1,type=0,subType="login"});//序列化

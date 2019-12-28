@@ -35,7 +35,7 @@ namespace onlineChat
             IPHostEntry ip = Dns.GetHostEntry(hostname);
             //IPHostEntry：为主机地址（多个）提供容器,实例化IPHostEntry为ip
             //Dns.GetHostEntry(hostname)：将主机名或 IP 地址解析为 IPHostEntry 实例，ip.addressList数组中存储有多个ip地址
-            for (int i = 0; i < ip.AddressList.Length; i++)
+            for (int i = ip.AddressList.Length - 1; i >= 0; i--)
             //遍历addressList数组得到IPv4的地址(主流IP地址)
             {
                 if (ip.AddressList[i].AddressFamily == AddressFamily.InterNetwork)
@@ -58,6 +58,8 @@ namespace onlineChat
             {
                 switch (cComand.subType)
                 {
+                    case ("userNameCheck"): decodeUserNameCheck(cComand);
+                        break;
                     case ("login"):decodeLogin(cComand);
                         break;
                 }
@@ -70,6 +72,25 @@ namespace onlineChat
 
 
         //解析函数簇
+        //用户名检测
+        public  static void decodeUserNameCheck(command cCommand)
+        {
+            if (cCommand.res == "exist")
+            {
+                //mainUser = (user)cCommand.data;//赋值给主用户
+                //l1.DialogResult = DialogResult.OK;
+                //l1.Close();
+            }
+            else if(cCommand.res == "notExist")
+            {
+                l1.userNameCheck(false);
+            }
+            else
+            {
+                MessageBox.Show("登录错误，请重试！");
+            }
+        }
+
         //登录解析
         public static void decodeLogin(command cCommand)
         {
