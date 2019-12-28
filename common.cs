@@ -23,6 +23,7 @@ namespace onlineChat
         public static clientSocket cSocket;
         public static List<int> serverPorts=new List<int>() { 2333,2334,2335,2336};
         public static IPAddress serverIP=IPAddress.Parse("127.0.0.1");
+        public static bool isRun = false;
 
         public static login l1;
 
@@ -247,7 +248,7 @@ namespace onlineChat
         //public int serverImagePort;//。。。
         //public int serverFilePort;//
         private List<int> serverPorts;//端口列表
-        private bool isRun;//运行标志
+        //private bool isRun;//运行标志
         //private Socket cSocket;//套接字
         private List<Socket> cSockets;//套接字列表
         private List<Thread> messageThread;//消息接收线程列表
@@ -259,7 +260,7 @@ namespace onlineChat
             serverPorts = publicClass.serverPorts;
             cSockets = new List<Socket>();
             messageThread = new List<Thread>();
-            isRun = true;
+            //isRun = true;
         }
         public clientSocket(IPAddress sIP, List<int> sP)
         {
@@ -267,25 +268,25 @@ namespace onlineChat
             serverPorts = sP;
             cSockets = new List<Socket>();
             messageThread = new List<Thread>();
-            isRun = true;
+            //isRun = true;
         }
 
-        public void startService()
-        {
-            isRun = true;
-        }
+        //public void startService()
+        //{
+        //    isRun = true;
+        //}
 
-        public void stopService()
-        {
-            isRun = false;
-        }
+        //public void stopService()
+        //{
+        //    isRun = false;
+        //}
 
         //连接到服务器
         public bool connectSocket()
         {
             try
             {
-                for (int i = 0; i < 4; i++)
+                for (int i = 0; i < 1; i++)
                 {
                     cSockets.Add(new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp));
                     IPEndPoint point = new IPEndPoint(serverIPAddress, Convert.ToInt32(serverPorts[i]));
@@ -294,15 +295,21 @@ namespace onlineChat
                 //线程接收消息
                 Thread t0 = new Thread(receiveSysMsg);
                 t0.Start();
+                t0.IsBackground = true;
                 messageThread.Add(t0);
                 Thread t1 = new Thread(receiveText);
                 t1.Start();
+                t1.IsBackground = true;
                 messageThread.Add(t1);
                 Thread t2 = new Thread(receiveImage);
                 t2.Start();
+                t2.IsBackground = true;
+
                 messageThread.Add(t2);
                 Thread t3 = new Thread(receiveFile);
                 t3.Start();
+                t3.IsBackground = true;
+
                 messageThread.Add(t3);
                 return true;
             }
@@ -318,10 +325,19 @@ namespace onlineChat
             }
         }
 
+        //断开连接
+        public void disconnect()
+        {
+            foreach (var cSocket in cSockets)
+            {
+                cSocket.Disconnect(true);
+            }
+        }
+
         //接收消息函数簇
         public void receiveSysMsg()
         {
-            while (isRun)
+            while (publicClass.isRun)
             {
                 byte[] textRec = new byte[4096];//创建接收消息的buffer
                 int length = -1;

@@ -30,9 +30,11 @@ namespace onlineChat
 
         private void userNameCheck(object sender ,EventArgs e) //用户名输入框失焦操作
         {
-            publicClass.cSocket = new clientSocket();
             string secUser = JsonConvert.SerializeObject(new command() { data = userNameBox.Text, type = 0, subType = "checkUserName" });//序列化
-            //publicClass.cSocket.sendSysMsg(secUser);
+            if (publicClass.isRun)
+            {
+                publicClass.cSocket.sendSysMsg(secUser);
+            }
             //if (userNameBox.Text == "hwy")
             //{
             //    userNameCheckPicture.ImageLocation = "../..//src/img/greenYes.png";
@@ -80,7 +82,6 @@ namespace onlineChat
                 {
                     if (passwordBox.Text != "")//新建账户并进入
                     {
-                        publicClass.cSocket.connectSocket();
                         user u1 = new user(userNameBox.Text, publicClass.getIPAddress(),passwordBox.Text);
                         string secUser = JsonConvert.SerializeObject(new command() { data=u1,type=0,subType="login"});//序列化
                         publicClass.cSocket.sendSysMsg(secUser);
@@ -114,6 +115,21 @@ namespace onlineChat
         {
             serverConfig s1 = new serverConfig();
             s1.Show();
+        }
+
+        private void ConnectServerBtn_Click(object sender, EventArgs e)
+        {
+            if (publicClass.isRun)
+            {
+                publicClass.isRun = false;
+                publicClass.cSocket = null;
+            }
+            else
+            {
+                publicClass.cSocket = new clientSocket();//创建客户端套接字
+                publicClass.cSocket.connectSocket();
+                publicClass.isRun = true;
+            }
         }
     }
 }
