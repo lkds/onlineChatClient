@@ -24,7 +24,7 @@ namespace onlineChat
                 Application.Run(new mainPage());
             }else
             {
-                return;
+                System.Environment.Exit(0);
             }
         }
     }
