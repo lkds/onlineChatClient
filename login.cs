@@ -30,10 +30,11 @@ namespace onlineChat
 
         private void userNameCheck(object sender ,EventArgs e) //用户名输入框失焦操作
         {
-            string secUser = JsonConvert.SerializeObject(new command() { data = userNameBox.Text, type = 0, subType = "checkUserName" });//序列化
+            string secUser = JsonConvert.SerializeObject(new command() { data = userNameBox.Text, type = 0, subType = "checkUserName" ,res=""});//序列化
             if (publicClass.isRun)
             {
                 publicClass.cSocket.sendSysMsg(secUser);
+                userNameCheck(true);
             }
             //if (userNameBox.Text == "hwy")
             //{
@@ -64,9 +65,16 @@ namespace onlineChat
             if (!nameExist)//用户名不存在
             {
                 userNameCheckPicture.ImageLocation = "../..//src/img/blueQues.png";
-                userNameTips.Show();
-                userNameCheckPicture.Show();
+                userNameTips.Visible = true;
+                userNameCheckPicture.Visible = true;
                 isExist = -1;
+            }
+            else //用户存在
+            {
+                userNameCheckPicture.ImageLocation = "../..//src/img/greenYes.png";
+                    userNameCheckPicture.Visible = true;
+                userNameTips.Visible = false;
+                    isExist = 1;
             }
         }
 
@@ -83,7 +91,7 @@ namespace onlineChat
                     if (passwordBox.Text != "")//新建账户并进入
                     {
                         user u1 = new user(userNameBox.Text, publicClass.getIPAddress(),passwordBox.Text);
-                        string secUser = JsonConvert.SerializeObject(new command() { data=u1,type=0,subType="login"});//序列化
+                        string secUser = JsonConvert.SerializeObject(new command() { data=u1,type=0,subType="register",res=""});//序列化
                         publicClass.cSocket.sendSysMsg(secUser);
                     }
                     else
@@ -96,8 +104,18 @@ namespace onlineChat
             {
                 if (passwordBox.Text != "")//已有帐户进入
                 {
-                    this.DialogResult = DialogResult.OK;
-                    Close();
+                    List<string> l1 = new List<string>()
+                    {
+                        userNameBox.Text,passwordBox.Text
+                    };
+                    string secUser = JsonConvert.SerializeObject(new command() { data =l1, type = 0, subType = "login",res="" });//序列化
+                    if (publicClass.isRun)
+                    {
+                        publicClass.cSocket.sendSysMsg(secUser);
+
+                    }
+                    //this.DialogResult = DialogResult.OK;
+                    //Close();
                 }
                 else
                 {
@@ -123,12 +141,31 @@ namespace onlineChat
             {
                 publicClass.isRun = false;
                 publicClass.cSocket = null;
+                this.label1.Enabled = false;
+                this.userNameTips.Enabled = false;
+                this.userNameBox.Enabled = false;
+                this.userNameCheckPicture.Enabled = false;
+                this.label3.Enabled = false;
+                this.passwordBox.Enabled = false;
+                this.loginBtn.Enabled = false;
+                this.connectServerBtn.Text = "连接服务器";
             }
             else
             {
                 publicClass.cSocket = new clientSocket();//创建客户端套接字
-                publicClass.cSocket.connectSocket();
-                publicClass.isRun = true;
+                if(publicClass.cSocket.connectSocket())
+                {
+                    publicClass.isRun = true;
+                    this.label1.Enabled = true;
+                    this.userNameTips.Enabled = true;
+                    this.userNameBox.Enabled = true;
+                    this.userNameCheckPicture.Enabled = true;
+                    this.label3.Enabled = true;
+                    this.passwordBox.Enabled = true;
+                    this.loginBtn.Enabled = true;
+                    this.serverConfigBtn.Enabled = false;
+                    this.connectServerBtn.Text = "断开服务器";
+                }
             }
         }
     }

@@ -59,9 +59,9 @@ namespace onlineChat
             {
                 switch (cComand.subType)
                 {
-                    case ("userNameCheck"): decodeUserNameCheck(cComand);
+                    case ("checkNameAnswer"): decodeUserNameCheck(cComand);
                         break;
-                    case ("login"):decodeLogin(cComand);
+                    case ("loginAnswer"):decodeLogin(cComand);
                         break;
                 }
 
@@ -76,15 +76,20 @@ namespace onlineChat
         //用户名检测
         public  static void decodeUserNameCheck(command cCommand)
         {
-            if (cCommand.res == "exist")
+            if (cCommand.data.ToString() == "yes")
             {
-                //mainUser = (user)cCommand.data;//赋值给主用户
-                //l1.DialogResult = DialogResult.OK;
-                //l1.Close();
+                l1.Invoke(new Action(() =>
+                {
+                    l1.userNameCheck(true);
+                }));
             }
-            else if(cCommand.res == "notExist")
+            else if(cCommand.data.ToString() == "no")
             {
-                l1.userNameCheck(false);
+                //l1.userNameCheck(false);
+                l1.Invoke(new Action(() =>
+                {
+                    l1.userNameCheck(false);
+                }));
             }
             else
             {
@@ -95,11 +100,14 @@ namespace onlineChat
         //登录解析
         public static void decodeLogin(command cCommand)
         {
-            if(cCommand.res == "OK")
+            if(cCommand.data.ToString() == "yes")
             {
-                mainUser = (user)cCommand.data;//赋值给主用户
-                l1.DialogResult = DialogResult.OK;
-                l1.Close();
+                //mainUser = (user)cCommand.data;//赋值给主用户
+                l1.Invoke(new Action(() =>
+                {
+                    l1.DialogResult = DialogResult.OK;
+                    l1.Close();
+                }));
             }
             else
             {
@@ -260,6 +268,7 @@ namespace onlineChat
             serverPorts = publicClass.serverPorts;
             cSockets = new List<Socket>();
             messageThread = new List<Thread>();
+            publicClass.isRun = true;
             //isRun = true;
         }
         public clientSocket(IPAddress sIP, List<int> sP)
@@ -269,6 +278,8 @@ namespace onlineChat
             cSockets = new List<Socket>();
             messageThread = new List<Thread>();
             //isRun = true;
+            publicClass.isRun = true;
+
         }
 
         //public void startService()
@@ -297,20 +308,20 @@ namespace onlineChat
                 t0.Start();
                 t0.IsBackground = true;
                 messageThread.Add(t0);
-                Thread t1 = new Thread(receiveText);
-                t1.Start();
-                t1.IsBackground = true;
-                messageThread.Add(t1);
-                Thread t2 = new Thread(receiveImage);
-                t2.Start();
-                t2.IsBackground = true;
+                //Thread t1 = new Thread(receiveText);
+                //t1.Start();
+                //t1.IsBackground = true;
+                //messageThread.Add(t1);
+                //Thread t2 = new Thread(receiveImage);
+                //t2.Start();
+                //t2.IsBackground = true;
 
-                messageThread.Add(t2);
-                Thread t3 = new Thread(receiveFile);
-                t3.Start();
-                t3.IsBackground = true;
+                //messageThread.Add(t2);
+                //Thread t3 = new Thread(receiveFile);
+                //t3.Start();
+                //t3.IsBackground = true;
 
-                messageThread.Add(t3);
+                //messageThread.Add(t3);
                 return true;
             }
             catch(SocketException)
@@ -344,14 +355,15 @@ namespace onlineChat
                 try
                 {
                     length = cSockets[0].Receive(textRec);//接收消息长度计数
+                    string strMsg = System.Text.Encoding.UTF8.GetString(textRec, 0, length);// 将接受到的字节数据转化成字符串
+                    command c1 = JsonConvert.DeserializeObject<command>(strMsg);//解析
+                    publicClass.decodeCommand(c1);
                 }
                 catch
                 {
-                    return;
+                    //return;
                 }
-                string strMsg = System.Text.Encoding.UTF8.GetString(textRec, 0, length - 1);// 将接受到的字节数据转化成字符串
-                command c1 = JsonConvert.DeserializeObject<command>(strMsg);//解析
-                publicClass.decodeCommand(c1);
+
             }
         }
 
