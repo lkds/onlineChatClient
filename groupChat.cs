@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Collections;
+using CCWin.SkinControl;
 
 namespace onlineChat
 {
@@ -53,6 +55,22 @@ namespace onlineChat
         private void chatSendBtn_Click(object sender, EventArgs e)
         {
             if (inputBox.Text != "") ;
+        }
+
+        public void drawList(ArrayList memberList)  //绘制成员列表
+        {
+            ChatListItem groupMember = new ChatListItem("群组成员");
+
+            foreach (user i in memberList)  //绘制在线列表
+            {
+                ChatListSubItem sub = new ChatListSubItem();
+                sub.NicName = "在线";
+                sub.DisplayName = i.userName;
+                sub.PersonalMsg = i.IPAddress;
+                sub.Status = ChatListSubItem.UserStatus.Online;
+                groupMember.SubItems.Add(sub);
+            }
+            this.groupMemberListBox.Items.Add(groupMember);
         }
     }
 }

@@ -33,13 +33,18 @@
             this.mainUserNameLabel = new System.Windows.Forms.Label();
             this.mainUserIPLabel = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.onlineUserList = new System.Windows.Forms.TabPage();
-            this.recentChatList = new System.Windows.Forms.TabPage();
-            this.myGroupList = new System.Windows.Forms.TabPage();
+            this.onlineUserTab = new System.Windows.Forms.TabPage();
+            this.recentChatTab = new System.Windows.Forms.TabPage();
+            this.groupChatTab = new System.Windows.Forms.TabPage();
             this.startNewGroupBtn = new System.Windows.Forms.Button();
+            this.onlineUserListBox = new CCWin.SkinControl.ChatListBox();
+            this.recentChatListBox = new CCWin.SkinControl.ChatListBox();
+            this.groupChatListBox = new CCWin.SkinControl.ChatListBox();
             ((System.ComponentModel.ISupportInitialize)(this.mainUserAvatarBox)).BeginInit();
             this.tabControl1.SuspendLayout();
-            this.myGroupList.SuspendLayout();
+            this.onlineUserTab.SuspendLayout();
+            this.recentChatTab.SuspendLayout();
+            this.groupChatTab.SuspendLayout();
             this.SuspendLayout();
             // 
             // mainUserAvatarBox
@@ -75,44 +80,47 @@
             // 
             // tabControl1
             // 
-            this.tabControl1.Controls.Add(this.onlineUserList);
-            this.tabControl1.Controls.Add(this.recentChatList);
-            this.tabControl1.Controls.Add(this.myGroupList);
+            this.tabControl1.Controls.Add(this.onlineUserTab);
+            this.tabControl1.Controls.Add(this.recentChatTab);
+            this.tabControl1.Controls.Add(this.groupChatTab);
             this.tabControl1.Location = new System.Drawing.Point(4, 98);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(252, 437);
             this.tabControl1.TabIndex = 3;
             // 
-            // onlineUserList
+            // onlineUserTab
             // 
-            this.onlineUserList.Location = new System.Drawing.Point(4, 22);
-            this.onlineUserList.Name = "onlineUserList";
-            this.onlineUserList.Padding = new System.Windows.Forms.Padding(3);
-            this.onlineUserList.Size = new System.Drawing.Size(244, 411);
-            this.onlineUserList.TabIndex = 0;
-            this.onlineUserList.Text = "在线用户";
-            this.onlineUserList.UseVisualStyleBackColor = true;
+            this.onlineUserTab.Controls.Add(this.onlineUserListBox);
+            this.onlineUserTab.Location = new System.Drawing.Point(4, 22);
+            this.onlineUserTab.Name = "onlineUserTab";
+            this.onlineUserTab.Padding = new System.Windows.Forms.Padding(3);
+            this.onlineUserTab.Size = new System.Drawing.Size(244, 411);
+            this.onlineUserTab.TabIndex = 0;
+            this.onlineUserTab.Text = "在线用户";
+            this.onlineUserTab.UseVisualStyleBackColor = true;
             // 
-            // recentChatList
+            // recentChatTab
             // 
-            this.recentChatList.Location = new System.Drawing.Point(4, 22);
-            this.recentChatList.Name = "recentChatList";
-            this.recentChatList.Padding = new System.Windows.Forms.Padding(3);
-            this.recentChatList.Size = new System.Drawing.Size(244, 411);
-            this.recentChatList.TabIndex = 1;
-            this.recentChatList.Text = "最近会话";
-            this.recentChatList.UseVisualStyleBackColor = true;
+            this.recentChatTab.Controls.Add(this.recentChatListBox);
+            this.recentChatTab.Location = new System.Drawing.Point(4, 22);
+            this.recentChatTab.Name = "recentChatTab";
+            this.recentChatTab.Padding = new System.Windows.Forms.Padding(3);
+            this.recentChatTab.Size = new System.Drawing.Size(244, 411);
+            this.recentChatTab.TabIndex = 1;
+            this.recentChatTab.Text = "最近会话";
+            this.recentChatTab.UseVisualStyleBackColor = true;
             // 
-            // myGroupList
+            // groupChatTab
             // 
-            this.myGroupList.BackColor = System.Drawing.Color.Transparent;
-            this.myGroupList.Controls.Add(this.startNewGroupBtn);
-            this.myGroupList.Location = new System.Drawing.Point(4, 22);
-            this.myGroupList.Name = "myGroupList";
-            this.myGroupList.Size = new System.Drawing.Size(244, 411);
-            this.myGroupList.TabIndex = 2;
-            this.myGroupList.Text = "我的群聊";
+            this.groupChatTab.BackColor = System.Drawing.Color.Transparent;
+            this.groupChatTab.Controls.Add(this.groupChatListBox);
+            this.groupChatTab.Controls.Add(this.startNewGroupBtn);
+            this.groupChatTab.Location = new System.Drawing.Point(4, 22);
+            this.groupChatTab.Name = "groupChatTab";
+            this.groupChatTab.Size = new System.Drawing.Size(244, 411);
+            this.groupChatTab.TabIndex = 2;
+            this.groupChatTab.Text = "我的群聊";
             // 
             // startNewGroupBtn
             // 
@@ -125,6 +133,51 @@
             this.startNewGroupBtn.Text = "发起新的群聊";
             this.startNewGroupBtn.UseVisualStyleBackColor = true;
             this.startNewGroupBtn.Click += new System.EventHandler(this.startNewGroupBtn_Click);
+            // 
+            // onlineUserListBox
+            // 
+            this.onlineUserListBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.onlineUserListBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.onlineUserListBox.ForeColor = System.Drawing.Color.Black;
+            this.onlineUserListBox.FriendsMobile = true;
+            this.onlineUserListBox.ListSubItemMenu = null;
+            this.onlineUserListBox.Location = new System.Drawing.Point(2, 2);
+            this.onlineUserListBox.Name = "onlineUserListBox";
+            this.onlineUserListBox.SelectSubItem = null;
+            this.onlineUserListBox.Size = new System.Drawing.Size(241, 406);
+            this.onlineUserListBox.SubItemMenu = null;
+            this.onlineUserListBox.TabIndex = 0;
+            this.onlineUserListBox.Text = "chatListBox1";
+            // 
+            // recentChatListBox
+            // 
+            this.recentChatListBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.recentChatListBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.recentChatListBox.ForeColor = System.Drawing.Color.Black;
+            this.recentChatListBox.FriendsMobile = true;
+            this.recentChatListBox.ListSubItemMenu = null;
+            this.recentChatListBox.Location = new System.Drawing.Point(2, 2);
+            this.recentChatListBox.Name = "recentChatListBox";
+            this.recentChatListBox.SelectSubItem = null;
+            this.recentChatListBox.Size = new System.Drawing.Size(241, 406);
+            this.recentChatListBox.SubItemMenu = null;
+            this.recentChatListBox.TabIndex = 0;
+            this.recentChatListBox.Text = "chatListBox1";
+            // 
+            // groupChatListBox
+            // 
+            this.groupChatListBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.groupChatListBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.groupChatListBox.ForeColor = System.Drawing.Color.Black;
+            this.groupChatListBox.FriendsMobile = true;
+            this.groupChatListBox.ListSubItemMenu = null;
+            this.groupChatListBox.Location = new System.Drawing.Point(0, 28);
+            this.groupChatListBox.Name = "groupChatListBox";
+            this.groupChatListBox.SelectSubItem = null;
+            this.groupChatListBox.Size = new System.Drawing.Size(243, 378);
+            this.groupChatListBox.SubItemMenu = null;
+            this.groupChatListBox.TabIndex = 1;
+            this.groupChatListBox.Text = "chatListBox1";
             // 
             // mainPage
             // 
@@ -141,7 +194,9 @@
             this.Text = "DogChat火烈狗聊天";
             ((System.ComponentModel.ISupportInitialize)(this.mainUserAvatarBox)).EndInit();
             this.tabControl1.ResumeLayout(false);
-            this.myGroupList.ResumeLayout(false);
+            this.onlineUserTab.ResumeLayout(false);
+            this.recentChatTab.ResumeLayout(false);
+            this.groupChatTab.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -153,9 +208,12 @@
         private System.Windows.Forms.Label mainUserNameLabel;
         private System.Windows.Forms.Label mainUserIPLabel;
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage onlineUserList;
-        private System.Windows.Forms.TabPage recentChatList;
-        private System.Windows.Forms.TabPage myGroupList;
+        private System.Windows.Forms.TabPage onlineUserTab;
+        private System.Windows.Forms.TabPage recentChatTab;
+        private System.Windows.Forms.TabPage groupChatTab;
         private System.Windows.Forms.Button startNewGroupBtn;
+        private CCWin.SkinControl.ChatListBox onlineUserListBox;
+        private CCWin.SkinControl.ChatListBox recentChatListBox;
+        private CCWin.SkinControl.ChatListBox groupChatListBox;
     }
 }

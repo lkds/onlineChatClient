@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Collections;
 
 
 namespace onlineChat
@@ -26,6 +27,8 @@ namespace onlineChat
         public static bool isRun = false;
 
         public static login l1;
+        public static mainPage l2;
+        public static groupChat l3;
 
         //########################公共方法################################
         //获取本机IP地址
@@ -63,11 +66,19 @@ namespace onlineChat
                         break;
                     case ("loginAnswer"):decodeLogin(cComand);
                         break;
+                    case ("mainPageListDraw"):decodeMainPageList(cComand);
+                        break;
+                    case ("groupMemberListDraw"):decodeGroupMemberList(cComand);
+                        break;
                 }
 
             }else if (cComand.type == 1)//普通消息
             {
-
+                switch(cComand.subType)
+                {
+                    case ("singleChatMessageDraw"): decodeSingleMessageDraw(cComand);
+                        break;
+                }
             }
         }
 
@@ -114,6 +125,32 @@ namespace onlineChat
                 MessageBox.Show("登录错误，请重试！");
             }
 
+        }
+
+        //mainPage列表渲染解析
+        public static void decodeMainPageList(command cCommand)
+        {
+            ArrayList allThreeList = (ArrayList)cCommand.data;
+            l1.Invoke(new Action(() =>
+            {
+                l2.drawList(allThreeList);
+            }));
+        }
+
+        //groupChat成员列表渲染解析
+        public static void decodeGroupMemberList(command cCommand)
+        {
+            ArrayList groupMemberList = (ArrayList)cCommand.data;
+            l1.Invoke(new Action(() =>
+            {
+                l3.drawList(groupMemberList);
+            }));
+        }
+
+        //单聊信息框渲染解析
+        public static void decodeSingleMessageDraw(command cComand)
+        {
+            Message 
         }
     }
 

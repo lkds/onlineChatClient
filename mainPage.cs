@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Collections;
+using CCWin.SkinControl;
 
 namespace onlineChat
 {
@@ -31,6 +33,50 @@ namespace onlineChat
         {
             startNewGroup startNewGroup1 = new startNewGroup();
             startNewGroup1.Show();
+        }
+
+        public void drawList(ArrayList allThreeList)  //绘制三个列表
+        {
+            ArrayList onlineUserList = (ArrayList)allThreeList[0];  //在线用户
+            ArrayList recentChatList = (ArrayList)allThreeList[1];  //最近聊
+            ArrayList groupChatList = (ArrayList)allThreeList[2];  //群聊
+
+            ChatListItem onlineUser = new ChatListItem("在线用户");
+            ChatListItem recentChat = new ChatListItem("最近聊天用户");
+            ChatListItem groupChat = new ChatListItem("群组聊天");
+
+            foreach(user i in onlineUserList)  //绘制在线列表
+            {
+                ChatListSubItem sub = new ChatListSubItem();
+                sub.NicName = "在线";
+                sub.DisplayName = i.userName;
+                sub.PersonalMsg = i.IPAddress;
+                sub.Status = ChatListSubItem.UserStatus.Online;
+                onlineUser.SubItems.Add(sub);
+            }
+            this.onlineUserListBox.Items.Add(onlineUser);
+
+            foreach (user i in recentChatList)  //绘制最近聊列表
+            {
+                ChatListSubItem sub = new ChatListSubItem();
+                sub.NicName = "在线";
+                sub.DisplayName = i.userName;
+                sub.PersonalMsg = i.IPAddress;
+                sub.Status = ChatListSubItem.UserStatus.Online;
+                recentChat.SubItems.Add(sub);
+            }
+            this.recentChatListBox.Items.Add(recentChat);
+
+            foreach (group i in groupChatList)  //绘制群列表
+            {
+                ChatListSubItem sub = new ChatListSubItem();
+                sub.NicName = "群组";
+                sub.DisplayName = i.groupName;
+                sub.PersonalMsg = "";
+                sub.Status = ChatListSubItem.UserStatus.QMe;
+                groupChat.SubItems.Add(sub);
+            }
+            this.groupChatListBox.Items.Add(groupChat);
         }
     }
 }

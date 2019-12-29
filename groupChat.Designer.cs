@@ -29,9 +29,8 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(groupChat));
-            this.chatUserListBox = new System.Windows.Forms.ListBox();
+            this.groupMemberListBox = new System.Windows.Forms.ListBox();
             this.chatQuitGroupBtn = new System.Windows.Forms.Button();
-            this.chatMessageBox = new System.Windows.Forms.ListBox();
             this.inputBox = new System.Windows.Forms.TextBox();
             this.chatSendBtn = new System.Windows.Forms.Button();
             this.chatGroupName = new System.Windows.Forms.Label();
@@ -39,21 +38,22 @@
             this.imageSelectBox = new System.Windows.Forms.PictureBox();
             this.groupAvatarBox = new System.Windows.Forms.PictureBox();
             this.groupAvatar = new System.Windows.Forms.PictureBox();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.fileSelectBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageSelectBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupAvatarBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupAvatar)).BeginInit();
             this.SuspendLayout();
             // 
-            // chatUserListBox
+            // groupMemberListBox
             // 
-            this.chatUserListBox.BackColor = System.Drawing.Color.LightPink;
-            this.chatUserListBox.FormattingEnabled = true;
-            this.chatUserListBox.ItemHeight = 12;
-            this.chatUserListBox.Location = new System.Drawing.Point(2, 63);
-            this.chatUserListBox.Name = "chatUserListBox";
-            this.chatUserListBox.Size = new System.Drawing.Size(165, 340);
-            this.chatUserListBox.TabIndex = 0;
+            this.groupMemberListBox.BackColor = System.Drawing.Color.LightPink;
+            this.groupMemberListBox.FormattingEnabled = true;
+            this.groupMemberListBox.ItemHeight = 12;
+            this.groupMemberListBox.Location = new System.Drawing.Point(2, 63);
+            this.groupMemberListBox.Name = "groupMemberListBox";
+            this.groupMemberListBox.Size = new System.Drawing.Size(165, 340);
+            this.groupMemberListBox.TabIndex = 0;
             // 
             // chatQuitGroupBtn
             // 
@@ -65,17 +65,6 @@
             this.chatQuitGroupBtn.TabIndex = 1;
             this.chatQuitGroupBtn.Text = "退出群聊";
             this.chatQuitGroupBtn.UseVisualStyleBackColor = true;
-            // 
-            // chatMessageBox
-            // 
-            this.chatMessageBox.BackColor = System.Drawing.Color.LightBlue;
-            this.chatMessageBox.FormattingEnabled = true;
-            this.chatMessageBox.ItemHeight = 12;
-            this.chatMessageBox.Location = new System.Drawing.Point(182, 3);
-            this.chatMessageBox.Name = "chatMessageBox";
-            this.chatMessageBox.Size = new System.Drawing.Size(570, 328);
-            this.chatMessageBox.TabIndex = 2;
-            this.chatMessageBox.SelectedIndexChanged += new System.EventHandler(this.ListBox2_SelectedIndexChanged);
             // 
             // inputBox
             // 
@@ -150,20 +139,29 @@
             this.groupAvatar.TabIndex = 10;
             this.groupAvatar.TabStop = false;
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.BackColor = System.Drawing.Color.LightBlue;
+            this.richTextBox1.Location = new System.Drawing.Point(172, 5);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(577, 334);
+            this.richTextBox1.TabIndex = 11;
+            this.richTextBox1.Text = "";
+            // 
             // groupChat
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(755, 450);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.groupAvatar);
             this.Controls.Add(this.fileSelectBox);
             this.Controls.Add(this.imageSelectBox);
             this.Controls.Add(this.chatGroupName);
             this.Controls.Add(this.chatSendBtn);
             this.Controls.Add(this.inputBox);
-            this.Controls.Add(this.chatMessageBox);
             this.Controls.Add(this.chatQuitGroupBtn);
-            this.Controls.Add(this.chatUserListBox);
+            this.Controls.Add(this.groupMemberListBox);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "groupChat";
             this.Text = "群聊";
@@ -178,9 +176,8 @@
 
         #endregion
 
-        private System.Windows.Forms.ListBox chatUserListBox;
+        private System.Windows.Forms.ListBox groupMemberListBox;
         private System.Windows.Forms.Button chatQuitGroupBtn;
-        private System.Windows.Forms.ListBox chatMessageBox;
         private System.Windows.Forms.TextBox inputBox;
         private System.Windows.Forms.Button chatSendBtn;
         private System.Windows.Forms.Label chatGroupName;
@@ -188,5 +185,6 @@
         private System.Windows.Forms.PictureBox imageSelectBox;
         private System.Windows.Forms.PictureBox groupAvatarBox;
         private System.Windows.Forms.PictureBox groupAvatar;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
