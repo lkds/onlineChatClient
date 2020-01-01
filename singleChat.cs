@@ -51,6 +51,42 @@ namespace onlineChat
             l1.Show();
         }
 
+        public void DrawMessage(List<baseMessage> messages)
+        {
+            singleChatMessageBox.Text = "";
+            foreach(baseMessage i in messages)
+            {
+                if(i.GetType() == typeof(textMessage))
+                {
+                    singleChatMessageBox.SelectionFont = new Font("黑体", 7, FontStyle.Bold);
+                    singleChatMessageBox.SelectionColor = System.Drawing.Color.Purple;
+                    singleChatMessageBox.SelectionIndent = 2;
+                    singleChatMessageBox.SelectionBullet = true;
+                    singleChatMessageBox.Text = singleChatMessageBox.Text + "\r\n" + i.sendUser + "  [" + i.sendTime + "]";
+
+                    singleChatMessageBox.SelectionFont = new Font("宋体", 7, FontStyle.Regular);
+                    singleChatMessageBox.SelectionColor = System.Drawing.Color.Black;
+                    singleChatMessageBox.SelectionIndent = 52;
+                    singleChatMessageBox.SelectionBullet = false;
+                    singleChatMessageBox.Text = singleChatMessageBox.Text + "\r\n" + ((textMessage)i).content;
+                }
+                else if (i.GetType() == typeof(imageFileMessage))
+                {
+                    singleChatMessageBox.SelectionFont = new Font("黑体", 7, FontStyle.Bold);
+                    singleChatMessageBox.SelectionColor = System.Drawing.Color.Purple;
+                    singleChatMessageBox.SelectionIndent = 2;
+                    singleChatMessageBox.SelectionBullet = true;
+                    singleChatMessageBox.Text = singleChatMessageBox.Text + "\r\n" + i.sendUser + "  [" + i.sendTime + "]";
+
+                    singleChatMessageBox.SelectionFont = new Font("宋体", 7, FontStyle.Regular);
+                    singleChatMessageBox.SelectionColor = System.Drawing.Color.Blue;
+                    singleChatMessageBox.SelectionIndent = 52;
+                    singleChatMessageBox.SelectionBullet = false;
+                    singleChatMessageBox.Text = singleChatMessageBox.Text + "\r\n" + "【图片/文件消息  点击查看】";
+                }
+            }
+        }
+
         private void SingleUserBox1_Load(object sender, EventArgs e)
         {
 

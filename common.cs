@@ -20,7 +20,7 @@ namespace onlineChat
     {
         //########################公共变量#############################
         public static user mainUser;//当前用户
-        public static Dictionary<int, chatSession> myChat = new Dictionary<int, chatSession>();//保存本地聊天会话
+        public static Dictionary<int, singleChatSession> myChat = new Dictionary<int, singleChatSession>();//保存本地聊天会话
         public static clientSocket cSocket;
         public static List<int> serverPorts=new List<int>() { 2333,2334,2335,2336};
         public static IPAddress serverIP=IPAddress.Parse("127.0.0.1");
@@ -77,6 +77,8 @@ namespace onlineChat
                 switch(cComand.subType)
                 {
                     case ("singleChatMessageDraw"): decodeSingleMessageDraw(cComand);
+                        break;
+                    case ("groupChatMessageDraw"): decodeGroupMessageDraw(cComand);
                         break;
                 }
             }
@@ -147,10 +149,27 @@ namespace onlineChat
             }));
         }
 
-        //单聊信息框渲染解析
+        //单聊信息解析
         public static void decodeSingleMessageDraw(command cComand)
         {
-            Message 
+            baseMessage message = (baseMessage) cComand.data;
+            if(!myChat.ContainsKey(message.target))
+            {
+                singleChatSession chatSession = new singleChatSession();
+                chatSession.addMessage(message);
+                myChat.Add(message.target,chatSession);
+            }
+            else
+            {
+                myChat[message.target].addMessage(message);
+            }
+            //drawMessage
+        }
+
+        public static void decodeGroupMessageDraw(command cComand)
+        {
+            baseMessage message = (baseMessage)cComand.data;
+            //drawMessage
         }
     }
 
@@ -190,6 +209,7 @@ namespace onlineChat
         public int id;//
         public string groupName;
         public List<user> groupUserList;
+        public List<baseMessage> messageList;
         public int groupAvatar;//群组头像编号
 
         public group(int cID, string cGroupName, List<user> cGroupUserList, int cGroupAvatar)
@@ -212,10 +232,16 @@ namespace onlineChat
             groupUserList.Remove(targetUser);
         }
 
+        //添加一个消息
+        public void addMessage(baseMessage message)
+        {
+            messageList.Add(message);
+        }
+
         //退出群组,删除
         //public void quitGroup()
         //{
-            
+
         //}
     }
 
@@ -244,36 +270,19 @@ namespace onlineChat
     }
 
     //某个聊天连接,可以是群组也可以是单聊
-    class chatSession
+    class singleChatSession
     {
-        public string createTime;
+        ////public string createTime;
         public user targetUser;//单聊用户
-        public group userList;//群组
-        public int chatSessionType;//类型，0单聊，1群聊
+        ////public group userList;//群组
+        ////public int chatSessionType;//类型，0单聊，1群聊
         public List<baseMessage> messageList;
-
-        //构造函数
-        public chatSession(string time, int type, dynamic target, List<baseMessage> messages)
-        {
-            createTime = time;//创建时间
-            chatSessionType = type;
-            if (type == 0)
-            {
-                targetUser = target;
-            }
-            else
-            {
-                userList = target;
-            }
-            messageList = messages;//消息
-        }
 
         //添加一条聊天记录，可以是文字，图片，文件
         public void addMessage(baseMessage message)
         {
             messageList.Add(message);//添加到数组末尾
         }
-
     }
 
     //command类
