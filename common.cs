@@ -146,8 +146,8 @@ namespace onlineChat
             
             //赋值本地数据
             onlineUserList = allThreeList[0].ToObject<List<user>>();
-            groupList = allThreeList[0].ToObject<List<group>>();
-            recentChatList = allThreeList[0].ToObject<List<user>>();
+            groupList = allThreeList[1].ToObject<List<group>>();
+            recentChatList = allThreeList[2].ToObject<List<user>>();
             m1.Invoke(new Action(() =>
             {
                 m1.drawList();

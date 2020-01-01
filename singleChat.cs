@@ -22,7 +22,7 @@ namespace onlineChat
         {
             InitializeComponent();
             targetUserName = name;
-            Text = "单人聊天【To：+" + targetUserName + "】";
+            Text = "单人聊天【To：" + targetUserName + "】";
             targetUserID = userID;
             userName.Text = name;
             DrawMessage();
@@ -75,29 +75,29 @@ namespace onlineChat
             {
                 if(i.GetType() == typeof(textMessage))
                 {
-                    singleChatMessageBox.SelectionFont = new Font("黑体", 7, FontStyle.Bold);
+                    singleChatMessageBox.SelectionFont = new Font("黑体", 9, FontStyle.Bold);
                     singleChatMessageBox.SelectionColor = System.Drawing.Color.Purple;
                     singleChatMessageBox.SelectionIndent = 2;
                     singleChatMessageBox.SelectionBullet = true;
                     singleChatMessageBox.AppendText(publicClass.onlineUserList.Find(s=>s.id ==i.sendUser).userName + "  [" + i.sendTime + "]\r\n");
 
-                    singleChatMessageBox.SelectionFont = new Font("宋体", 7, FontStyle.Regular);
+                    singleChatMessageBox.SelectionFont = new Font("宋体", 9, FontStyle.Regular);
                     singleChatMessageBox.SelectionColor = System.Drawing.Color.Black;
-                    singleChatMessageBox.SelectionIndent = 52;
+                    singleChatMessageBox.SelectionIndent = 19;
                     singleChatMessageBox.SelectionBullet = false;
                     singleChatMessageBox.AppendText(((textMessage)i).content+ "\r\n");
                 }
                 else if (i.GetType() == typeof(imageFileMessage))
                 {
-                    singleChatMessageBox.SelectionFont = new Font("黑体", 7, FontStyle.Bold);
+                    singleChatMessageBox.SelectionFont = new Font("黑体", 9, FontStyle.Bold);
                     singleChatMessageBox.SelectionColor = System.Drawing.Color.Purple;
                     singleChatMessageBox.SelectionIndent = 2;
                     singleChatMessageBox.SelectionBullet = true;
                     singleChatMessageBox.AppendText(publicClass.onlineUserList.Find(s => s.id == i.sendUser).userName + "  [" + i.sendTime + "]\r\n");
 
-                    singleChatMessageBox.SelectionFont = new Font("宋体", 7, FontStyle.Regular);
+                    singleChatMessageBox.SelectionFont = new Font("宋体", 9, FontStyle.Regular);
                     singleChatMessageBox.SelectionColor = System.Drawing.Color.Blue;
-                    singleChatMessageBox.SelectionIndent = 52;
+                    singleChatMessageBox.SelectionIndent = 19;
                     singleChatMessageBox.SelectionBullet = false;
                     singleChatMessageBox.Text = singleChatMessageBox.Text + "\r\n" + "【图片/文件消息  点击查看】";
                 }
@@ -106,30 +106,30 @@ namespace onlineChat
 
         public void AddMessage(textMessage message)
         {
-                singleChatMessageBox.SelectionFont = new Font("黑体", 7, FontStyle.Bold);
+                singleChatMessageBox.SelectionFont = new Font("黑体", 9, FontStyle.Bold);
                 singleChatMessageBox.SelectionColor = System.Drawing.Color.Purple;
                 singleChatMessageBox.SelectionIndent = 2;
                 singleChatMessageBox.SelectionBullet = true;
             singleChatMessageBox.AppendText(publicClass.onlineUserList.Find(s => s.id == message.sendUser).userName + "  [" + message.sendTime + "]\r\n");
 
-                singleChatMessageBox.SelectionFont = new Font("宋体", 7, FontStyle.Regular);
+                singleChatMessageBox.SelectionFont = new Font("宋体", 9, FontStyle.Regular);
                 singleChatMessageBox.SelectionColor = System.Drawing.Color.Black;
-                singleChatMessageBox.SelectionIndent = 52;
+                singleChatMessageBox.SelectionIndent = 19;
                 singleChatMessageBox.SelectionBullet = false;
                 singleChatMessageBox.AppendText(((textMessage)message).content+"\r\n");
         }
 
         public void AddMessage(imageFileMessage message)
         {
-            singleChatMessageBox.SelectionFont = new Font("黑体", 7, FontStyle.Bold);
+            singleChatMessageBox.SelectionFont = new Font("黑体", 9, FontStyle.Bold);
             singleChatMessageBox.SelectionColor = System.Drawing.Color.Purple;
             singleChatMessageBox.SelectionIndent = 2;
             singleChatMessageBox.SelectionBullet = true;
             singleChatMessageBox.AppendText( publicClass.onlineUserList.Find(s => s.id == message.sendUser).userName + "  [" + message.sendTime + "]\r\n");
 
-            singleChatMessageBox.SelectionFont = new Font("宋体", 7, FontStyle.Regular);
+            singleChatMessageBox.SelectionFont = new Font("宋体", 9, FontStyle.Regular);
             singleChatMessageBox.SelectionColor = System.Drawing.Color.Blue;
-            singleChatMessageBox.SelectionIndent = 52;
+            singleChatMessageBox.SelectionIndent = 19;
             singleChatMessageBox.SelectionBullet = false;
             singleChatMessageBox.AppendText("【图片/文件消息  点击查看】\r\n" );
         }

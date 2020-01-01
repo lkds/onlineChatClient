@@ -16,11 +16,17 @@ namespace onlineChat
 {
     public partial class mainPage : Form
     {
+        public bool ifNew;
+        public ChatListItem onlineUser = new ChatListItem("在线用户");
+        public ChatListItem recentChat = new ChatListItem("最近聊天用户");
+        public ChatListItem groupChat = new ChatListItem("群组聊天");
         public mainPage()
         {
             InitializeComponent();
+            ifNew = true;
             mainUserIPLabel.Text = publicClass.mainUser.IPAddress;
             mainUserNameLabel.Text = publicClass.mainUser.userName;
+
         }
 
         private void MainStartGroupBtn_Click(object sender, EventArgs e)
@@ -43,13 +49,9 @@ namespace onlineChat
         {
             List<user> onlineUserList = publicClass.onlineUserList;  //在线用户
             List<user> recentChatList = publicClass.recentChatList; //最近聊
-            List<group> groupChatList = publicClass.groupList; ;  //群聊
+            List<group> groupChatList = publicClass.groupList;   //群聊
 
-            ChatListItem onlineUser = new ChatListItem("在线用户");
-            ChatListItem recentChat = new ChatListItem("最近聊天用户");
-            ChatListItem groupChat = new ChatListItem("群组聊天");
-
-            foreach(user i in onlineUserList)  //绘制在线列表
+            foreach (user i in onlineUserList)  //绘制在线列表
             {
                 ChatListSubItem sub = new ChatListSubItem();
                 if(i.isOnline)
