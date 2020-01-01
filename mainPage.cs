@@ -115,27 +115,48 @@ namespace onlineChat
         //头像停止闪动
         public void userHeadNotTwinkle(uint id)
         {
-            this.onlineUserListBox.GetSubItemsById(id)[0].IsTwinkle = false;
-            this.recentChatListBox.GetSubItemsById(id)[0].IsTwinkle = false;
-            this.groupChatListBox.GetSubItemsById(id)[0].IsTwinkle = false;
+            try
+            {
+                this.onlineUserListBox.GetSubItemsById(id)[0].IsTwinkle = false;
+                this.recentChatListBox.GetSubItemsById(id)[0].IsTwinkle = false;
+                this.groupChatListBox.GetSubItemsById(id)[0].IsTwinkle = false;
+            }
+            catch
+            {
+                return;
+            }
         }
 
         //头像变灰（下线）
         public void userHeadDark(uint id)
         {
-            this.onlineUserListBox.GetSubItemsById(id)[0].Status= ChatListSubItem.UserStatus.OffLine;
-            this.onlineUserListBox.GetSubItemsById(id)[0].NicName = "下线";
-            this.recentChatListBox.GetSubItemsById(id)[0].Status = ChatListSubItem.UserStatus.OffLine;
-            this.recentChatListBox.GetSubItemsById(id)[0].NicName = "下线";
+            try
+            {
+                this.onlineUserListBox.GetSubItemsById(id)[0].Status = ChatListSubItem.UserStatus.OffLine;
+                this.onlineUserListBox.GetSubItemsById(id)[0].NicName = "下线";
+                this.recentChatListBox.GetSubItemsById(id)[0].Status = ChatListSubItem.UserStatus.OffLine;
+                this.recentChatListBox.GetSubItemsById(id)[0].NicName = "下线";
+            }
+            catch
+            {
+
+            }
         }
 
         //头像变亮（上线）
         public void userHeadBright(uint id)
         {
-            this.onlineUserListBox.GetSubItemsById(id)[0].Status = ChatListSubItem.UserStatus.Online;
-            this.onlineUserListBox.GetSubItemsById(id)[0].NicName = "在线";
-            this.recentChatListBox.GetSubItemsById(id)[0].Status = ChatListSubItem.UserStatus.Online;
-            this.recentChatListBox.GetSubItemsById(id)[0].NicName = "在线";
+            try
+            {
+                this.onlineUserListBox.GetSubItemsById(id)[0].Status = ChatListSubItem.UserStatus.Online;
+                this.onlineUserListBox.GetSubItemsById(id)[0].NicName = "在线";
+                this.recentChatListBox.GetSubItemsById(id)[0].Status = ChatListSubItem.UserStatus.Online;
+                this.recentChatListBox.GetSubItemsById(id)[0].NicName = "在线";
+            }
+            catch
+            {
+
+            }
         }
 
         private void onlineUserListBox_Click(object sender, EventArgs e)
