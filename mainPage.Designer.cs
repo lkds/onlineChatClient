@@ -34,12 +34,12 @@
             this.mainUserIPLabel = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.onlineUserTab = new System.Windows.Forms.TabPage();
-            this.recentChatTab = new System.Windows.Forms.TabPage();
-            this.groupChatTab = new System.Windows.Forms.TabPage();
-            this.startNewGroupBtn = new System.Windows.Forms.Button();
             this.onlineUserListBox = new CCWin.SkinControl.ChatListBox();
+            this.recentChatTab = new System.Windows.Forms.TabPage();
             this.recentChatListBox = new CCWin.SkinControl.ChatListBox();
+            this.groupChatTab = new System.Windows.Forms.TabPage();
             this.groupChatListBox = new CCWin.SkinControl.ChatListBox();
+            this.startNewGroupBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.mainUserAvatarBox)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.onlineUserTab.SuspendLayout();
@@ -100,40 +100,6 @@
             this.onlineUserTab.Text = "在线用户";
             this.onlineUserTab.UseVisualStyleBackColor = true;
             // 
-            // recentChatTab
-            // 
-            this.recentChatTab.Controls.Add(this.recentChatListBox);
-            this.recentChatTab.Location = new System.Drawing.Point(4, 22);
-            this.recentChatTab.Name = "recentChatTab";
-            this.recentChatTab.Padding = new System.Windows.Forms.Padding(3);
-            this.recentChatTab.Size = new System.Drawing.Size(244, 411);
-            this.recentChatTab.TabIndex = 1;
-            this.recentChatTab.Text = "最近会话";
-            this.recentChatTab.UseVisualStyleBackColor = true;
-            // 
-            // groupChatTab
-            // 
-            this.groupChatTab.BackColor = System.Drawing.Color.Transparent;
-            this.groupChatTab.Controls.Add(this.groupChatListBox);
-            this.groupChatTab.Controls.Add(this.startNewGroupBtn);
-            this.groupChatTab.Location = new System.Drawing.Point(4, 22);
-            this.groupChatTab.Name = "groupChatTab";
-            this.groupChatTab.Size = new System.Drawing.Size(244, 411);
-            this.groupChatTab.TabIndex = 2;
-            this.groupChatTab.Text = "我的群聊";
-            // 
-            // startNewGroupBtn
-            // 
-            this.startNewGroupBtn.Font = new System.Drawing.Font("微软雅黑", 7.75F);
-            this.startNewGroupBtn.ForeColor = System.Drawing.Color.MediumBlue;
-            this.startNewGroupBtn.Location = new System.Drawing.Point(4, 3);
-            this.startNewGroupBtn.Name = "startNewGroupBtn";
-            this.startNewGroupBtn.Size = new System.Drawing.Size(235, 24);
-            this.startNewGroupBtn.TabIndex = 0;
-            this.startNewGroupBtn.Text = "发起新的群聊";
-            this.startNewGroupBtn.UseVisualStyleBackColor = true;
-            this.startNewGroupBtn.Click += new System.EventHandler(this.startNewGroupBtn_Click);
-            // 
             // onlineUserListBox
             // 
             this.onlineUserListBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
@@ -148,6 +114,19 @@
             this.onlineUserListBox.SubItemMenu = null;
             this.onlineUserListBox.TabIndex = 0;
             this.onlineUserListBox.Text = "chatListBox1";
+            this.onlineUserListBox.DoubleClickSubItem += new CCWin.SkinControl.ChatListBox.ChatListEventHandler(this.onlineUserListBox_DoubleClickSubItem);
+            this.onlineUserListBox.Click += new System.EventHandler(this.onlineUserListBox_Click);
+            // 
+            // recentChatTab
+            // 
+            this.recentChatTab.Controls.Add(this.recentChatListBox);
+            this.recentChatTab.Location = new System.Drawing.Point(4, 22);
+            this.recentChatTab.Name = "recentChatTab";
+            this.recentChatTab.Padding = new System.Windows.Forms.Padding(3);
+            this.recentChatTab.Size = new System.Drawing.Size(244, 411);
+            this.recentChatTab.TabIndex = 1;
+            this.recentChatTab.Text = "最近会话";
+            this.recentChatTab.UseVisualStyleBackColor = true;
             // 
             // recentChatListBox
             // 
@@ -163,6 +142,18 @@
             this.recentChatListBox.SubItemMenu = null;
             this.recentChatListBox.TabIndex = 0;
             this.recentChatListBox.Text = "chatListBox1";
+            this.recentChatListBox.DoubleClickSubItem += new CCWin.SkinControl.ChatListBox.ChatListEventHandler(this.recentChatListBox_DoubleClickSubItem);
+            // 
+            // groupChatTab
+            // 
+            this.groupChatTab.BackColor = System.Drawing.Color.Transparent;
+            this.groupChatTab.Controls.Add(this.groupChatListBox);
+            this.groupChatTab.Controls.Add(this.startNewGroupBtn);
+            this.groupChatTab.Location = new System.Drawing.Point(4, 22);
+            this.groupChatTab.Name = "groupChatTab";
+            this.groupChatTab.Size = new System.Drawing.Size(244, 411);
+            this.groupChatTab.TabIndex = 2;
+            this.groupChatTab.Text = "我的群聊";
             // 
             // groupChatListBox
             // 
@@ -178,6 +169,19 @@
             this.groupChatListBox.SubItemMenu = null;
             this.groupChatListBox.TabIndex = 1;
             this.groupChatListBox.Text = "chatListBox1";
+            this.groupChatListBox.DoubleClickSubItem += new CCWin.SkinControl.ChatListBox.ChatListEventHandler(this.groupChatListBox_DoubleClickSubItem);
+            // 
+            // startNewGroupBtn
+            // 
+            this.startNewGroupBtn.Font = new System.Drawing.Font("微软雅黑", 7.75F);
+            this.startNewGroupBtn.ForeColor = System.Drawing.Color.MediumBlue;
+            this.startNewGroupBtn.Location = new System.Drawing.Point(4, 3);
+            this.startNewGroupBtn.Name = "startNewGroupBtn";
+            this.startNewGroupBtn.Size = new System.Drawing.Size(235, 24);
+            this.startNewGroupBtn.TabIndex = 0;
+            this.startNewGroupBtn.Text = "发起新的群聊";
+            this.startNewGroupBtn.UseVisualStyleBackColor = true;
+            this.startNewGroupBtn.Click += new System.EventHandler(this.startNewGroupBtn_Click);
             // 
             // mainPage
             // 

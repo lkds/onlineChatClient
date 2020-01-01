@@ -14,9 +14,12 @@ namespace onlineChat
 {
     public partial class groupChat : Form
     {
-        public groupChat()
+        public string groupName;
+        public groupChat(string name)
         {
             InitializeComponent();
+            groupName = name;
+            chatGroupName.Text = name;
             inputBox.ForeColor = Color.Gray;
             inputBox.Text = "此处输入文字消息......";
             inputBox.LostFocus += new EventHandler(this.inputTip);  //消息输入框失焦
@@ -64,10 +67,18 @@ namespace onlineChat
             foreach (user i in memberList)  //绘制在线列表
             {
                 ChatListSubItem sub = new ChatListSubItem();
-                sub.NicName = "在线";
+                if (i.isOnline)
+                {
+                    sub.NicName = "在线";
+                    sub.Status = ChatListSubItem.UserStatus.Online;
+                }
+                else
+                {
+                    sub.NicName = "下线";
+                    sub.Status = ChatListSubItem.UserStatus.OffLine;
+                }
                 sub.DisplayName = i.userName;
                 sub.PersonalMsg = i.IPAddress;
-                sub.Status = ChatListSubItem.UserStatus.Online;
                 groupMember.SubItems.Add(sub);
             }
             this.groupMemberListBox.Items.Add(groupMember);

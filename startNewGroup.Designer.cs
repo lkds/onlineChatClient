@@ -28,50 +28,91 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.startGroupBtn = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.newGroupName = new System.Windows.Forms.TextBox();
+            this.selectUserBox = new CCWin.SkinControl.ChatListBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
-            // 
-            // checkedListBox1
-            // 
-            this.checkedListBox1.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.checkedListBox1.FormattingEnabled = true;
-            this.checkedListBox1.Location = new System.Drawing.Point(3, 33);
-            this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(252, 388);
-            this.checkedListBox1.TabIndex = 0;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.label1.Location = new System.Drawing.Point(31, 9);
+            this.label1.Location = new System.Drawing.Point(16, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(191, 20);
+            this.label1.Size = new System.Drawing.Size(219, 20);
             this.label1.TabIndex = 1;
-            this.label1.Text = "请选择您想要纳入群聊的用户";
+            this.label1.Text = "请双击选择您想要纳入群聊的用户";
             // 
-            // button1
+            // startGroupBtn
             // 
-            this.button1.BackColor = System.Drawing.Color.LightGreen;
-            this.button1.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button1.ForeColor = System.Drawing.Color.DarkGreen;
-            this.button1.Location = new System.Drawing.Point(63, 427);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(134, 31);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "选择完成  创建群聊";
-            this.button1.UseVisualStyleBackColor = false;
+            this.startGroupBtn.BackColor = System.Drawing.Color.LightGreen;
+            this.startGroupBtn.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.startGroupBtn.ForeColor = System.Drawing.Color.DarkGreen;
+            this.startGroupBtn.Location = new System.Drawing.Point(61, 505);
+            this.startGroupBtn.Name = "startGroupBtn";
+            this.startGroupBtn.Size = new System.Drawing.Size(134, 31);
+            this.startGroupBtn.TabIndex = 2;
+            this.startGroupBtn.Text = "选择完成  创建群聊";
+            this.startGroupBtn.UseVisualStyleBackColor = false;
+            this.startGroupBtn.Click += new System.EventHandler(this.startGroupBtn_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(90, 463);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(77, 12);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "设定群聊名称";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
+            // 
+            // newGroupName
+            // 
+            this.newGroupName.Location = new System.Drawing.Point(12, 478);
+            this.newGroupName.Name = "newGroupName";
+            this.newGroupName.Size = new System.Drawing.Size(235, 21);
+            this.newGroupName.TabIndex = 4;
+            // 
+            // selectUserBox
+            // 
+            this.selectUserBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.selectUserBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.selectUserBox.ForeColor = System.Drawing.Color.Black;
+            this.selectUserBox.FriendsMobile = true;
+            this.selectUserBox.ListSubItemMenu = null;
+            this.selectUserBox.Location = new System.Drawing.Point(2, 54);
+            this.selectUserBox.Name = "selectUserBox";
+            this.selectUserBox.SelectSubItem = null;
+            this.selectUserBox.Size = new System.Drawing.Size(256, 394);
+            this.selectUserBox.SubItemMenu = null;
+            this.selectUserBox.TabIndex = 5;
+            this.selectUserBox.Text = "chatListBox1";
+            this.selectUserBox.Click += new System.EventHandler(this.selectUserBox_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label3.Location = new System.Drawing.Point(70, 29);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(125, 12);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "【头像变亮表示选中】";
             // 
             // startNewGroup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(259, 464);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(259, 548);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.selectUserBox);
+            this.Controls.Add(this.newGroupName);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.startGroupBtn);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.checkedListBox1);
             this.MaximizeBox = false;
             this.Name = "startNewGroup";
             this.Text = "startNewGroup";
@@ -81,9 +122,11 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.CheckedListBox checkedListBox1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button startGroupBtn;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox newGroupName;
+        private CCWin.SkinControl.ChatListBox selectUserBox;
+        private System.Windows.Forms.Label label3;
     }
 }

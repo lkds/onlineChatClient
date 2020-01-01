@@ -12,10 +12,12 @@ namespace onlineChat
 {
     public partial class singleChat : Form
     {
-        public int currentUserID;
-        public singleChat()
+        public string currentUserName;
+        public singleChat(string Name)
         {
             InitializeComponent();
+            currentUserName = Name;
+            userName.Text = Name;
             inputBox.ForeColor = Color.Gray;
             inputBox.Text = "此处输入文字消息......";
             inputBox.LostFocus += new EventHandler(this.inputTip);  //消息输入框失焦
@@ -85,6 +87,38 @@ namespace onlineChat
                     singleChatMessageBox.SelectionBullet = false;
                     singleChatMessageBox.Text = singleChatMessageBox.Text + "\r\n" + "【图片/文件消息  点击查看】";
                 }
+            }
+        }
+
+        public void AddMessage(baseMessage message)
+        {
+            if (message.GetType() == typeof(textMessage))
+            {
+                singleChatMessageBox.SelectionFont = new Font("黑体", 7, FontStyle.Bold);
+                singleChatMessageBox.SelectionColor = System.Drawing.Color.Purple;
+                singleChatMessageBox.SelectionIndent = 2;
+                singleChatMessageBox.SelectionBullet = true;
+                singleChatMessageBox.Text = singleChatMessageBox.Text + "\r\n" + message.sendUser + "  [" + message.sendTime + "]";
+
+                singleChatMessageBox.SelectionFont = new Font("宋体", 7, FontStyle.Regular);
+                singleChatMessageBox.SelectionColor = System.Drawing.Color.Black;
+                singleChatMessageBox.SelectionIndent = 52;
+                singleChatMessageBox.SelectionBullet = false;
+                singleChatMessageBox.Text = singleChatMessageBox.Text + "\r\n" + ((textMessage)message).content;
+            }
+            else if (message.GetType() == typeof(imageFileMessage))
+            {
+                singleChatMessageBox.SelectionFont = new Font("黑体", 7, FontStyle.Bold);
+                singleChatMessageBox.SelectionColor = System.Drawing.Color.Purple;
+                singleChatMessageBox.SelectionIndent = 2;
+                singleChatMessageBox.SelectionBullet = true;
+                singleChatMessageBox.Text = singleChatMessageBox.Text + "\r\n" + message.sendUser + "  [" + message.sendTime + "]";
+
+                singleChatMessageBox.SelectionFont = new Font("宋体", 7, FontStyle.Regular);
+                singleChatMessageBox.SelectionColor = System.Drawing.Color.Blue;
+                singleChatMessageBox.SelectionIndent = 52;
+                singleChatMessageBox.SelectionBullet = false;
+                singleChatMessageBox.Text = singleChatMessageBox.Text + "\r\n" + "【图片/文件消息  点击查看】";
             }
         }
 

@@ -29,8 +29,10 @@ namespace onlineChat
         public static login l1=null;
         public static mainPage m1=null;
         public static groupChat g1=null;
+        public static singleChat s1 = null;
 
         //########################公共方法################################
+
         //获取本机IP地址
         public static string getIPAddress()
         {
@@ -142,11 +144,11 @@ namespace onlineChat
         //groupChat成员列表渲染解析
         public static void decodeGroupMemberList(command cCommand)
         {
-            ArrayList groupMemberList = (ArrayList)cCommand.data;
-            l1.Invoke(new Action(() =>
-            {
-                g1.drawList(groupMemberList);
-            }));
+            ////ArrayList groupMemberList = (ArrayList)cCommand.data;
+            ////l1.Invoke(new Action(() =>
+            ////{
+            ////    g1.drawList(groupMemberList);
+            ////}));
         }
 
         //单聊信息解析
@@ -158,14 +160,42 @@ namespace onlineChat
                 singleChatSession chatSession = new singleChatSession();
                 chatSession.addMessage(message);
                 myChat.Add(message.target,chatSession);
+                if(s1==null || s1.currentUserName!=message.sendUser.userName)
+                {
+                    m1.Invoke(new Action(() =>
+                    {
+                        m1.userHeadTwinkle(message.sendUser.userName);
+                    }));
+                }
+                else
+                {
+                    s1.Invoke(new Action(() =>
+                    {
+                        s1.AddMessage(message);
+                    }));
+                }
             }
             else
             {
                 myChat[message.target].addMessage(message);
+                if (s1 == null || s1.currentUserName != message.sendUser.userName)
+                {
+                    m1.Invoke(new Action(() =>
+                    {
+                        m1.userHeadTwinkle(message.sendUser.userName);
+                    }));
+                }
+                else
+                {
+                    s1.Invoke(new Action(() =>
+                    {
+                        s1.AddMessage(message);
+                    }));
+                }
             }
-            //drawMessage
         }
 
+        //群聊信息解析
         public static void decodeGroupMessageDraw(command cComand)
         {
             baseMessage message = (baseMessage)cComand.data;

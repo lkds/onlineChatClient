@@ -48,10 +48,18 @@ namespace onlineChat
             foreach(user i in onlineUserList)  //绘制在线列表
             {
                 ChatListSubItem sub = new ChatListSubItem();
-                sub.NicName = "在线";
+                if(i.isOnline)
+                {
+                    sub.NicName = "在线";
+                    sub.Status = ChatListSubItem.UserStatus.Online;
+                }
+                else
+                {
+                    sub.NicName = "下线";
+                    sub.Status = ChatListSubItem.UserStatus.OffLine;
+                }
                 sub.DisplayName = i.userName;
                 sub.PersonalMsg = i.IPAddress;
-                sub.Status = ChatListSubItem.UserStatus.Online;
                 onlineUser.SubItems.Add(sub);
             }
             this.onlineUserListBox.Items.Add(onlineUser);
@@ -59,10 +67,18 @@ namespace onlineChat
             foreach (user i in recentChatList)  //绘制最近聊列表
             {
                 ChatListSubItem sub = new ChatListSubItem();
-                sub.NicName = "在线";
+                if (i.isOnline)
+                {
+                    sub.NicName = "在线";
+                    sub.Status = ChatListSubItem.UserStatus.Online;
+                }
+                else
+                {
+                    sub.NicName = "下线";
+                    sub.Status = ChatListSubItem.UserStatus.OffLine;
+                }
                 sub.DisplayName = i.userName;
                 sub.PersonalMsg = i.IPAddress;
-                sub.Status = ChatListSubItem.UserStatus.Online;
                 recentChat.SubItems.Add(sub);
             }
             this.recentChatListBox.Items.Add(recentChat);
@@ -77,6 +93,72 @@ namespace onlineChat
                 groupChat.SubItems.Add(sub);
             }
             this.groupChatListBox.Items.Add(groupChat);
+        }
+
+        //头像闪动
+        public void userHeadTwinkle(string name)
+        {
+            this.onlineUserListBox.GetSubItemsByDisplayName(name)[0].IsTwinkle=true;
+            this.recentChatListBox.GetSubItemsByDisplayName(name)[0].IsTwinkle = true;
+            this.groupChatListBox.GetSubItemsByDisplayName(name)[0].IsTwinkle = true;
+        }
+
+        //头像停止闪动
+        public void userHeadNotTwinkle(string name)
+        {
+            this.onlineUserListBox.GetSubItemsByDisplayName(name)[0].IsTwinkle = false;
+            this.recentChatListBox.GetSubItemsByDisplayName(name)[0].IsTwinkle = false;
+            this.groupChatListBox.GetSubItemsByDisplayName(name)[0].IsTwinkle = false;
+        }
+
+        //头像变灰（下线）
+        public void userHeadDark(string name)
+        {
+            this.onlineUserListBox.GetSubItemsByDisplayName(name)[0].Status= ChatListSubItem.UserStatus.OffLine;
+            this.onlineUserListBox.GetSubItemsByDisplayName(name)[0].NicName = "下线";
+            this.recentChatListBox.GetSubItemsByDisplayName(name)[0].Status = ChatListSubItem.UserStatus.OffLine;
+            this.recentChatListBox.GetSubItemsByDisplayName(name)[0].NicName = "下线";
+        }
+
+        //头像变亮（上线）
+        public void userHeadBright(string name)
+        {
+            this.onlineUserListBox.GetSubItemsByDisplayName(name)[0].Status = ChatListSubItem.UserStatus.Online;
+            this.onlineUserListBox.GetSubItemsByDisplayName(name)[0].NicName = "在线";
+            this.recentChatListBox.GetSubItemsByDisplayName(name)[0].Status = ChatListSubItem.UserStatus.Online;
+            this.recentChatListBox.GetSubItemsByDisplayName(name)[0].NicName = "在线";
+        }
+
+        private void onlineUserListBox_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void onlineUserListBox_DoubleClickSubItem(object sender, ChatListEventArgs e, MouseEventArgs es)
+        {
+            e.SelectSubItem.IsTwinkle = false;
+            if (publicClass.s1 != null || e.SelectSubItem.DisplayName != publicClass.s1.currentUserName)
+            {
+                publicClass.s1 = new singleChat(e.SelectSubItem.DisplayName);
+            }
+        }
+
+        private void recentChatListBox_DoubleClickSubItem(object sender, ChatListEventArgs e, MouseEventArgs es)
+        {
+            e.SelectSubItem.IsTwinkle = false;
+            if (publicClass.s1 != null || e.SelectSubItem.DisplayName != publicClass.s1.currentUserName)
+            {
+                publicClass.s1 = new singleChat(e.SelectSubItem.DisplayName);
+            }
+        }
+
+        private void groupChatListBox_DoubleClickSubItem(object sender, ChatListEventArgs e, MouseEventArgs es)
+        {
+            e.SelectSubItem.IsTwinkle = false;
+            if (publicClass.g1 != null || e.SelectSubItem.DisplayName != publicClass.g1.groupName)
+            {
+                publicClass.g1 = new groupChat(e.SelectSubItem.DisplayName);
+            }
         }
     }
 }
