@@ -65,6 +65,7 @@ namespace onlineChat
                     sub.Status = ChatListSubItem.UserStatus.OffLine;
                 }
                 sub.ID = (uint)i.id;
+                sub.HeadImage = System.Drawing.Image.FromFile("../..//src/img/avatar.png");
                 sub.DisplayName = i.userName;
                 sub.PersonalMsg = i.IPAddress;
                 onlineUser.SubItems.Add(sub);
@@ -85,6 +86,7 @@ namespace onlineChat
                     sub.Status = ChatListSubItem.UserStatus.OffLine;
                 }
                 sub.ID = (uint)i.id;
+                sub.HeadImage = System.Drawing.Image.FromFile("../..//src/img/avatar.png");
                 sub.DisplayName = i.userName;
                 sub.PersonalMsg = i.IPAddress;
                 recentChat.SubItems.Add(sub);
@@ -97,6 +99,7 @@ namespace onlineChat
                 sub.NicName = "群组";
                 sub.DisplayName = i.groupName;
                 sub.ID = (uint)i.id;
+                sub.HeadImage = System.Drawing.Image.FromFile("../..//src/img/avatar2.png");
                 sub.PersonalMsg = "";
                 sub.Status = ChatListSubItem.UserStatus.QMe;
                 groupChat.SubItems.Add(sub);

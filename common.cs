@@ -73,7 +73,9 @@ namespace onlineChat
                         break;
                     case ("mainPageListDraw"):decodeMainPageList(cComand);//mainPage渲染
                         break;
-                    case ("groupMemberChage"):decodeGroupMemberChange(cComand);//group成员变动
+                    case ("groupMemberChange"):decodeGroupMemberChange(cComand);//group成员变动
+                        break;
+                    case ("createGroupAnswer"):decodeCreateGroupAnswer(cComand);//建群回复
                         break;
                 }
 
@@ -165,7 +167,7 @@ namespace onlineChat
         public static void decodeGroupMemberChange(command cComand)
         {
             JObject data = (JObject)cComand.data;//转化为Jobject
-            List<int> changeMessage = data.ToObject<List<int>>();//获取变动信息{成员ID，群组ID}
+            List<int> changeMessage = data.ToObject<List<int>>();//获取变动信息{退群成员ID，群组ID}
             foreach(group i in groupList)
             {
                 if(i.id==changeMessage[1])
@@ -173,6 +175,17 @@ namespace onlineChat
                     i.deleteUser((uint)changeMessage[0]);
                 }
             }
+        }
+
+        //建群回复解析
+        public static void decodeCreateGroupAnswer(command cComand)
+        {
+            JObject data = (JObject)cComand.data;//转化为Jobject
+            ArrayList newGroupMessage = data.ToObject<ArrayList>();
+            group newGroup = new group((int)newGroupMessage[0],(string)newGroupMessage[1],(List<user>)newGroupMessage[2]);
+            groupList.Add(newGroup);
+            if(m1!=null)
+                m1.drawList();
         }
 
         //单聊文本信息解析
@@ -370,12 +383,12 @@ namespace onlineChat
         public ArrayList messageList;
         public int groupAvatar;//群组头像编号
 
-        public group(int cID, string cGroupName, List<user> cGroupUserList, int cGroupAvatar)
+        public group(int cID, string cGroupName, List<user> cGroupUserList)
         {
             id = cID;
             groupName = cGroupName;
             groupUserList = cGroupUserList;
-            groupAvatar = cGroupAvatar;
+            //groupAvatar = cGroupAvatar;
         }
 
         //添加一个用户
