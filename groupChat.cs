@@ -139,13 +139,21 @@ namespace onlineChat
 
         private void chatSendBtn_Click(object sender, EventArgs e)
         {
-            if (inputBox.ForeColor != Color.Gray || inputBox.Text != "")
+            if (inputBox.ForeColor != Color.Gray && inputBox.Text != "")
             {
                 textMessage message = new textMessage();
                 message.content = inputBox.Text;
                 message.target = (int)groupID;
                 message.sendUser = publicClass.mainUser.id;
                 AddMessage(message);
+                foreach(group i in publicClass.groupList)
+                {
+                    if(i.id==groupID)
+                    {
+                        i.addMessage(message);
+                        break;
+                    }
+                }
                 string sendMessage = JsonConvert.SerializeObject(new command() { data = message, type = 0, subType = "groupChatTextMessage", res = "" });//序列化
                 publicClass.cSocket.sendSysMsg(sendMessage);
             }

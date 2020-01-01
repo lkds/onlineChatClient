@@ -154,6 +154,16 @@ namespace onlineChat
                 message.sendUser = publicClass.mainUser.id;
                 message.sendTime = DateTime.Now;
                 AddMessage(message);
+                if(publicClass.myChat.ContainsKey(message.target))
+                {
+                    publicClass.myChat[message.target].addMessage(message);
+                }
+                else
+                {
+                    singleChatSession chatSession = new singleChatSession(message.target);
+                    chatSession.addMessage(message);
+                    publicClass.myChat.Add(message.target, chatSession);
+                }
                 string sendMessage = JsonConvert.SerializeObject(new command() { data = message, type = 1, subType = "singleChatTextMessage", res = "" });//序列化
                 publicClass.cSocket.sendSysMsg(sendMessage);
                 inputBox.Clear();
