@@ -8,12 +8,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using CCWin.SkinControl;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System.Collections;
 
 namespace onlineChat
 {
     public partial class startNewGroup : Form
     {
-        public List<user> selectedUser;
+        public List<int> selectedUserID;
         public startNewGroup()
         {
             InitializeComponent();
@@ -40,8 +43,11 @@ namespace onlineChat
             }
             else
             {
-                //向服务端发送建群请求
-                //selectedUser
+                selectedUserID.Add(publicClass.mainUser.id);
+                ArrayList groupMessage = new ArrayList() {newGroupName.Text,selectedUserID};
+                string sendMessage = JsonConvert.SerializeObject(new command() { data = groupMessage, type = 0, subType = "createGroup", res = "" });//序列化
+                publicClass.cSocket.sendSysMsg(sendMessage);
+                this.Close();
             }
         }
 
@@ -52,17 +58,17 @@ namespace onlineChat
             {
                 e.SelectSubItem.Status = ChatListSubItem.UserStatus.Online;
                 e.SelectSubItem.NicName = "已选择";
-                selectedUser.Add(publicClass.onlineUserList[(int)e.SelectSubItem.ID]);
+                selectedUserID.Add((int)e.SelectSubItem.ID);
             }
             else
             {
                 e.SelectSubItem.Status = ChatListSubItem.UserStatus.OffLine;
                 e.SelectSubItem.NicName = "未选择";
-                foreach(user i in selectedUser)
+                foreach(int i in selectedUserID)
                 {
-                    if(i.id== (int)e.SelectSubItem.ID)
+                    if(i== (int)e.SelectSubItem.ID)
                     {
-                        selectedUser.Remove(i);
+                        selectedUserID.Remove(i);
                         break;
                     }
                 }
