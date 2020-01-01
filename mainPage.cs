@@ -16,7 +16,6 @@ namespace onlineChat
 {
     public partial class mainPage : Form
     {
-        public bool ifNew;
         public ChatListItem onlineUser = new ChatListItem("在线用户");
         public ChatListItem recentChat = new ChatListItem("最近聊天用户");
         public ChatListItem groupChat = new ChatListItem("群组聊天");
