@@ -22,6 +22,7 @@ namespace onlineChat
         {
             InitializeComponent();
             targetUserName = name;
+            Text = "单人聊天【To：+" + targetUserName + "】";
             targetUserID = userID;
             userName.Text = name;
             DrawMessage();
@@ -151,6 +152,7 @@ namespace onlineChat
                 message.content = inputBox.Text;
                 message.target = (int)targetUserID;
                 message.sendUser = publicClass.mainUser.id;
+                AddMessage(message);
                 string sendMessage = JsonConvert.SerializeObject(new command() { data = message, type = 0, subType = "singleChatTextMessage", res = "" });//序列化
                 publicClass.cSocket.sendSysMsg(sendMessage);
             }

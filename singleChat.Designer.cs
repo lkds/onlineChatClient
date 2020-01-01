@@ -97,7 +97,7 @@
             // 
             this.userAvatar.Image = ((System.Drawing.Image)(resources.GetObject("userAvatar.Image")));
             this.userAvatar.Location = new System.Drawing.Point(1, 4);
-            this.userAvatar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.userAvatar.Margin = new System.Windows.Forms.Padding(2);
             this.userAvatar.Name = "userAvatar";
             this.userAvatar.Size = new System.Drawing.Size(30, 32);
             this.userAvatar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -127,7 +127,6 @@
             this.Controls.Add(this.inputBox);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "singleChat";
-            this.Text = "黄伟业";
             ((System.ComponentModel.ISupportInitialize)(this.imageSelectBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fileSelectBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.userAvatar)).EndInit();

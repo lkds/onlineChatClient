@@ -23,6 +23,7 @@ namespace onlineChat
             InitializeComponent();
             groupName = name;
             groupID = ID;
+            Text = "群组聊天【In：+" + groupName + "】";
             chatGroupName.Text = name;
             DrawMessage();
             drawList();
@@ -143,6 +144,7 @@ namespace onlineChat
                 message.content = inputBox.Text;
                 message.target = (int)groupID;
                 message.sendUser = publicClass.mainUser.id;
+                AddMessage(message);
                 string sendMessage = JsonConvert.SerializeObject(new command() { data = message, type = 0, subType = "groupChatTextMessage", res = "" });//序列化
                 publicClass.cSocket.sendSysMsg(sendMessage);
             }

@@ -19,6 +19,8 @@ namespace onlineChat
         public mainPage()
         {
             InitializeComponent();
+            mainUserIPLabel.Text = publicClass.mainUser.IPAddress;
+            mainUserNameLabel.Text = publicClass.mainUser.userName;
         }
 
         private void MainStartGroupBtn_Click(object sender, EventArgs e)
