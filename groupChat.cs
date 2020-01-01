@@ -181,5 +181,24 @@ namespace onlineChat
             }
             this.groupMemberListBox.Items.Add(groupMember);
         }
+
+        private void chatQuitGroupBtn_Click(object sender, EventArgs e)
+        {
+            if(MessageBox.Show("点击“确定”将退出此群聊", "退出群聊？", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation)==DialogResult.OK)
+            {
+                foreach(group i in publicClass.groupList)
+                {
+                    if(i.id==groupID)
+                    {
+                        List<int> quitMessage = new List<int>() {publicClass.mainUser.id,(int)groupID};
+                        string sendMessage = JsonConvert.SerializeObject(new command() { data = quitMessage, type = 1, subType = "quitGroup", res = "" });//序列化
+                        publicClass.cSocket.sendSysMsg(sendMessage);
+                        publicClass.groupList.Remove(i);
+                        this.Close();
+                        break;
+                    }
+                }
+            }
+        }
     }
 }

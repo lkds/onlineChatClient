@@ -172,8 +172,9 @@ namespace onlineChat
                 publicClass.s1 = new singleChat(e.SelectSubItem.ID,e.SelectSubItem.DisplayName);
                 publicClass.s1.Show();
             }
-            else if(e.SelectSubItem.DisplayName != publicClass.s1.targetUserName)
+            else if(e.SelectSubItem.ID != publicClass.s1.targetUserID)
             {
+                publicClass.s1.Close();
                 publicClass.s1 = new singleChat(e.SelectSubItem.ID, e.SelectSubItem.DisplayName);
                 publicClass.s1.Show();
 
@@ -183,18 +184,34 @@ namespace onlineChat
         private void recentChatListBox_DoubleClickSubItem(object sender, ChatListEventArgs e, MouseEventArgs es)
         {
             userHeadNotTwinkle(e.SelectSubItem.ID);
-            if (publicClass.s1 != null || e.SelectSubItem.DisplayName != publicClass.s1.targetUserName)
+            if (publicClass.s1 == null)
             {
-                publicClass.s1 = new singleChat(e.SelectSubItem.ID,e.SelectSubItem.DisplayName);
+                publicClass.s1 = new singleChat(e.SelectSubItem.ID, e.SelectSubItem.DisplayName);
+                publicClass.s1.Show();
+            }
+            else if (e.SelectSubItem.ID != publicClass.s1.targetUserID)
+            {
+                publicClass.s1.Close();
+                publicClass.s1 = new singleChat(e.SelectSubItem.ID, e.SelectSubItem.DisplayName);
+                publicClass.s1.Show();
+
             }
         }
 
         private void groupChatListBox_DoubleClickSubItem(object sender, ChatListEventArgs e, MouseEventArgs es)
         {
             userHeadNotTwinkle(e.SelectSubItem.ID);
-            if (publicClass.g1 != null || e.SelectSubItem.DisplayName != publicClass.g1.groupName)
+            if (publicClass.g1 == null)
             {
-                publicClass.g1 = new groupChat(e.SelectSubItem.ID,e.SelectSubItem.DisplayName);
+                publicClass.g1 = new groupChat(e.SelectSubItem.ID, e.SelectSubItem.DisplayName);
+                publicClass.g1.Show();
+            }
+            else if (e.SelectSubItem.ID != publicClass.g1.groupID)
+            {
+                publicClass.g1.Close();
+                publicClass.g1 = new groupChat(e.SelectSubItem.ID, e.SelectSubItem.DisplayName);
+                publicClass.g1.Show();
+
             }
         }
 

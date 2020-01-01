@@ -65,6 +65,7 @@
             this.chatQuitGroupBtn.TabIndex = 1;
             this.chatQuitGroupBtn.Text = "退出群聊";
             this.chatQuitGroupBtn.UseVisualStyleBackColor = true;
+            this.chatQuitGroupBtn.Click += new System.EventHandler(this.chatQuitGroupBtn_Click);
             // 
             // inputBox
             // 
