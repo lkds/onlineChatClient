@@ -48,9 +48,9 @@ namespace onlineChat
             List<user> onlineUserList = publicClass.onlineUserList;  //在线用户
             List<user> recentChatList = publicClass.recentChatList; //最近聊
             List<group> groupChatList = publicClass.groupList;   //群聊
-            onlineUser = null;
-            recentChat = null;
-            groupChat = null;
+            onlineUser.SubItems.Clear();
+            recentChat.SubItems.Clear();
+            groupChat.SubItems.Clear();
             foreach (user i in onlineUserList)  //绘制在线列表
             {
                 ChatListSubItem sub = new ChatListSubItem();
