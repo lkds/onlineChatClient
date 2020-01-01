@@ -44,19 +44,21 @@
             // inputBox
             // 
             this.inputBox.BackColor = System.Drawing.Color.LightGreen;
-            this.inputBox.Location = new System.Drawing.Point(1, 349);
+            this.inputBox.Location = new System.Drawing.Point(1, 436);
+            this.inputBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.inputBox.Multiline = true;
             this.inputBox.Name = "inputBox";
-            this.inputBox.Size = new System.Drawing.Size(466, 89);
+            this.inputBox.Size = new System.Drawing.Size(620, 110);
             this.inputBox.TabIndex = 1;
             // 
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button1.ForeColor = System.Drawing.Color.Green;
-            this.button1.Location = new System.Drawing.Point(485, 406);
+            this.button1.Location = new System.Drawing.Point(647, 508);
+            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(85, 30);
+            this.button1.Size = new System.Drawing.Size(113, 38);
             this.button1.TabIndex = 2;
             this.button1.Text = "发送";
             this.button1.UseVisualStyleBackColor = true;
@@ -65,9 +67,10 @@
             // imageSelectBox
             // 
             this.imageSelectBox.Image = ((System.Drawing.Image)(resources.GetObject("imageSelectBox.Image")));
-            this.imageSelectBox.Location = new System.Drawing.Point(485, 349);
+            this.imageSelectBox.Location = new System.Drawing.Point(647, 436);
+            this.imageSelectBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.imageSelectBox.Name = "imageSelectBox";
-            this.imageSelectBox.Size = new System.Drawing.Size(33, 32);
+            this.imageSelectBox.Size = new System.Drawing.Size(44, 40);
             this.imageSelectBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.imageSelectBox.TabIndex = 3;
             this.imageSelectBox.TabStop = false;
@@ -76,9 +79,10 @@
             // fileSelectBox
             // 
             this.fileSelectBox.Image = ((System.Drawing.Image)(resources.GetObject("fileSelectBox.Image")));
-            this.fileSelectBox.Location = new System.Drawing.Point(537, 349);
+            this.fileSelectBox.Location = new System.Drawing.Point(716, 436);
+            this.fileSelectBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.fileSelectBox.Name = "fileSelectBox";
-            this.fileSelectBox.Size = new System.Drawing.Size(33, 32);
+            this.fileSelectBox.Size = new System.Drawing.Size(44, 40);
             this.fileSelectBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.fileSelectBox.TabIndex = 4;
             this.fileSelectBox.TabStop = false;
@@ -87,19 +91,20 @@
             // 
             this.userName.AutoSize = true;
             this.userName.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.userName.Location = new System.Drawing.Point(36, 7);
+            this.userName.Location = new System.Drawing.Point(48, 9);
+            this.userName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.userName.Name = "userName";
-            this.userName.Size = new System.Drawing.Size(58, 22);
+            this.userName.Size = new System.Drawing.Size(72, 27);
             this.userName.TabIndex = 5;
             this.userName.Text = "黄伟业";
             // 
             // userAvatar
             // 
             this.userAvatar.Image = ((System.Drawing.Image)(resources.GetObject("userAvatar.Image")));
-            this.userAvatar.Location = new System.Drawing.Point(1, 4);
-            this.userAvatar.Margin = new System.Windows.Forms.Padding(2);
+            this.userAvatar.Location = new System.Drawing.Point(1, 5);
+            this.userAvatar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.userAvatar.Name = "userAvatar";
-            this.userAvatar.Size = new System.Drawing.Size(30, 32);
+            this.userAvatar.Size = new System.Drawing.Size(40, 40);
             this.userAvatar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.userAvatar.TabIndex = 6;
             this.userAvatar.TabStop = false;
@@ -107,17 +112,18 @@
             // singleChatMessageBox
             // 
             this.singleChatMessageBox.BackColor = System.Drawing.Color.LightBlue;
-            this.singleChatMessageBox.Location = new System.Drawing.Point(2, 42);
+            this.singleChatMessageBox.Location = new System.Drawing.Point(3, 52);
+            this.singleChatMessageBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.singleChatMessageBox.Name = "singleChatMessageBox";
-            this.singleChatMessageBox.Size = new System.Drawing.Size(572, 300);
+            this.singleChatMessageBox.Size = new System.Drawing.Size(761, 374);
             this.singleChatMessageBox.TabIndex = 7;
             this.singleChatMessageBox.Text = "";
             // 
             // singleChat
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(576, 450);
+            this.ClientSize = new System.Drawing.Size(768, 562);
             this.Controls.Add(this.singleChatMessageBox);
             this.Controls.Add(this.userAvatar);
             this.Controls.Add(this.userName);
@@ -126,7 +132,9 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.inputBox);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "singleChat";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SingleChat_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.imageSelectBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fileSelectBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.userAvatar)).EndInit();

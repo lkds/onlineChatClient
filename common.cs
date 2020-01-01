@@ -164,7 +164,7 @@ namespace onlineChat
         public static void decodeSingleTextMessageDraw(command cComand)
         {
             JObject data = (JObject)cComand.data;//转化为Jobject
-            textMessage message = data["msg"].ToObject<textMessage>();//获取消息类
+            textMessage message = data.ToObject<textMessage>();//获取消息类
 
             if (!myChat.ContainsKey(message.sendUser))
             {
@@ -658,11 +658,19 @@ namespace onlineChat
 
         ~clientSocket()
         {
-            foreach(Socket sk in cSockets)
+            try
             {
-                sk.Shutdown(SocketShutdown.Both);
-                sk.Close();
+                foreach (Socket sk in cSockets)
+                {
+                    sk.Shutdown(SocketShutdown.Both);
+                    sk.Close();
+                }
             }
+            catch
+            {
+
+            }
+
         }
     }
 }

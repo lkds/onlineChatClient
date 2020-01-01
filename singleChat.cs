@@ -79,13 +79,13 @@ namespace onlineChat
                     singleChatMessageBox.SelectionColor = System.Drawing.Color.Purple;
                     singleChatMessageBox.SelectionIndent = 2;
                     singleChatMessageBox.SelectionBullet = true;
-                    singleChatMessageBox.Text = singleChatMessageBox.Text + "\r\n" + i.sendUser + "  [" + i.sendTime + "]";
+                    singleChatMessageBox.AppendText(publicClass.onlineUserList.Find(s=>s.id ==i.sendUser).userName + "  [" + i.sendTime + "]\r\n");
 
                     singleChatMessageBox.SelectionFont = new Font("宋体", 7, FontStyle.Regular);
                     singleChatMessageBox.SelectionColor = System.Drawing.Color.Black;
                     singleChatMessageBox.SelectionIndent = 52;
                     singleChatMessageBox.SelectionBullet = false;
-                    singleChatMessageBox.Text = singleChatMessageBox.Text + "\r\n" + ((textMessage)i).content;
+                    singleChatMessageBox.AppendText(((textMessage)i).content+ "\r\n");
                 }
                 else if (i.GetType() == typeof(imageFileMessage))
                 {
@@ -93,7 +93,7 @@ namespace onlineChat
                     singleChatMessageBox.SelectionColor = System.Drawing.Color.Purple;
                     singleChatMessageBox.SelectionIndent = 2;
                     singleChatMessageBox.SelectionBullet = true;
-                    singleChatMessageBox.Text = singleChatMessageBox.Text + "\r\n" + i.sendUser + "  [" + i.sendTime + "]";
+                    singleChatMessageBox.AppendText(publicClass.onlineUserList.Find(s => s.id == i.sendUser).userName + "  [" + i.sendTime + "]\r\n");
 
                     singleChatMessageBox.SelectionFont = new Font("宋体", 7, FontStyle.Regular);
                     singleChatMessageBox.SelectionColor = System.Drawing.Color.Blue;
@@ -110,13 +110,13 @@ namespace onlineChat
                 singleChatMessageBox.SelectionColor = System.Drawing.Color.Purple;
                 singleChatMessageBox.SelectionIndent = 2;
                 singleChatMessageBox.SelectionBullet = true;
-                singleChatMessageBox.Text = singleChatMessageBox.Text + "\r\n" + message.sendUser + "  [" + message.sendTime + "]";
+            singleChatMessageBox.AppendText(publicClass.onlineUserList.Find(s => s.id == message.sendUser).userName + "  [" + message.sendTime + "]\r\n");
 
                 singleChatMessageBox.SelectionFont = new Font("宋体", 7, FontStyle.Regular);
                 singleChatMessageBox.SelectionColor = System.Drawing.Color.Black;
                 singleChatMessageBox.SelectionIndent = 52;
                 singleChatMessageBox.SelectionBullet = false;
-                singleChatMessageBox.Text = singleChatMessageBox.Text + "\r\n" + ((textMessage)message).content;
+                singleChatMessageBox.AppendText(((textMessage)message).content+"\r\n");
         }
 
         public void AddMessage(imageFileMessage message)
@@ -125,13 +125,13 @@ namespace onlineChat
             singleChatMessageBox.SelectionColor = System.Drawing.Color.Purple;
             singleChatMessageBox.SelectionIndent = 2;
             singleChatMessageBox.SelectionBullet = true;
-            singleChatMessageBox.Text = singleChatMessageBox.Text + "\r\n" + message.sendUser + "  [" + message.sendTime + "]";
+            singleChatMessageBox.AppendText( publicClass.onlineUserList.Find(s => s.id == message.sendUser).userName + "  [" + message.sendTime + "]\r\n");
 
             singleChatMessageBox.SelectionFont = new Font("宋体", 7, FontStyle.Regular);
             singleChatMessageBox.SelectionColor = System.Drawing.Color.Blue;
             singleChatMessageBox.SelectionIndent = 52;
             singleChatMessageBox.SelectionBullet = false;
-            singleChatMessageBox.Text = singleChatMessageBox.Text + "\r\n" + "【图片/文件消息  点击查看】";
+            singleChatMessageBox.AppendText("【图片/文件消息  点击查看】\r\n" );
         }
 
         private void SingleUserBox1_Load(object sender, EventArgs e)
@@ -144,17 +144,31 @@ namespace onlineChat
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        public void sendMsg()
         {
-            if (inputBox.ForeColor != Color.Gray || inputBox.Text!="")
+            if (inputBox.ForeColor != Color.Gray || inputBox.Text != "")
             {
                 textMessage message = new textMessage();
                 message.content = inputBox.Text;
                 message.target = (int)targetUserID;
                 message.sendUser = publicClass.mainUser.id;
+                message.sendTime = DateTime.Now;
                 AddMessage(message);
-                string sendMessage = JsonConvert.SerializeObject(new command() { data = message, type = 0, subType = "singleChatTextMessage", res = "" });//序列化
+                string sendMessage = JsonConvert.SerializeObject(new command() { data = message, type = 1, subType = "singleChatTextMessage", res = "" });//序列化
                 publicClass.cSocket.sendSysMsg(sendMessage);
+                inputBox.Clear();
+            }
+        }
+        private void button1_Click(object sender, EventArgs e)
+        {
+            sendMsg();
+        }
+
+        private void SingleChat_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyData == Keys.Enter)
+            {
+                sendMsg();
             }
         }
     }
