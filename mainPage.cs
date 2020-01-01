@@ -19,8 +19,6 @@ namespace onlineChat
         public mainPage()
         {
             InitializeComponent();
-            string sendMessage = JsonConvert.SerializeObject(new command() { data = publicClass.mainUser.id, type = 0, subType = "mainPageListDraw", res = "" });//序列化
-            publicClass.cSocket.sendSysMsg(sendMessage);
         }
 
         private void MainStartGroupBtn_Click(object sender, EventArgs e)
@@ -144,9 +142,16 @@ namespace onlineChat
         private void onlineUserListBox_DoubleClickSubItem(object sender, ChatListEventArgs e, MouseEventArgs es)
         {
             userHeadNotTwinkle(e.SelectSubItem.ID);
-            if (publicClass.s1 != null || e.SelectSubItem.DisplayName != publicClass.s1.targetUserName)
+            if (publicClass.s1 == null )
             {
                 publicClass.s1 = new singleChat(e.SelectSubItem.ID,e.SelectSubItem.DisplayName);
+                publicClass.s1.Show();
+            }
+            else if(e.SelectSubItem.DisplayName != publicClass.s1.targetUserName)
+            {
+                publicClass.s1 = new singleChat(e.SelectSubItem.ID, e.SelectSubItem.DisplayName);
+                publicClass.s1.Show();
+
             }
         }
 
@@ -166,6 +171,12 @@ namespace onlineChat
             {
                 publicClass.g1 = new groupChat(e.SelectSubItem.ID,e.SelectSubItem.DisplayName);
             }
+        }
+
+        private void MainPage_Load(object sender, EventArgs e)
+        {
+            string sendMessage = JsonConvert.SerializeObject(new command() { data = publicClass.mainUser.id, type = 0, subType = "mainPageListDraw", res = "" });//序列化
+            publicClass.cSocket.sendSysMsg(sendMessage);
         }
     }
 }

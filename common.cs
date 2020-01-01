@@ -142,12 +142,13 @@ namespace onlineChat
         //mainPage列表渲染解析
         public static void decodeMainPageList(command cCommand)
         {
-            ArrayList allThreeList = (ArrayList)cCommand.data;
+            JArray allThreeList = (JArray)(cCommand.data);
+            
             //赋值本地数据
-            onlineUserList = (List<user>)allThreeList[0];
-            groupList = (List<group>)allThreeList[1];
-            recentChatList = (List<user>)allThreeList[2];
-            l1.Invoke(new Action(() =>
+            onlineUserList = allThreeList[0].ToObject<List<user>>();
+            groupList = allThreeList[0].ToObject<List<group>>();
+            recentChatList = allThreeList[0].ToObject<List<user>>();
+            m1.Invoke(new Action(() =>
             {
                 m1.drawList();
             }));
@@ -322,6 +323,10 @@ namespace onlineChat
         public bool isOnline;
         public int avatar;//头像编号
 
+
+        public user(){
+
+            }
         //注册、登录构造函数
         public user(string cUserName, string cIPAddress, string cPass)
         {
@@ -552,17 +557,17 @@ namespace onlineChat
             {
                 byte[] textRec = new byte[4096];//创建接收消息的buffer
                 int length = -1;
-                try
-                {
+                //try
+                //{
                     length = cSockets[0].Receive(textRec);//接收消息长度计数
                     string strMsg = System.Text.Encoding.UTF8.GetString(textRec, 0, length);// 将接受到的字节数据转化成字符串
                     command c1 = JsonConvert.DeserializeObject<command>(strMsg);//解析
                     publicClass.decodeCommand(c1);
-                }
-                catch
-                {
-                    //return;
-                }
+                //}
+                //catch
+                //{
+                //    //return;
+                //}
 
             }
         }
