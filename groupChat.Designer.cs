@@ -38,7 +38,7 @@
             this.imageSelectBox = new System.Windows.Forms.PictureBox();
             this.groupAvatarBox = new System.Windows.Forms.PictureBox();
             this.groupAvatar = new System.Windows.Forms.PictureBox();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.groupChatMessageBox = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.fileSelectBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageSelectBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupAvatarBox)).BeginInit();
@@ -139,21 +139,21 @@
             this.groupAvatar.TabIndex = 10;
             this.groupAvatar.TabStop = false;
             // 
-            // richTextBox1
+            // groupChatMessageBox
             // 
-            this.richTextBox1.BackColor = System.Drawing.Color.LightBlue;
-            this.richTextBox1.Location = new System.Drawing.Point(172, 5);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(577, 334);
-            this.richTextBox1.TabIndex = 11;
-            this.richTextBox1.Text = "";
+            this.groupChatMessageBox.BackColor = System.Drawing.Color.LightBlue;
+            this.groupChatMessageBox.Location = new System.Drawing.Point(172, 5);
+            this.groupChatMessageBox.Name = "groupChatMessageBox";
+            this.groupChatMessageBox.Size = new System.Drawing.Size(577, 334);
+            this.groupChatMessageBox.TabIndex = 11;
+            this.groupChatMessageBox.Text = "";
             // 
             // groupChat
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(755, 450);
-            this.Controls.Add(this.richTextBox1);
+            this.Controls.Add(this.groupChatMessageBox);
             this.Controls.Add(this.groupAvatar);
             this.Controls.Add(this.fileSelectBox);
             this.Controls.Add(this.imageSelectBox);
@@ -185,6 +185,6 @@
         private System.Windows.Forms.PictureBox imageSelectBox;
         private System.Windows.Forms.PictureBox groupAvatarBox;
         private System.Windows.Forms.PictureBox groupAvatar;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.RichTextBox groupChatMessageBox;
     }
 }

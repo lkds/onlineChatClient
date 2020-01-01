@@ -20,6 +20,9 @@ namespace onlineChat
     {
         //########################公共变量#############################
         public static user mainUser;//当前用户
+        public static List<user> onlineUserList;//本地用户列表
+        public static List<group> groupList;//本地群组列表
+        public static List<user> recentChatList;//最近聊列表
         public static Dictionary<int, singleChatSession> myChat = new Dictionary<int, singleChatSession>();//保存本地聊天会话
         public static clientSocket cSocket;
         public static List<int> serverPorts=new List<int>() { 2333,2334,2335,2336};
@@ -64,13 +67,13 @@ namespace onlineChat
             {
                 switch (cComand.subType)
                 {
-                    case ("checkNameAnswer"): decodeUserNameCheck(cComand);
+                    case ("checkNameAnswer"): decodeUserNameCheck(cComand);//重名查询
                         break;
-                    case ("loginAnswer"):decodeLogin(cComand);
+                    case ("loginAnswer"):decodeLogin(cComand);//登录回应
                         break;
-                    case ("mainPageListDraw"):decodeMainPageList(cComand);
+                    case ("mainPageListDraw"):decodeMainPageList(cComand);//mainPage渲染
                         break;
-                    case ("groupMemberListDraw"):decodeGroupMemberList(cComand);
+                    case ("groupMemberListDraw"):decodeGroupMemberList(cComand);//group成员变动
                         break;
                 }
 
@@ -78,9 +81,14 @@ namespace onlineChat
             {
                 switch(cComand.subType)
                 {
-                    case ("singleChatMessageDraw"): decodeSingleMessageDraw(cComand);
+                    case ("singleChatTextMessageDraw"): decodeSingleTextMessageDraw(cComand);
                         break;
-                    case ("groupChatMessageDraw"): decodeGroupMessageDraw(cComand);
+                    case ("singleChatIFMessageDraw"):
+                        decodeSingleIFMessageDraw(cComand);
+                        break;
+                    case ("groupChatTextMessageDraw"): decodeGroupTextMessageDraw(cComand);
+                        break;
+                    case ("groupChatIFMessageDraw"):decodeGroupIFMessageDraw(cComand);
                         break;
                 }
             }
@@ -135,9 +143,13 @@ namespace onlineChat
         public static void decodeMainPageList(command cCommand)
         {
             ArrayList allThreeList = (ArrayList)cCommand.data;
+            //赋值本地数据
+            onlineUserList = (List<user>)allThreeList[0];
+            groupList = (List<group>)allThreeList[1];
+            recentChatList = (List<user>)allThreeList[2];
             l1.Invoke(new Action(() =>
             {
-                m1.drawList(allThreeList);
+                m1.drawList();
             }));
         }
 
@@ -151,20 +163,22 @@ namespace onlineChat
             ////}));
         }
 
-        //单聊信息解析
-        public static void decodeSingleMessageDraw(command cComand)
+        //单聊文本信息解析
+        public static void decodeSingleTextMessageDraw(command cComand)
         {
-            baseMessage message = (baseMessage) cComand.data;
-            if(!myChat.ContainsKey(message.target))
+            JObject data = (JObject)cComand.data;//转化为Jobject
+            textMessage message = data["msg"].ToObject<textMessage>();//获取消息类
+
+            if (!myChat.ContainsKey(message.sendUser))
             {
-                singleChatSession chatSession = new singleChatSession();
+                singleChatSession chatSession = new singleChatSession(message.sendUser);
                 chatSession.addMessage(message);
-                myChat.Add(message.target,chatSession);
-                if(s1==null || s1.currentUserName!=message.sendUser.userName)
+                myChat.Add(message.sendUser, chatSession);
+                if(s1==null || s1.currentUserID!=(uint)message.sendUser)
                 {
                     m1.Invoke(new Action(() =>
                     {
-                        m1.userHeadTwinkle(message.sendUser.userName);
+                        m1.userHeadTwinkle((uint)message.sendUser);
                     }));
                 }
                 else
@@ -177,12 +191,12 @@ namespace onlineChat
             }
             else
             {
-                myChat[message.target].addMessage(message);
-                if (s1 == null || s1.currentUserName != message.sendUser.userName)
+                myChat[message.sendUser].addMessage(message);
+                if (s1 == null || s1.currentUserID != (uint)message.sendUser)
                 {
                     m1.Invoke(new Action(() =>
                     {
-                        m1.userHeadTwinkle(message.sendUser.userName);
+                        m1.userHeadTwinkle((uint)message.sendUser);
                     }));
                 }
                 else
@@ -195,11 +209,109 @@ namespace onlineChat
             }
         }
 
-        //群聊信息解析
-        public static void decodeGroupMessageDraw(command cComand)
+        //单聊图片文件信息解析
+        public static void decodeSingleIFMessageDraw(command cComand)
         {
-            baseMessage message = (baseMessage)cComand.data;
-            //drawMessage
+            JObject data = (JObject)cComand.data;//转化为Jobject
+            imageFileMessage message = data["msg"].ToObject<imageFileMessage>();//获取消息类
+
+            if (!myChat.ContainsKey(message.sendUser))
+            {
+                singleChatSession chatSession = new singleChatSession(message.sendUser);
+                chatSession.addMessage(message);
+                myChat.Add(message.sendUser, chatSession);
+                if (s1 == null || s1.currentUserID != (uint)message.sendUser)
+                {
+                    m1.Invoke(new Action(() =>
+                    {
+                        m1.userHeadTwinkle((uint)message.sendUser);
+                    }));
+                }
+                else
+                {
+                    s1.Invoke(new Action(() =>
+                    {
+                        s1.AddMessage(message);
+                    }));
+                }
+            }
+            else
+            {
+                myChat[message.sendUser].addMessage(message);
+                if (s1 == null || s1.currentUserID != (uint)message.sendUser)
+                {
+                    m1.Invoke(new Action(() =>
+                    {
+                        m1.userHeadTwinkle((uint)message.sendUser);
+                    }));
+                }
+                else
+                {
+                    s1.Invoke(new Action(() =>
+                    {
+                        s1.AddMessage(message);
+                    }));
+                }
+            }
+        }
+
+
+        //群聊文本信息解析
+        public static void decodeGroupTextMessageDraw(command cComand)
+        {
+            JObject data = (JObject)cComand.data;//转化为Jobject
+            textMessage message = data["msg"].ToObject<textMessage>();//获取消息类
+
+            foreach(group i in groupList)
+            {
+                if(i.id==message.target)
+                {
+                    i.addMessage(message);
+                }
+            }
+            if (g1 == null || g1.groupID != (uint)message.sendUser)
+            {
+                m1.Invoke(new Action(() =>
+                {
+                    m1.userHeadTwinkle((uint)message.sendUser);
+                }));
+            }
+            else
+            {
+                g1.Invoke(new Action(() =>
+                {
+                    g1.AddMessage(message);
+                }));
+            }
+        }
+
+        //群聊图片文件信息解析
+        public static void decodeGroupIFMessageDraw(command cComand)
+        {
+            JObject data = (JObject)cComand.data;//转化为Jobject
+            imageFileMessage message = data["msg"].ToObject<imageFileMessage>();//获取消息类
+
+            foreach (group i in groupList)
+            {
+                if (i.id == message.target)
+                {
+                    i.addMessage(message);
+                }
+            }
+            if (g1 == null || g1.groupID != (uint)message.sendUser)
+            {
+                m1.Invoke(new Action(() =>
+                {
+                    m1.userHeadTwinkle((uint)message.sendUser);
+                }));
+            }
+            else
+            {
+                g1.Invoke(new Action(() =>
+                {
+                    g1.AddMessage(message);
+                }));
+            }
         }
     }
 
@@ -239,7 +351,7 @@ namespace onlineChat
         public int id;//
         public string groupName;
         public List<user> groupUserList;
-        public List<baseMessage> messageList;
+        public ArrayList messageList;
         public int groupAvatar;//群组头像编号
 
         public group(int cID, string cGroupName, List<user> cGroupUserList, int cGroupAvatar)
@@ -263,9 +375,14 @@ namespace onlineChat
         }
 
         //添加一个消息
-        public void addMessage(baseMessage message)
+        public void addMessage(textMessage message)
         {
-            messageList.Add(message);
+            messageList.Add(message);//添加到数组末尾
+        }
+
+        public void addMessage(imageFileMessage message)
+        {
+            messageList.Add(message);//添加到数组末尾
         }
 
         //退出群组,删除
@@ -278,20 +395,20 @@ namespace onlineChat
     //消息基类
     public class baseMessage
     {
-        public user sendUser;//消息发送者
+        public int sendUser;//消息发送者
         public DateTime sendTime;
         public bool isValid;//暂时用不到
         public int target;//目标用户或者群组
     }
 
     //文本消息
-    class textMessage : baseMessage
+    public class textMessage : baseMessage
     {
         public string content;
     }
 
     //图片/文件消息
-    class imageFileMessage : baseMessage
+    public class imageFileMessage : baseMessage
     {
         public string fileName;
         public string fileSize;
@@ -299,17 +416,28 @@ namespace onlineChat
         public string filePath;
     }
 
-    //某个聊天连接,可以是群组也可以是单聊
-    class singleChatSession
+    //某个聊天连接
+    public class singleChatSession
     {
         ////public string createTime;
-        public user targetUser;//单聊用户
+        public int targetUserID;//单聊用户
         ////public group userList;//群组
         ////public int chatSessionType;//类型，0单聊，1群聊
-        public List<baseMessage> messageList;
+        public ArrayList messageList;
+
+        public singleChatSession(int uID)
+        {
+            targetUserID = uID;
+            messageList = new ArrayList();
+        }
 
         //添加一条聊天记录，可以是文字，图片，文件
-        public void addMessage(baseMessage message)
+        public void addMessage(textMessage message)
+        {
+            messageList.Add(message);//添加到数组末尾
+        }
+
+        public void addMessage(imageFileMessage message)
         {
             messageList.Add(message);//添加到数组末尾
         }

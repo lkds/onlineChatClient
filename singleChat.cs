@@ -7,17 +7,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Collections.Generic;
+using System.Collections;
 
 namespace onlineChat
 {
     public partial class singleChat : Form
     {
         public string currentUserName;
-        public singleChat(string Name)
+        public uint currentUserID;
+        public singleChat(uint userID,string name)
         {
             InitializeComponent();
-            currentUserName = Name;
-            userName.Text = Name;
+            currentUserName = name;
+            currentUserID = userID;
+            userName.Text = name;
+            DrawMessage();
             inputBox.ForeColor = Color.Gray;
             inputBox.Text = "此处输入文字消息......";
             inputBox.LostFocus += new EventHandler(this.inputTip);  //消息输入框失焦
@@ -54,8 +59,14 @@ namespace onlineChat
             l1.Show();
         }
 
-        public void DrawMessage(List<baseMessage> messages)
+        public void DrawMessage()
         {
+            if (!publicClass.myChat.ContainsKey((int)currentUserID))
+            {
+                singleChatSession chatSession = new singleChatSession((int)currentUserID);
+                publicClass.myChat.Add((int)currentUserID, chatSession);
+            }
+            ArrayList messages = publicClass.myChat[(int)currentUserID].messageList;
             singleChatMessageBox.Text = "";
             foreach(baseMessage i in messages)
             {
@@ -90,10 +101,8 @@ namespace onlineChat
             }
         }
 
-        public void AddMessage(baseMessage message)
+        public void AddMessage(textMessage message)
         {
-            if (message.GetType() == typeof(textMessage))
-            {
                 singleChatMessageBox.SelectionFont = new Font("黑体", 7, FontStyle.Bold);
                 singleChatMessageBox.SelectionColor = System.Drawing.Color.Purple;
                 singleChatMessageBox.SelectionIndent = 2;
@@ -105,21 +114,21 @@ namespace onlineChat
                 singleChatMessageBox.SelectionIndent = 52;
                 singleChatMessageBox.SelectionBullet = false;
                 singleChatMessageBox.Text = singleChatMessageBox.Text + "\r\n" + ((textMessage)message).content;
-            }
-            else if (message.GetType() == typeof(imageFileMessage))
-            {
-                singleChatMessageBox.SelectionFont = new Font("黑体", 7, FontStyle.Bold);
-                singleChatMessageBox.SelectionColor = System.Drawing.Color.Purple;
-                singleChatMessageBox.SelectionIndent = 2;
-                singleChatMessageBox.SelectionBullet = true;
-                singleChatMessageBox.Text = singleChatMessageBox.Text + "\r\n" + message.sendUser + "  [" + message.sendTime + "]";
+        }
 
-                singleChatMessageBox.SelectionFont = new Font("宋体", 7, FontStyle.Regular);
-                singleChatMessageBox.SelectionColor = System.Drawing.Color.Blue;
-                singleChatMessageBox.SelectionIndent = 52;
-                singleChatMessageBox.SelectionBullet = false;
-                singleChatMessageBox.Text = singleChatMessageBox.Text + "\r\n" + "【图片/文件消息  点击查看】";
-            }
+        public void AddMessage(imageFileMessage message)
+        {
+            singleChatMessageBox.SelectionFont = new Font("黑体", 7, FontStyle.Bold);
+            singleChatMessageBox.SelectionColor = System.Drawing.Color.Purple;
+            singleChatMessageBox.SelectionIndent = 2;
+            singleChatMessageBox.SelectionBullet = true;
+            singleChatMessageBox.Text = singleChatMessageBox.Text + "\r\n" + message.sendUser + "  [" + message.sendTime + "]";
+
+            singleChatMessageBox.SelectionFont = new Font("宋体", 7, FontStyle.Regular);
+            singleChatMessageBox.SelectionColor = System.Drawing.Color.Blue;
+            singleChatMessageBox.SelectionIndent = 52;
+            singleChatMessageBox.SelectionBullet = false;
+            singleChatMessageBox.Text = singleChatMessageBox.Text + "\r\n" + "【图片/文件消息  点击查看】";
         }
 
         private void SingleUserBox1_Load(object sender, EventArgs e)

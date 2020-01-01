@@ -15,11 +15,14 @@ namespace onlineChat
     public partial class groupChat : Form
     {
         public string groupName;
-        public groupChat(string name)
+        public uint groupID;
+        public groupChat(uint ID,string name)
         {
             InitializeComponent();
             groupName = name;
+            groupID = ID;
             chatGroupName.Text = name;
+            DrawMessage();
             inputBox.ForeColor = Color.Gray;
             inputBox.Text = "此处输入文字消息......";
             inputBox.LostFocus += new EventHandler(this.inputTip);  //消息输入框失焦
@@ -43,6 +46,80 @@ namespace onlineChat
                 inputBox.ForeColor = Color.Gray;
                 inputBox.Text = "此处输入文字消息......";
             }
+        }
+
+        public void DrawMessage()
+        {
+            ArrayList messages=null;
+            foreach(group i in publicClass.groupList)
+            {
+                if(i.id==groupID)
+                {
+                    messages = i.messageList;
+                }
+            }
+            groupChatMessageBox.Text = "";
+            foreach (baseMessage i in messages)
+            {
+                if (i.GetType() == typeof(textMessage))
+                {
+                    groupChatMessageBox.SelectionFont = new Font("黑体", 7, FontStyle.Bold);
+                    groupChatMessageBox.SelectionColor = System.Drawing.Color.Purple;
+                    groupChatMessageBox.SelectionIndent = 2;
+                    groupChatMessageBox.SelectionBullet = true;
+                    groupChatMessageBox.Text = groupChatMessageBox.Text + "\r\n" + i.sendUser + "  [" + i.sendTime + "]";
+
+                    groupChatMessageBox.SelectionFont = new Font("宋体", 7, FontStyle.Regular);
+                    groupChatMessageBox.SelectionColor = System.Drawing.Color.Black;
+                    groupChatMessageBox.SelectionIndent = 52;
+                    groupChatMessageBox.SelectionBullet = false;
+                    groupChatMessageBox.Text = groupChatMessageBox.Text + "\r\n" + ((textMessage)i).content;
+                }
+                else if (i.GetType() == typeof(imageFileMessage))
+                {
+                    groupChatMessageBox.SelectionFont = new Font("黑体", 7, FontStyle.Bold);
+                    groupChatMessageBox.SelectionColor = System.Drawing.Color.Purple;
+                    groupChatMessageBox.SelectionIndent = 2;
+                    groupChatMessageBox.SelectionBullet = true;
+                    groupChatMessageBox.Text = groupChatMessageBox.Text + "\r\n" + i.sendUser + "  [" + i.sendTime + "]";
+
+                    groupChatMessageBox.SelectionFont = new Font("宋体", 7, FontStyle.Regular);
+                    groupChatMessageBox.SelectionColor = System.Drawing.Color.Blue;
+                    groupChatMessageBox.SelectionIndent = 52;
+                    groupChatMessageBox.SelectionBullet = false;
+                    groupChatMessageBox.Text = groupChatMessageBox.Text + "\r\n" + "【图片/文件消息  点击查看】";
+                }
+            }
+        }
+
+        public void AddMessage(textMessage message)
+        {
+            groupChatMessageBox.SelectionFont = new Font("黑体", 7, FontStyle.Bold);
+            groupChatMessageBox.SelectionColor = System.Drawing.Color.Purple;
+            groupChatMessageBox.SelectionIndent = 2;
+            groupChatMessageBox.SelectionBullet = true;
+            groupChatMessageBox.Text = groupChatMessageBox.Text + "\r\n" + message.sendUser + "  [" + message.sendTime + "]";
+
+            groupChatMessageBox.SelectionFont = new Font("宋体", 7, FontStyle.Regular);
+            groupChatMessageBox.SelectionColor = System.Drawing.Color.Black;
+            groupChatMessageBox.SelectionIndent = 52;
+            groupChatMessageBox.SelectionBullet = false;
+            groupChatMessageBox.Text = groupChatMessageBox.Text + "\r\n" + ((textMessage)message).content;
+        }
+
+        public void AddMessage(imageFileMessage message)
+        {
+            groupChatMessageBox.SelectionFont = new Font("黑体", 7, FontStyle.Bold);
+            groupChatMessageBox.SelectionColor = System.Drawing.Color.Purple;
+            groupChatMessageBox.SelectionIndent = 2;
+            groupChatMessageBox.SelectionBullet = true;
+            groupChatMessageBox.Text = groupChatMessageBox.Text + "\r\n" + message.sendUser + "  [" + message.sendTime + "]";
+
+            groupChatMessageBox.SelectionFont = new Font("宋体", 7, FontStyle.Regular);
+            groupChatMessageBox.SelectionColor = System.Drawing.Color.Blue;
+            groupChatMessageBox.SelectionIndent = 52;
+            groupChatMessageBox.SelectionBullet = false;
+            groupChatMessageBox.Text = groupChatMessageBox.Text + "\r\n" + "【图片/文件消息  点击查看】";
         }
 
         private void ListBox2_SelectedIndexChanged(object sender, EventArgs e)
