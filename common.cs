@@ -26,9 +26,9 @@ namespace onlineChat
         public static IPAddress serverIP=IPAddress.Parse("127.0.0.1");
         public static bool isRun = false;
 
-        public static login l1;
-        public static mainPage l2;
-        public static groupChat l3;
+        public static login l1=null;
+        public static mainPage m1=null;
+        public static groupChat g1=null;
 
         //########################公共方法################################
         //获取本机IP地址
@@ -135,7 +135,7 @@ namespace onlineChat
             ArrayList allThreeList = (ArrayList)cCommand.data;
             l1.Invoke(new Action(() =>
             {
-                l2.drawList(allThreeList);
+                m1.drawList(allThreeList);
             }));
         }
 
@@ -145,7 +145,7 @@ namespace onlineChat
             ArrayList groupMemberList = (ArrayList)cCommand.data;
             l1.Invoke(new Action(() =>
             {
-                l3.drawList(groupMemberList);
+                g1.drawList(groupMemberList);
             }));
         }
 
@@ -174,7 +174,7 @@ namespace onlineChat
     }
 
     //用户类
-    class user
+    public class user
     {
         public int id;//用户身份ID
         public string userName;
@@ -246,7 +246,7 @@ namespace onlineChat
     }
 
     //消息基类
-    class baseMessage
+    public class baseMessage
     {
         public user sendUser;//消息发送者
         public DateTime sendTime;

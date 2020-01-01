@@ -21,7 +21,8 @@ namespace onlineChat
             publicClass.l1.ShowDialog();
             if (publicClass.l1.DialogResult == DialogResult.OK)
             {
-                Application.Run(new mainPage());
+                publicClass.m1 = new mainPage();
+                Application.Run(publicClass.m1);
             }else
             {
                 System.Environment.Exit(0);

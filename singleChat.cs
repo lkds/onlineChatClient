@@ -12,6 +12,7 @@ namespace onlineChat
 {
     public partial class singleChat : Form
     {
+        public int currentUserID;
         public singleChat()
         {
             InitializeComponent();
