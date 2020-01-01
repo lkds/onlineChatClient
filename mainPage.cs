@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Collections;
 using CCWin.SkinControl;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 
 namespace onlineChat
 {
@@ -17,6 +19,8 @@ namespace onlineChat
         public mainPage()
         {
             InitializeComponent();
+            string sendMessage = JsonConvert.SerializeObject(new command() { data = publicClass.mainUser.id, type = 0, subType = "mainPageListDraw", res = "" });//序列化
+            publicClass.cSocket.sendSysMsg(sendMessage);
         }
 
         private void MainStartGroupBtn_Click(object sender, EventArgs e)
