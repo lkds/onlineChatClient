@@ -16,7 +16,7 @@ namespace onlineChat
 {
     public partial class startNewGroup : Form
     {
-        public List<int> selectedUserID;
+        public List<int> selectedUserID = new List<int>();
         public startNewGroup()
         {
             InitializeComponent();

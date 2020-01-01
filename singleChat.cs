@@ -141,7 +141,15 @@ namespace onlineChat
 
         private void PictureBox1_Click(object sender, EventArgs e)
         {
-
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Title = "选择要传的文件";
+            ofd.InitialDirectory = @"C:";
+            ofd.Filter = "图片文件|*.jpg|*.png|*.jpeg|*.gif";
+            ofd.ShowDialog();
+            //得到选择文件的路径
+            publicClass.sendFileName = ofd.FileName;
+            inputBox.Text = ofd.FileName;
+            publicClass.sendMsgStatus = 1;
         }
 
         public void sendMsg()
@@ -170,6 +178,24 @@ namespace onlineChat
             {
                 sendMsg();
             }
+        }
+
+        private void FileSelectBox_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Title = "选择要传的文件";
+            ofd.InitialDirectory = @"C:";
+            ofd.Filter = "文本文件|*.txt|图片文件|*.jpg|视频文件|*.avi|所有文件|*.*";
+            ofd.ShowDialog();
+            //得到选择文件的路径
+            publicClass.sendFileName = ofd.FileName;
+            inputBox.Text = ofd.FileName;
+            publicClass.sendMsgStatus = 2;
+        }
+
+        private void InputBox_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
