@@ -107,9 +107,16 @@ namespace onlineChat
         //头像闪动
         public void userHeadTwinkle(uint id)
         {
-            this.onlineUserListBox.GetSubItemsById(id)[0].IsTwinkle=true;
-            this.recentChatListBox.GetSubItemsById(id)[0].IsTwinkle = true;
-            this.groupChatListBox.GetSubItemsById(id)[0].IsTwinkle = true;
+            try
+            {
+                this.onlineUserListBox.GetSubItemsById(id)[0].IsTwinkle = true;
+                this.recentChatListBox.GetSubItemsById(id)[0].IsTwinkle = true;
+                this.groupChatListBox.GetSubItemsById(id)[0].IsTwinkle = true;
+            }
+            catch
+            {
+                return;
+            }
         }
 
         //头像停止闪动
@@ -139,7 +146,7 @@ namespace onlineChat
             }
             catch
             {
-
+                return;
             }
         }
 
@@ -155,7 +162,7 @@ namespace onlineChat
             }
             catch
             {
-
+                return;
             }
         }
 

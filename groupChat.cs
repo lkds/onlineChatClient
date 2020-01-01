@@ -18,6 +18,7 @@ namespace onlineChat
     {
         public string groupName;
         public uint groupID;
+        public ChatListItem groupMember = new ChatListItem("群组成员");
         public groupChat(uint ID,string name)
         {
             InitializeComponent();
@@ -152,7 +153,7 @@ namespace onlineChat
 
         public void drawList()  //绘制成员列表
         {
-            List<user> memberList = null;
+            List<user> memberList=new List<user>();
             foreach (group i in publicClass.groupList)
             {
                 if (i.id == groupID)
@@ -160,8 +161,7 @@ namespace onlineChat
                     memberList = i.groupUserList;
                 }
             }
-            ChatListItem groupMember = new ChatListItem("群组成员");
-
+            groupMember.SubItems.Clear();
             foreach (user i in memberList)  //绘制在线列表
             {
                 ChatListSubItem sub = new ChatListSubItem();

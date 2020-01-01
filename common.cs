@@ -73,7 +73,7 @@ namespace onlineChat
                         break;
                     case ("mainPageListDraw"):decodeMainPageList(cComand);//mainPage渲染
                         break;
-                    case ("groupMemberListDraw"):decodeGroupMemberList(cComand);//group成员变动
+                    case ("groupMemberChage"):decodeGroupMemberChange(cComand);//group成员变动
                         break;
                 }
 
@@ -152,12 +152,27 @@ namespace onlineChat
             {
                 m1.drawList();
             }));
+            if(g1!=null)//如果有群聊对话框打开，也要重绘内部成员列表
+            {
+                g1.Invoke(new Action(() =>
+                {
+                    g1.drawList();
+                }));
+            }
         }
 
-        //groupChat成员列表渲染解析
-        public static void decodeGroupMemberList(command cCommand)
+        //群组成员变动解析
+        public static void decodeGroupMemberChange(command cComand)
         {
-            
+            JObject data = (JObject)cComand.data;//转化为Jobject
+            List<int> changeMessage = data.ToObject<List<int>>();//获取变动信息{成员ID，群组ID}
+            foreach(group i in groupList)
+            {
+                if(i.id==changeMessage[1])
+                {
+                    i.deleteUser((uint)changeMessage[0]);
+                }
+            }
         }
 
         //单聊文本信息解析
@@ -370,9 +385,15 @@ namespace onlineChat
         }
         
         //删除一个用户
-        public void deleteUser(user targetUser)
+        public void deleteUser(uint userID)
         {
-            groupUserList.Remove(targetUser);
+            foreach(user i in groupUserList)
+            {
+                if(i.id==userID)
+                {
+                    groupUserList.Remove(i);
+                }
+            }
         }
 
         //添加一个消息
