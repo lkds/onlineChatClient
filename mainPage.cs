@@ -189,6 +189,14 @@ namespace onlineChat
                 publicClass.s1.Show();
 
             }
+            else
+            {
+                if (publicClass.s1.IsDisposed)
+                {
+                    publicClass.s1 = new singleChat(e.SelectSubItem.ID, e.SelectSubItem.DisplayName);
+                    publicClass.s1.Show();
+                }
+            }
         }
 
         private void recentChatListBox_DoubleClickSubItem(object sender, ChatListEventArgs e, MouseEventArgs es)
@@ -206,6 +214,14 @@ namespace onlineChat
                 publicClass.s1.Show();
 
             }
+            else
+            {
+                if (publicClass.s1.IsDisposed)
+                {
+                    publicClass.s1 = new singleChat(e.SelectSubItem.ID, e.SelectSubItem.DisplayName);
+                    publicClass.s1.Show();
+                }
+            }
         }
 
         private void groupChatListBox_DoubleClickSubItem(object sender, ChatListEventArgs e, MouseEventArgs es)
@@ -222,6 +238,14 @@ namespace onlineChat
                 publicClass.g1 = new groupChat(e.SelectSubItem.ID, e.SelectSubItem.DisplayName);
                 publicClass.g1.Show();
 
+            }
+            else
+            {
+                if (publicClass.g1.IsDisposed)
+                {
+                    publicClass.g1 = new groupChat(e.SelectSubItem.ID, e.SelectSubItem.DisplayName);
+                    publicClass.g1.Show();
+                }
             }
         }
 

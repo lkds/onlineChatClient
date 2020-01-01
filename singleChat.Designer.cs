@@ -45,18 +45,19 @@
             // 
             this.inputBox.BackColor = System.Drawing.Color.LightGreen;
             this.inputBox.Location = new System.Drawing.Point(1, 436);
-            this.inputBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.inputBox.Margin = new System.Windows.Forms.Padding(4);
             this.inputBox.Multiline = true;
             this.inputBox.Name = "inputBox";
             this.inputBox.Size = new System.Drawing.Size(620, 110);
             this.inputBox.TabIndex = 1;
+            this.inputBox.TextChanged += new System.EventHandler(this.InputBox_TextChanged);
             // 
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button1.ForeColor = System.Drawing.Color.Green;
             this.button1.Location = new System.Drawing.Point(647, 508);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(113, 38);
             this.button1.TabIndex = 2;
@@ -68,7 +69,7 @@
             // 
             this.imageSelectBox.Image = ((System.Drawing.Image)(resources.GetObject("imageSelectBox.Image")));
             this.imageSelectBox.Location = new System.Drawing.Point(647, 436);
-            this.imageSelectBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.imageSelectBox.Margin = new System.Windows.Forms.Padding(4);
             this.imageSelectBox.Name = "imageSelectBox";
             this.imageSelectBox.Size = new System.Drawing.Size(44, 40);
             this.imageSelectBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -80,12 +81,13 @@
             // 
             this.fileSelectBox.Image = ((System.Drawing.Image)(resources.GetObject("fileSelectBox.Image")));
             this.fileSelectBox.Location = new System.Drawing.Point(716, 436);
-            this.fileSelectBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.fileSelectBox.Margin = new System.Windows.Forms.Padding(4);
             this.fileSelectBox.Name = "fileSelectBox";
             this.fileSelectBox.Size = new System.Drawing.Size(44, 40);
             this.fileSelectBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.fileSelectBox.TabIndex = 4;
             this.fileSelectBox.TabStop = false;
+            this.fileSelectBox.Click += new System.EventHandler(this.FileSelectBox_Click);
             // 
             // userName
             // 
@@ -113,7 +115,7 @@
             // 
             this.singleChatMessageBox.BackColor = System.Drawing.Color.LightBlue;
             this.singleChatMessageBox.Location = new System.Drawing.Point(3, 52);
-            this.singleChatMessageBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.singleChatMessageBox.Margin = new System.Windows.Forms.Padding(4);
             this.singleChatMessageBox.Name = "singleChatMessageBox";
             this.singleChatMessageBox.Size = new System.Drawing.Size(761, 374);
             this.singleChatMessageBox.TabIndex = 7;
@@ -132,7 +134,7 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.inputBox);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "singleChat";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SingleChat_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.imageSelectBox)).EndInit();

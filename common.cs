@@ -11,7 +11,7 @@ using System.Windows.Forms;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Collections;
-
+using System.IO;
 
 namespace onlineChat
 {
@@ -28,6 +28,8 @@ namespace onlineChat
         public static List<int> serverPorts=new List<int>() { 2333,2334,2335,2336};
         public static IPAddress serverIP=IPAddress.Parse("127.0.0.1");
         public static bool isRun = false;
+        public static string sendFileName;
+        public static int sendMsgStatus = 0;
 
         public static login l1=null;
         public static mainPage m1=null;
@@ -643,17 +645,54 @@ namespace onlineChat
 
         public void receiveFile()
         {
-            byte[] fileRec = new byte[1024*1024*2];//创建接收消息的buffer
-            int length = -1;
+            //byte[] fileRec = new byte[1024*1024*2];//创建接收消息的buffer
+            //int length = -1;
+            //try
+            //{
+            //    length = cSockets[2].Receive(fileRec);//接收消息长度计数
+
+            //}
+            //catch
+            //{
+            //    return;
+            //}
+
             try
             {
-                length = cSockets[2].Receive(fileRec);//接收消息长度计数
+                /// <summary>
+                /// 存储大文件的大小
+                /// </summary>
+                long length = 0;
+                long recive = 0; //接收的大文件总的字节数
+                byte[] buffer = new byte[1024 * 1024];
+                int r = cSockets[0].Receive(buffer);
 
+                while (true)
+                {
+                    
+                    if (r == 0)
+                    {
+                        break;
+                    }
+                    if (length > 0)  //判断大文件是否已经保存完
+                    {
+                        //保存接收的文件
+                        using (FileStream fsWrite = new FileStream(Application.StartupPath, FileMode.Append, FileAccess.Write))
+                        {
+                            fsWrite.Write(buffer, 0, r);
+                            length -= r; //减去每次保存的字节数
+                            if (length <= 0)
+                            {
+                                //ShowMsg(socketSend.RemoteEndPoint + ": 接收文件成功");
+                            }
+                            continue;
+                        }
+                    }
+                    length = int.Parse(Encoding.UTF8.GetString(buffer, 1, r - 1));
+                    recive = length;
+                }
             }
-            catch
-            {
-                return;
-            }
+            catch { }
             //TODO
             //保存文件
             //解析
