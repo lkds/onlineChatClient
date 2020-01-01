@@ -144,7 +144,7 @@ namespace onlineChat
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Title = "选择要传的文件";
             ofd.InitialDirectory = @"C:";
-            ofd.Filter = "图片文件|*.jpg|*.png|*.jpeg|*.gif";
+            ofd.Filter = "图片文件|*.jpg";
             ofd.ShowDialog();
             //得到选择文件的路径
             publicClass.sendFileName = ofd.FileName;
