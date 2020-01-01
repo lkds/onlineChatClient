@@ -22,7 +22,6 @@ namespace onlineChat
         public mainPage()
         {
             InitializeComponent();
-            ifNew = true;
             mainUserIPLabel.Text = publicClass.mainUser.IPAddress;
             mainUserNameLabel.Text = publicClass.mainUser.userName;
 
@@ -49,7 +48,9 @@ namespace onlineChat
             List<user> onlineUserList = publicClass.onlineUserList;  //在线用户
             List<user> recentChatList = publicClass.recentChatList; //最近聊
             List<group> groupChatList = publicClass.groupList;   //群聊
-
+            onlineUser = null;
+            recentChat = null;
+            groupChat = null;
             foreach (user i in onlineUserList)  //绘制在线列表
             {
                 ChatListSubItem sub = new ChatListSubItem();
