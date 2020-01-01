@@ -23,6 +23,7 @@ namespace onlineChat
             {
                 publicClass.m1 = new mainPage();
                 Application.Run(publicClass.m1);
+                Console.WriteLine("sss");
             }else
             {
                 System.Environment.Exit(0);

@@ -125,7 +125,7 @@ namespace onlineChat
         {
             if(cCommand.res.ToString() == "yes")
             {
-                mainUser.id = (int)cCommand.data;//赋值给主用户
+                mainUser.id = Convert.ToInt32(cCommand.data);//赋值给主用户
                 l1.Invoke(new Action(() =>
                 {
                     l1.DialogResult = DialogResult.OK;
@@ -648,6 +648,15 @@ namespace onlineChat
             {
                 Console.WriteLine("用户离线");
                 return false;
+            }
+        }
+
+        ~clientSocket()
+        {
+            foreach(Socket sk in cSockets)
+            {
+                sk.Shutdown(SocketShutdown.Both);
+                sk.Close();
             }
         }
     }
