@@ -123,9 +123,9 @@ namespace onlineChat
         //登录解析
         public static void decodeLogin(command cCommand)
         {
-            if(cCommand.data.ToString() == "yes")
+            if(cCommand.res.ToString() == "yes")
             {
-                //mainUser = (user)cCommand.data;//赋值给主用户
+                mainUser.id = (int)cCommand.data;//赋值给主用户
                 l1.Invoke(new Action(() =>
                 {
                     l1.DialogResult = DialogResult.OK;
@@ -156,11 +156,7 @@ namespace onlineChat
         //groupChat成员列表渲染解析
         public static void decodeGroupMemberList(command cCommand)
         {
-            ////ArrayList groupMemberList = (ArrayList)cCommand.data;
-            ////l1.Invoke(new Action(() =>
-            ////{
-            ////    g1.drawList(groupMemberList);
-            ////}));
+            
         }
 
         //单聊文本信息解析
@@ -174,7 +170,7 @@ namespace onlineChat
                 singleChatSession chatSession = new singleChatSession(message.sendUser);
                 chatSession.addMessage(message);
                 myChat.Add(message.sendUser, chatSession);
-                if(s1==null || s1.currentUserID!=(uint)message.sendUser)
+                if(s1==null || s1.targetUserID!=(uint)message.sendUser)
                 {
                     m1.Invoke(new Action(() =>
                     {
@@ -192,7 +188,7 @@ namespace onlineChat
             else
             {
                 myChat[message.sendUser].addMessage(message);
-                if (s1 == null || s1.currentUserID != (uint)message.sendUser)
+                if (s1 == null || s1.targetUserID != (uint)message.sendUser)
                 {
                     m1.Invoke(new Action(() =>
                     {
@@ -220,7 +216,7 @@ namespace onlineChat
                 singleChatSession chatSession = new singleChatSession(message.sendUser);
                 chatSession.addMessage(message);
                 myChat.Add(message.sendUser, chatSession);
-                if (s1 == null || s1.currentUserID != (uint)message.sendUser)
+                if (s1 == null || s1.targetUserID != (uint)message.sendUser)
                 {
                     m1.Invoke(new Action(() =>
                     {
@@ -238,7 +234,7 @@ namespace onlineChat
             else
             {
                 myChat[message.sendUser].addMessage(message);
-                if (s1 == null || s1.currentUserID != (uint)message.sendUser)
+                if (s1 == null || s1.targetUserID != (uint)message.sendUser)
                 {
                     m1.Invoke(new Action(() =>
                     {
@@ -630,7 +626,11 @@ namespace onlineChat
             {
                 //转化为字节流
                 byte[] strbyte = Encoding.UTF8.GetBytes(msg);
-                cSockets[0].Send(strbyte);
+                List<byte> prefix = new List<byte>();
+                prefix.Add(0);
+                prefix.AddRange(strbyte);
+                byte[] buffer = prefix.ToArray();
+                cSockets[0].Send(buffer);
                 return true;
             }
             catch(ArgumentNullException)

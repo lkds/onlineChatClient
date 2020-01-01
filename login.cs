@@ -17,6 +17,7 @@ namespace onlineChat
     {
         public bool isLogin = false;
         public int isExist;  //标识账户是否存在，未判断为0，存在为1，不存在为-1
+        public string defaultIP="127.0.0.1";
 
         public login()
         {
@@ -90,8 +91,8 @@ namespace onlineChat
                 {
                     if (passwordBox.Text != "")//新建账户并进入
                     {
-                        user u1 = new user(userNameBox.Text, publicClass.getIPAddress(),passwordBox.Text);
-                        string secUser = JsonConvert.SerializeObject(new command() { data=u1,type=0,subType="register",res=""});//序列化
+                        publicClass.mainUser = new user(userNameBox.Text, publicClass.getIPAddress(),passwordBox.Text);
+                        string secUser = JsonConvert.SerializeObject(new command() { data=publicClass.mainUser,type=0,subType="login",res=""});//序列化
                         publicClass.cSocket.sendSysMsg(secUser);
                     }
                     else
@@ -148,6 +149,7 @@ namespace onlineChat
                 this.label3.Enabled = false;
                 this.passwordBox.Enabled = false;
                 this.loginBtn.Enabled = false;
+                this.serverConfigBtn.Enabled = true;
                 this.connectServerBtn.Text = "连接服务器";
             }
             else

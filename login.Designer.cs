@@ -116,8 +116,9 @@
             // 
             this.passwordBox.Enabled = false;
             this.passwordBox.Location = new System.Drawing.Point(190, 151);
-            this.passwordBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.passwordBox.Margin = new System.Windows.Forms.Padding(2);
             this.passwordBox.Name = "passwordBox";
+            this.passwordBox.PasswordChar = '*';
             this.passwordBox.Size = new System.Drawing.Size(151, 21);
             this.passwordBox.TabIndex = 8;
             // 
@@ -135,7 +136,7 @@
             // serverConfigBtn
             // 
             this.serverConfigBtn.Location = new System.Drawing.Point(250, 181);
-            this.serverConfigBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.serverConfigBtn.Margin = new System.Windows.Forms.Padding(2);
             this.serverConfigBtn.Name = "serverConfigBtn";
             this.serverConfigBtn.Size = new System.Drawing.Size(89, 23);
             this.serverConfigBtn.TabIndex = 10;
@@ -146,7 +147,7 @@
             // connectServerBtn
             // 
             this.connectServerBtn.Location = new System.Drawing.Point(137, 181);
-            this.connectServerBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.connectServerBtn.Margin = new System.Windows.Forms.Padding(2);
             this.connectServerBtn.Name = "connectServerBtn";
             this.connectServerBtn.Size = new System.Drawing.Size(89, 23);
             this.connectServerBtn.TabIndex = 11;

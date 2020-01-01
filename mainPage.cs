@@ -140,7 +140,7 @@ namespace onlineChat
         private void onlineUserListBox_DoubleClickSubItem(object sender, ChatListEventArgs e, MouseEventArgs es)
         {
             userHeadNotTwinkle(e.SelectSubItem.ID);
-            if (publicClass.s1 != null || e.SelectSubItem.DisplayName != publicClass.s1.currentUserName)
+            if (publicClass.s1 != null || e.SelectSubItem.DisplayName != publicClass.s1.targetUserName)
             {
                 publicClass.s1 = new singleChat(e.SelectSubItem.ID,e.SelectSubItem.DisplayName);
             }
@@ -149,7 +149,7 @@ namespace onlineChat
         private void recentChatListBox_DoubleClickSubItem(object sender, ChatListEventArgs e, MouseEventArgs es)
         {
             userHeadNotTwinkle(e.SelectSubItem.ID);
-            if (publicClass.s1 != null || e.SelectSubItem.DisplayName != publicClass.s1.currentUserName)
+            if (publicClass.s1 != null || e.SelectSubItem.DisplayName != publicClass.s1.targetUserName)
             {
                 publicClass.s1 = new singleChat(e.SelectSubItem.ID,e.SelectSubItem.DisplayName);
             }

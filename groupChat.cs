@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Collections;
 using CCWin.SkinControl;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace onlineChat
 {
@@ -23,6 +25,7 @@ namespace onlineChat
             groupID = ID;
             chatGroupName.Text = name;
             DrawMessage();
+            drawList();
             inputBox.ForeColor = Color.Gray;
             inputBox.Text = "此处输入文字消息......";
             inputBox.LostFocus += new EventHandler(this.inputTip);  //消息输入框失焦
@@ -134,11 +137,27 @@ namespace onlineChat
 
         private void chatSendBtn_Click(object sender, EventArgs e)
         {
-            if (inputBox.Text != "") ;
+            if (inputBox.ForeColor != Color.Gray || inputBox.Text != "")
+            {
+                textMessage message = new textMessage();
+                message.content = inputBox.Text;
+                message.target = (int)groupID;
+                message.sendUser = publicClass.mainUser.id;
+                string sendMessage = JsonConvert.SerializeObject(new command() { data = message, type = 0, subType = "groupChatTextMessage", res = "" });//序列化
+                publicClass.cSocket.sendSysMsg(sendMessage);
+            }
         }
 
-        public void drawList(ArrayList memberList)  //绘制成员列表
+        public void drawList()  //绘制成员列表
         {
+            List<user> memberList = null;
+            foreach (group i in publicClass.groupList)
+            {
+                if (i.id == groupID)
+                {
+                    memberList = i.groupUserList;
+                }
+            }
             ChatListItem groupMember = new ChatListItem("群组成员");
 
             foreach (user i in memberList)  //绘制在线列表

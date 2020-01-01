@@ -9,18 +9,20 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Collections.Generic;
 using System.Collections;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace onlineChat
 {
     public partial class singleChat : Form
     {
-        public string currentUserName;
-        public uint currentUserID;
+        public string targetUserName;
+        public uint targetUserID;
         public singleChat(uint userID,string name)
         {
             InitializeComponent();
-            currentUserName = name;
-            currentUserID = userID;
+            targetUserName = name;
+            targetUserID = userID;
             userName.Text = name;
             DrawMessage();
             inputBox.ForeColor = Color.Gray;
@@ -61,12 +63,12 @@ namespace onlineChat
 
         public void DrawMessage()
         {
-            if (!publicClass.myChat.ContainsKey((int)currentUserID))
+            if (!publicClass.myChat.ContainsKey((int)targetUserID))
             {
-                singleChatSession chatSession = new singleChatSession((int)currentUserID);
-                publicClass.myChat.Add((int)currentUserID, chatSession);
+                singleChatSession chatSession = new singleChatSession((int)targetUserID);
+                publicClass.myChat.Add((int)targetUserID, chatSession);
             }
-            ArrayList messages = publicClass.myChat[(int)currentUserID].messageList;
+            ArrayList messages = publicClass.myChat[(int)targetUserID].messageList;
             singleChatMessageBox.Text = "";
             foreach(baseMessage i in messages)
             {
@@ -143,7 +145,15 @@ namespace onlineChat
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            if (inputBox.ForeColor != Color.Gray || inputBox.Text!="")
+            {
+                textMessage message = new textMessage();
+                message.content = inputBox.Text;
+                message.target = (int)targetUserID;
+                message.sendUser = publicClass.mainUser.id;
+                string sendMessage = JsonConvert.SerializeObject(new command() { data = message, type = 0, subType = "singleChatTextMessage", res = "" });//序列化
+                publicClass.cSocket.sendSysMsg(sendMessage);
+            }
         }
     }
 }

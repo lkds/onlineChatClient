@@ -16,6 +16,7 @@ namespace onlineChat
         public serverConfig()
         {
             InitializeComponent();
+            serverIPBox.Text = publicClass.l1.defaultIP;
         }
 
         private void GroupBox2_Enter(object sender, EventArgs e)
@@ -26,6 +27,7 @@ namespace onlineChat
         private void SubmitBtn_Click(object sender, EventArgs e)
         {
             publicClass.serverIP = IPAddress.Parse(serverIPBox.Text);
+            publicClass.l1.defaultIP = serverIPBox.Text;
             publicClass.serverPorts = new List<int>()
             {
                 int.Parse(sysPort.Text),
