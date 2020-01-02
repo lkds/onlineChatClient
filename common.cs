@@ -182,7 +182,7 @@ namespace onlineChat
         //建群回复解析
         public static void decodeCreateGroupAnswer(command cComand)
         {
-            JObject data = (JObject)cComand.data;//转化为Jobject
+            JArray data = (JArray)cComand.data;//转化为Jobject
             ArrayList newGroupMessage = data.ToObject<ArrayList>();
             group newGroup = new group((int)newGroupMessage[0],(string)newGroupMessage[1],(List<user>)newGroupMessage[2]);
             groupList.Add(newGroup);
@@ -239,9 +239,26 @@ namespace onlineChat
         //单聊图片文件信息解析
         public static void decodeSingleIFMessageDraw(command cComand)
         {
-            JObject data = (JObject)cComand.data;//转化为Jobject
-            imageFileMessage message = data["msg"].ToObject<imageFileMessage>();//获取消息类
-
+            JArray data = (JArray)cComand.data;//转化为Jobject
+            int uID = data[1].ToObject<int>();
+            int targetID = data[2].ToObject<int>();
+            string fileName = data[3].ToString();
+            imageFileMessage message = new imageFileMessage();
+            message.fileName = fileName;
+            try
+            {
+                string endfix = fileName.Substring(fileName.IndexOf('.') + 1);
+                if(endfix=="jpg" | endfix == "jpeg" | endfix =="png" | endfix == "gif")
+                {
+                    message.fileType = "img";//图片类型
+                }
+            }
+            catch
+            {
+                message.fileType = "file";//文件类型
+            }
+            message.sendUser = uID;
+            message.sendTime = DateTime.Now;
             if (!myChat.ContainsKey(message.sendUser))
             {
                 singleChatSession chatSession = new singleChatSession(message.sendUser);
@@ -592,13 +609,21 @@ namespace onlineChat
             while (publicClass.isRun)
             {
                 byte[] textRec = new byte[4096];//创建接收消息的buffer
-                int length = -1;
+                int length;
+                length = cSockets[0].Receive(textRec);//接收消息长度计数
                 //try
                 //{
-                    length = cSockets[0].Receive(textRec);//接收消息长度计数
-                    string strMsg = System.Text.Encoding.UTF8.GetString(textRec, 0, length);// 将接受到的字节数据转化成字符串
-                    command c1 = JsonConvert.DeserializeObject<command>(strMsg);//解析
+                string strMsg = System.Text.Encoding.UTF8.GetString(textRec, 1, length - 1);// 将接受到的字节数据转化成字符串
+                command c1 = JsonConvert.DeserializeObject<command>(strMsg);//解析
+                if (textRec[0] == 0)
+                {
                     publicClass.decodeCommand(c1);
+                }
+                else if(textRec[0]==1)
+                {
+                    AcceptMgs(c1);
+                }
+                    
                 //}
                 //catch
                 //{
@@ -606,6 +631,47 @@ namespace onlineChat
                 //}
 
             }
+        }
+
+        /// <summary>
+        /// 接收数据
+        /// </summary>
+        private void AcceptMgs(command C)
+        {
+            //try
+            //{
+            /// <summary>
+            /// 存储大文件的大小
+            /// </summary>
+            ArrayList a = ((JArray)C.data).ToObject<ArrayList>();
+            string fileName = a[3].ToString();
+            int length = 0;
+            long recive = 0; //接收的大文件总的字节数
+            long totallength = Convert.ToInt64(a[0]);
+
+            using (FileStream fsWrite = new FileStream(Application.StartupPath + "\\src\\" + fileName, FileMode.Append, FileAccess.Write))
+            {
+                while (recive < totallength)
+                {
+                    byte[] buffer = new byte[1024 * 1024];
+                    int r = cSockets[0].Receive(buffer);
+                    //length = int.Parse(Encoding.UTF8.GetString(buffer, 0, r));
+                    recive += r;
+                    if (r > 0)  //判断大文件是否已经保存完
+                    {
+                        //保存接收的文件
+
+                        fsWrite.Write(buffer, 0, r);
+
+                    }
+
+                }
+                fsWrite.Close();
+            }
+            //启动转发函数
+            publicClass.decodeCommand(C);
+            //}
+            //catch { }
         }
 
         public void receiveText()
@@ -698,14 +764,14 @@ namespace onlineChat
             //解析
         }
 
-        public bool sendSysMsg(string msg)
+        public bool sendSysMsg(string msg,byte type)
         {
             try
             {
                 //转化为字节流
                 byte[] strbyte = Encoding.UTF8.GetBytes(msg);
                 List<byte> prefix = new List<byte>();
-                prefix.Add(0);
+                prefix.Add(type);
                 prefix.AddRange(strbyte);
                 byte[] buffer = prefix.ToArray();
                 cSockets[0].Send(buffer);
@@ -727,6 +793,56 @@ namespace onlineChat
                 Console.WriteLine("用户离线");
                 return false;
             }
+        }
+
+        //发送文件
+        //发送大文件
+        //发送者ID
+        //套接字号
+        //接收方ID《群组或者用户ID》
+        //单聊还是多聊消息
+        public void SendBigFile(string filePath,int uID,List<int> targetID, string fileType)
+        {
+            Socket socketSend = cSockets[0];
+            string fileName="null";
+            try
+            {
+                //读取选择的文件
+                using (FileStream fsRead = new FileStream(filePath, FileMode.OpenOrCreate, FileAccess.Read))
+                {
+                    //1. 第一步：发送一个包，表示文件的长度，让客户端知道后续要接收几个包来重新组织成一个文件
+                    long length = fsRead.Length;
+                    fileName = filePath.Substring(filePath.LastIndexOf('\\')+1);
+                    ArrayList fileInfo = new ArrayList() { length, uID, targetID, fileName };
+                    command c1 = new command() { data = fileInfo, type = 1, subType = fileType, res = "yes" };
+                    string sendStr = JsonConvert.SerializeObject(c1);
+                    sendSysMsg(sendStr, 1);
+                    //2. 第二步：每次发送一个1MB的包，如果文件较大，则会拆分为多个包
+                    byte[] buffer = new byte[1024 * 1024];
+                    long send = 0; //发送的字节数                  
+                    while (true)  //大文件断点多次传输
+                    {
+                        int r = fsRead.Read(buffer, 0, buffer.Length);
+                        if (r == 0)
+                        {
+                            break;
+                        }
+                        socketSend.Send(buffer, 0, r, SocketFlags.None);
+                        send += r;
+                    }
+                    //删除文件
+                }
+            }
+            catch
+            {
+                Console.WriteLine("收发文件错误！");
+            }
+            imageFileMessage message = new imageFileMessage();
+            message.target = (int)(publicClass.s1.targetUserID);
+            message.sendUser = publicClass.mainUser.id;
+            message.sendTime = DateTime.Now;
+            message.fileName = fileName;
+            publicClass.s1.AddMessage(message);
         }
 
         ~clientSocket()

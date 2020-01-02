@@ -252,7 +252,7 @@ namespace onlineChat
         private void MainPage_Load(object sender, EventArgs e)
         {
             string sendMessage = JsonConvert.SerializeObject(new command() { data = publicClass.mainUser.id, type = 0, subType = "mainPageListDraw", res = "" });//序列化
-            publicClass.cSocket.sendSysMsg(sendMessage);
+            publicClass.cSocket.sendSysMsg(sendMessage,0);
         }
     }
 }

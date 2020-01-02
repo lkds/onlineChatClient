@@ -34,7 +34,7 @@ namespace onlineChat
             string secUser = JsonConvert.SerializeObject(new command() { data = userNameBox.Text, type = 0, subType = "checkUserName" ,res=""});//序列化
             if (publicClass.isRun)
             {
-                publicClass.cSocket.sendSysMsg(secUser);
+                publicClass.cSocket.sendSysMsg(secUser,0);
                 userNameCheck(true);
             }
             //if (userNameBox.Text == "hwy")
@@ -93,7 +93,7 @@ namespace onlineChat
                     {
                         publicClass.mainUser = new user(userNameBox.Text, publicClass.getIPAddress(),passwordBox.Text);
                         string secUser = JsonConvert.SerializeObject(new command() { data=publicClass.mainUser,type=0,subType="login",res=""});//序列化
-                        publicClass.cSocket.sendSysMsg(secUser);
+                        publicClass.cSocket.sendSysMsg(secUser,0);
                     }
                     else
                     {
@@ -112,7 +112,7 @@ namespace onlineChat
                     string secUser = JsonConvert.SerializeObject(new command() { data =l1, type = 0, subType = "login",res="" });//序列化
                     if (publicClass.isRun)
                     {
-                        publicClass.cSocket.sendSysMsg(secUser);
+                        publicClass.cSocket.sendSysMsg(secUser,0);
 
                     }
                     //this.DialogResult = DialogResult.OK;

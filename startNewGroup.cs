@@ -46,7 +46,7 @@ namespace onlineChat
                 selectedUserID.Add(publicClass.mainUser.id);
                 ArrayList groupMessage = new ArrayList() {newGroupName.Text,selectedUserID};
                 string sendMessage = JsonConvert.SerializeObject(new command() { data = groupMessage, type = 0, subType = "createGroup", res = "" });//序列化
-                publicClass.cSocket.sendSysMsg(sendMessage);
+                publicClass.cSocket.sendSysMsg(sendMessage,0);
                 this.Close();
             }
         }

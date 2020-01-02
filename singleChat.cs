@@ -108,7 +108,15 @@ namespace onlineChat
             singleChatMessageBox.SelectionColor = System.Drawing.Color.Blue;
             singleChatMessageBox.SelectionIndent = 19;
             singleChatMessageBox.SelectionBullet = false;
-            singleChatMessageBox.AppendText("【图片/文件消息  点击查看】\r\n" );
+            //singleChatMessageBox.AppendText("【图片/文件消息  点击查看】\r\n" );
+            //LinkLabel l1 = new LinkLabel();
+            //l1.Text = "333";
+            //singleChatMessageBox.Controls.Add(l1);
+            Clipboard.Clear();   //清空剪贴板
+            Bitmap bmp = new Bitmap(Application.StartupPath+"\\src\\"+message.fileName);  //创建Bitmap类对象
+            Clipboard.SetImage(bmp);  //将Bitmap类对象写入剪贴板
+            singleChatMessageBox.Paste();   //将剪贴板中的对象粘贴到RichTextBox1
+            Clipboard.Clear();
         }
 
         private void SingleUserBox1_Load(object sender, EventArgs e)
@@ -150,13 +158,22 @@ namespace onlineChat
                     publicClass.myChat.Add(message.target, chatSession);
                 }
                 string sendMessage = JsonConvert.SerializeObject(new command() { data = message, type = 1, subType = "singleChatTextMessage", res = "" });//序列化
-                publicClass.cSocket.sendSysMsg(sendMessage);
+                publicClass.cSocket.sendSysMsg(sendMessage,0);
                 inputBox.Clear();
             }
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            sendMsg();
+            if (publicClass.sendMsgStatus == 0)
+            {
+                sendMsg();
+            }
+            else if(publicClass.sendMsgStatus == 1)
+            {
+                List<int> l1= new List<int>() { (int)targetUserID };
+                publicClass.cSocket.SendBigFile(publicClass.sendFileName,publicClass.mainUser.id,l1,"singleChatImageFileMsg");
+            }
+            publicClass.sendMsgStatus = 0;
         }
 
         private void SingleChat_KeyDown(object sender, KeyEventArgs e)
@@ -177,7 +194,7 @@ namespace onlineChat
             //得到选择文件的路径
             publicClass.sendFileName = ofd.FileName;
             inputBox.Text = ofd.FileName;
-            publicClass.sendMsgStatus = 2;
+            publicClass.sendMsgStatus = 1;
         }
 
         private void InputBox_TextChanged(object sender, EventArgs e)

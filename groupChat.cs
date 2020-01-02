@@ -132,7 +132,7 @@ namespace onlineChat
                     }
                 }
                 string sendMessage = JsonConvert.SerializeObject(new command() { data = message, type = 0, subType = "groupChatTextMessage", res = "" });//序列化
-                publicClass.cSocket.sendSysMsg(sendMessage);
+                publicClass.cSocket.sendSysMsg(sendMessage,0);
             }
         }
 
@@ -177,7 +177,7 @@ namespace onlineChat
                     {
                         List<int> quitMessage = new List<int>() {publicClass.mainUser.id,(int)groupID};
                         string sendMessage = JsonConvert.SerializeObject(new command() { data = quitMessage, type = 1, subType = "quitGroup", res = "" });//序列化
-                        publicClass.cSocket.sendSysMsg(sendMessage);
+                        publicClass.cSocket.sendSysMsg(sendMessage,0);
                         publicClass.groupList.Remove(i);
                         this.Close();
                         break;
