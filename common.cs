@@ -201,7 +201,14 @@ namespace onlineChat
                 singleChatSession chatSession = new singleChatSession(message.sendUser);
                 chatSession.addMessage(message);
                 myChat.Add(message.sendUser, chatSession);
-                if(s1==null || s1.targetUserID!=(uint)message.sendUser)
+                if(s1==null)
+                {
+                    m1.Invoke(new Action(() =>
+                    {
+                        m1.userHeadTwinkle((uint)message.sendUser);
+                    }));
+                }
+                else if(s1.targetUserID != (uint)message.sendUser)
                 {
                     m1.Invoke(new Action(() =>
                     {
@@ -219,7 +226,14 @@ namespace onlineChat
             else
             {
                 myChat[message.sendUser].addMessage(message);
-                if (s1 == null || s1.targetUserID != (uint)message.sendUser)
+                if (s1 == null)
+                {
+                    m1.Invoke(new Action(() =>
+                    {
+                        m1.userHeadTwinkle((uint)message.sendUser);
+                    }));
+                }
+                else if (s1.targetUserID != (uint)message.sendUser)
                 {
                     m1.Invoke(new Action(() =>
                     {
@@ -264,7 +278,14 @@ namespace onlineChat
                 singleChatSession chatSession = new singleChatSession(message.sendUser);
                 chatSession.addMessage(message);
                 myChat.Add(message.sendUser, chatSession);
-                if (s1 == null || s1.targetUserID != (uint)message.sendUser)
+                if (s1 == null)
+                {
+                    m1.Invoke(new Action(() =>
+                    {
+                        m1.userHeadTwinkle((uint)message.sendUser);
+                    }));
+                }
+                else if (s1.targetUserID != (uint)message.sendUser)
                 {
                     m1.Invoke(new Action(() =>
                     {
@@ -282,7 +303,14 @@ namespace onlineChat
             else
             {
                 myChat[message.sendUser].addMessage(message);
-                if (s1 == null || s1.targetUserID != (uint)message.sendUser)
+                if (s1 == null)
+                {
+                    m1.Invoke(new Action(() =>
+                    {
+                        m1.userHeadTwinkle((uint)message.sendUser);
+                    }));
+                }
+                else if(s1.targetUserID != (uint)message.sendUser)
                 {
                     m1.Invoke(new Action(() =>
                     {
@@ -313,7 +341,14 @@ namespace onlineChat
                     i.addMessage(message);
                 }
             }
-            if (g1 == null || g1.groupID != (uint)message.sendUser)
+            if (g1 == null)
+            {
+                m1.Invoke(new Action(() =>
+                {
+                    m1.userHeadTwinkle((uint)message.sendUser);
+                }));
+            }
+            else if(g1.groupID != (uint)message.sendUser)
             {
                 m1.Invoke(new Action(() =>
                 {
@@ -342,7 +377,14 @@ namespace onlineChat
                     i.addMessage(message);
                 }
             }
-            if (g1 == null || g1.groupID != (uint)message.sendUser)
+            if (g1 == null)
+            {
+                m1.Invoke(new Action(() =>
+                {
+                    m1.userHeadTwinkle((uint)message.sendUser);
+                }));
+            }
+            else if(g1.groupID != (uint)message.sendUser)
             {
                 m1.Invoke(new Action(() =>
                 {
