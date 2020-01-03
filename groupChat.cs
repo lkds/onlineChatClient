@@ -123,12 +123,7 @@ namespace onlineChat
 
         }
 
-        private void Label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void chatSendBtn_Click(object sender, EventArgs e)
+        public void sendMsg()
         {
             if (inputBox.ForeColor != Color.Gray && inputBox.Text != "")
             {
@@ -137,17 +132,47 @@ namespace onlineChat
                 message.target = (int)groupID;
                 message.sendUser = publicClass.mainUser.id;
                 AddMessage(message);
-                foreach(group i in publicClass.groupList)
+                foreach (group i in publicClass.groupList)
                 {
-                    if(i.id==groupID)
+                    if (i.id == groupID)
                     {
                         i.addMessage(message);
                         break;
                     }
                 }
                 string sendMessage = JsonConvert.SerializeObject(new command() { data = message, type = 0, subType = "groupChatTextMessage", res = "" });//序列化
-                publicClass.cSocket.sendSysMsg(sendMessage,0);
+                publicClass.cSocket.sendSysMsg(sendMessage, 0);
             }
+        }
+
+        private void Label1_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void chatSendBtn_Click(object sender, EventArgs e)
+        {
+            if (publicClass.sendMsgStatus == 0)
+            {
+                sendMsg();
+            }
+            else if (publicClass.sendMsgStatus == 1)
+            {
+                List<int> l1 = new List<int>();
+                foreach (var i in publicClass.groupList)
+                {
+                    if (i.id == groupID)
+                    {
+                        foreach (var u in i.groupUserList)
+                        {
+                            l1.Add(u.id);
+                        }
+                    }
+                }
+                publicClass.cSocket.SendBigFileG(publicClass.sendFileName, publicClass.mainUser.id, l1, "singleChatImageFileMsg");
+            }
+            publicClass.sendMsgStatus = 0;
+            inputBox.Clear();
         }
 
         public void drawList()  //绘制成员列表
@@ -209,6 +234,32 @@ namespace onlineChat
         private void GroupMemberListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void ImageSelectBox_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Title = "选择要传的文件";
+            ofd.InitialDirectory = @"C:";
+            ofd.Filter = "图片文件|*.jpg";
+            ofd.ShowDialog();
+            //得到选择文件的路径
+            publicClass.sendFileName = ofd.FileName;
+            inputBox.Text = ofd.FileName;
+            publicClass.sendMsgStatus = 1;
+        }
+
+        private void FileSelectBox_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Title = "选择要传的文件";
+            ofd.InitialDirectory = @"C:";
+            ofd.Filter = "文本文件|*.txt|图片文件|*.jpg|视频文件|*.avi|所有文件|*.*";
+            ofd.ShowDialog();
+            //得到选择文件的路径
+            publicClass.sendFileName = ofd.FileName;
+            inputBox.Text = ofd.FileName;
+            publicClass.sendMsgStatus = 1;
         }
     }
 }

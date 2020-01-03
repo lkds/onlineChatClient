@@ -911,7 +911,7 @@ namespace onlineChat
         //套接字号
         //接收方ID《群组或者用户ID》
         //单聊还是多聊消息
-        public void SendBigFile(string filePath,int uID,List<int> targetID, string fileType)
+        public void SendBigFileG(string filePath,int uID,List<int> targetID, string fileType)
         {
             Socket socketSend = cSockets[0];
             string fileName="null";
@@ -923,6 +923,50 @@ namespace onlineChat
                     //1. 第一步：发送一个包，表示文件的长度，让客户端知道后续要接收几个包来重新组织成一个文件
                     long length = fsRead.Length;
                     fileName = filePath.Substring(filePath.LastIndexOf('\\')+1);
+                    ArrayList fileInfo = new ArrayList() { length, uID, targetID, fileName };
+                    command c1 = new command() { data = fileInfo, type = 1, subType = fileType, res = "yes" };
+                    string sendStr = JsonConvert.SerializeObject(c1);
+                    sendSysMsg(sendStr, 1);
+                    //2. 第二步：每次发送一个1MB的包，如果文件较大，则会拆分为多个包
+                    byte[] buffer = new byte[1024 * 1024];
+                    long send = 0; //发送的字节数                  
+                    while (true)  //大文件断点多次传输
+                    {
+                        int r = fsRead.Read(buffer, 0, buffer.Length);
+                        if (r == 0)
+                        {
+                            break;
+                        }
+                        socketSend.Send(buffer, 0, r, SocketFlags.None);
+                        send += r;
+                    }
+                    //删除文件
+                }
+            }
+            catch
+            {
+                Console.WriteLine("收发文件错误！");
+            }
+            imageFileMessage message = new imageFileMessage();
+            message.target = 0;
+            message.sendUser = publicClass.mainUser.id;
+            message.sendTime = DateTime.Now;
+            message.fileName = filePath;
+            publicClass.s1.showImageFileMessage(message);
+        }
+
+        public void SendBigFile(string filePath, int uID, List<int> targetID, string fileType)
+        {
+            Socket socketSend = cSockets[0];
+            string fileName = "null";
+            try
+            {
+                //读取选择的文件
+                using (FileStream fsRead = new FileStream(filePath, FileMode.OpenOrCreate, FileAccess.Read))
+                {
+                    //1. 第一步：发送一个包，表示文件的长度，让客户端知道后续要接收几个包来重新组织成一个文件
+                    long length = fsRead.Length;
+                    fileName = filePath.Substring(filePath.LastIndexOf('\\') + 1);
                     ArrayList fileInfo = new ArrayList() { length, uID, targetID, fileName };
                     command c1 = new command() { data = fileInfo, type = 1, subType = fileType, res = "yes" };
                     string sendStr = JsonConvert.SerializeObject(c1);
