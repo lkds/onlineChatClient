@@ -841,8 +841,8 @@ namespace onlineChat
             message.target = (int)(publicClass.s1.targetUserID);
             message.sendUser = publicClass.mainUser.id;
             message.sendTime = DateTime.Now;
-            message.fileName = fileName;
-            publicClass.s1.AddMessage(message);
+            message.fileName = filePath;
+            publicClass.s1.showImageFileMessage(message);
         }
 
         ~clientSocket()

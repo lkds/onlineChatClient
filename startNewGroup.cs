@@ -24,13 +24,16 @@ namespace onlineChat
             ChatListItem onlineUser = new ChatListItem("请选择在线用户");
             foreach (user i in onlineUserList)  //绘制在线列表
             {
-                ChatListSubItem sub = new ChatListSubItem();
-                sub.NicName = "下线";
-                sub.Status = ChatListSubItem.UserStatus.OffLine;
-                sub.ID = (uint)i.id;
-                sub.DisplayName = i.userName;
-                sub.PersonalMsg = i.IPAddress;
-                onlineUser.SubItems.Add(sub);
+                if (i.id != publicClass.mainUser.id)
+                {
+                    ChatListSubItem sub = new ChatListSubItem();
+                    sub.NicName = "未选择";
+                    sub.Status = ChatListSubItem.UserStatus.OffLine;
+                    sub.ID = (uint)i.id;
+                    sub.DisplayName = i.userName;
+                    sub.PersonalMsg = i.IPAddress;
+                    onlineUser.SubItems.Add(sub);
+                }
             }
             this.selectUserBox.Items.Add(onlineUser);
         }
@@ -40,6 +43,10 @@ namespace onlineChat
             if(this.newGroupName.Text=="")
             {
                 MessageBox.Show("请设置群名称");
+            }
+            if (selectedUserID.Count==0)
+            {
+                MessageBox.Show("群组成员不能为空");
             }
             else
             {
@@ -60,7 +67,7 @@ namespace onlineChat
                 e.SelectSubItem.NicName = "已选择";
                 selectedUserID.Add((int)e.SelectSubItem.ID);
             }
-            else
+            else if(e.SelectSubItem.Status == ChatListSubItem.UserStatus.Online)
             {
                 e.SelectSubItem.Status = ChatListSubItem.UserStatus.OffLine;
                 e.SelectSubItem.NicName = "未选择";
