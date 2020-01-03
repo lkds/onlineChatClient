@@ -118,6 +118,26 @@ namespace onlineChat
             groupChatMessageBox.AppendText("\r\n");
         }
 
+        public void showImageFileMessage(imageFileMessage message)
+        {
+            groupChatMessageBox.SelectionFont = new Font("黑体", 9, FontStyle.Bold);
+            groupChatMessageBox.SelectionColor = System.Drawing.Color.Purple;
+            groupChatMessageBox.SelectionIndent = 2;
+            groupChatMessageBox.SelectionBullet = true;
+            groupChatMessageBox.AppendText(publicClass.onlineUserList.Find(s => s.id == message.sendUser).userName + "  [" + message.sendTime + "]\r\n");
+
+            groupChatMessageBox.SelectionFont = new Font("宋体", 9, FontStyle.Regular);
+            groupChatMessageBox.SelectionColor = System.Drawing.Color.Blue;
+            groupChatMessageBox.SelectionIndent = 19;
+            groupChatMessageBox.SelectionBullet = false;
+            Clipboard.Clear();   //清空剪贴板
+            Bitmap bmp = new Bitmap(message.fileName);  //创建Bitmap类对象
+            Clipboard.SetImage(bmp);  //将Bitmap类对象写入剪贴板
+            groupChatMessageBox.Paste();   //将剪贴板中的对象粘贴到RichTextBox1
+            Clipboard.Clear();
+            groupChatMessageBox.AppendText("\r\n");
+        }
+
         private void ListBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -152,6 +172,7 @@ namespace onlineChat
 
         private void chatSendBtn_Click(object sender, EventArgs e)
         {
+            drawList();
             if (publicClass.sendMsgStatus == 0)
             {
                 sendMsg();

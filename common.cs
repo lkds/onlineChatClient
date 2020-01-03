@@ -952,7 +952,7 @@ namespace onlineChat
             message.sendUser = publicClass.mainUser.id;
             message.sendTime = DateTime.Now;
             message.fileName = filePath;
-            publicClass.s1.showImageFileMessage(message);
+            publicClass.g1.showImageFileMessage(message);
         }
 
         public void SendBigFile(string filePath, int uID, List<int> targetID, string fileType)

@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(groupChat));
-            this.groupMemberListBox = new System.Windows.Forms.ListBox();
             this.chatQuitGroupBtn = new System.Windows.Forms.Button();
             this.inputBox = new System.Windows.Forms.TextBox();
             this.chatSendBtn = new System.Windows.Forms.Button();
@@ -39,22 +38,12 @@
             this.groupAvatarBox = new System.Windows.Forms.PictureBox();
             this.groupAvatar = new System.Windows.Forms.PictureBox();
             this.groupChatMessageBox = new System.Windows.Forms.RichTextBox();
+            this.groupMemberListBox = new CCWin.SkinControl.ChatListBox();
             ((System.ComponentModel.ISupportInitialize)(this.fileSelectBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageSelectBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupAvatarBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupAvatar)).BeginInit();
             this.SuspendLayout();
-            // 
-            // groupMemberListBox
-            // 
-            this.groupMemberListBox.BackColor = System.Drawing.Color.LightPink;
-            this.groupMemberListBox.FormattingEnabled = true;
-            this.groupMemberListBox.ItemHeight = 15;
-            this.groupMemberListBox.Location = new System.Drawing.Point(3, 79);
-            this.groupMemberListBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.groupMemberListBox.Name = "groupMemberListBox";
-            this.groupMemberListBox.Size = new System.Drawing.Size(219, 424);
-            this.groupMemberListBox.TabIndex = 0;
             // 
             // chatQuitGroupBtn
             // 
@@ -159,11 +148,27 @@
             this.groupChatMessageBox.TabIndex = 11;
             this.groupChatMessageBox.Text = "";
             // 
+            // groupMemberListBox
+            // 
+            this.groupMemberListBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.groupMemberListBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.groupMemberListBox.ForeColor = System.Drawing.Color.Black;
+            this.groupMemberListBox.FriendsMobile = true;
+            this.groupMemberListBox.ListSubItemMenu = null;
+            this.groupMemberListBox.Location = new System.Drawing.Point(9, 85);
+            this.groupMemberListBox.Name = "groupMemberListBox";
+            this.groupMemberListBox.SelectSubItem = null;
+            this.groupMemberListBox.Size = new System.Drawing.Size(213, 419);
+            this.groupMemberListBox.SubItemMenu = null;
+            this.groupMemberListBox.TabIndex = 12;
+            this.groupMemberListBox.Text = "chatListBox1";
+            // 
             // groupChat
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1007, 562);
+            this.Controls.Add(this.groupMemberListBox);
             this.Controls.Add(this.groupChatMessageBox);
             this.Controls.Add(this.groupAvatar);
             this.Controls.Add(this.fileSelectBox);
@@ -172,7 +177,6 @@
             this.Controls.Add(this.chatSendBtn);
             this.Controls.Add(this.inputBox);
             this.Controls.Add(this.chatQuitGroupBtn);
-            this.Controls.Add(this.groupMemberListBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
@@ -189,8 +193,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.ListBox groupMemberListBox;
         private System.Windows.Forms.Button chatQuitGroupBtn;
         private System.Windows.Forms.TextBox inputBox;
         private System.Windows.Forms.Button chatSendBtn;
@@ -200,5 +202,6 @@
         private System.Windows.Forms.PictureBox groupAvatarBox;
         private System.Windows.Forms.PictureBox groupAvatar;
         private System.Windows.Forms.RichTextBox groupChatMessageBox;
+        private CCWin.SkinControl.ChatListBox groupMemberListBox;
     }
 }
