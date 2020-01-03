@@ -163,7 +163,9 @@
             this.Controls.Add(this.inputBox);
             this.Controls.Add(this.chatQuitGroupBtn);
             this.Controls.Add(this.groupMemberListBox);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "groupChat";
             this.Text = "群聊";
             ((System.ComponentModel.ISupportInitialize)(this.fileSelectBox)).EndInit();

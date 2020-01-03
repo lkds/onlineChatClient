@@ -215,12 +215,22 @@ namespace onlineChat
                         m1.userHeadTwinkle((uint)message.sendUser,0);
                     }));
                 }
-                else
+                else if (s1.targetUserID == (uint)message.sendUser)
                 {
-                    s1.Invoke(new Action(() =>
+                    if (s1.IsDisposed)
                     {
-                        s1.AddMessage(message);
-                    }));
+                        m1.Invoke(new Action(() =>
+                        {
+                            m1.userHeadTwinkle((uint)message.sendUser, 0);
+                        }));
+                    }
+                    else
+                    {
+                        s1.Invoke(new Action(() =>
+                        {
+                            s1.AddMessage(message);
+                        }));
+                    }
                 }
             }
             else
@@ -240,12 +250,22 @@ namespace onlineChat
                         m1.userHeadTwinkle((uint)message.sendUser,0);
                     }));
                 }
-                else
+                else if (s1.targetUserID == (uint)message.sendUser)
                 {
-                    s1.Invoke(new Action(() =>
+                    if(s1.IsDisposed)
                     {
-                        s1.AddMessage(message);
-                    }));
+                        m1.Invoke(new Action(() =>
+                        {
+                            m1.userHeadTwinkle((uint)message.sendUser, 0);
+                        }));
+                    }
+                    else
+                    {
+                        s1.Invoke(new Action(() =>
+                        {
+                            s1.AddMessage(message);
+                        }));
+                    }
                 }
             }
         }
@@ -292,12 +312,22 @@ namespace onlineChat
                         m1.userHeadTwinkle((uint)message.sendUser,0);
                     }));
                 }
-                else
+                else if (s1.targetUserID == (uint)message.sendUser)
                 {
-                    s1.Invoke(new Action(() =>
+                    if (s1.IsDisposed)
                     {
-                        s1.AddMessage(message);
-                    }));
+                        m1.Invoke(new Action(() =>
+                        {
+                            m1.userHeadTwinkle((uint)message.sendUser, 0);
+                        }));
+                    }
+                    else
+                    {
+                        s1.Invoke(new Action(() =>
+                        {
+                            s1.AddMessage(message);
+                        }));
+                    }
                 }
             }
             else
@@ -317,12 +347,22 @@ namespace onlineChat
                         m1.userHeadTwinkle((uint)message.sendUser,0);
                     }));
                 }
-                else
+                else if (s1.targetUserID == (uint)message.sendUser)
                 {
-                    s1.Invoke(new Action(() =>
+                    if (s1.IsDisposed)
                     {
-                        s1.AddMessage(message);
-                    }));
+                        m1.Invoke(new Action(() =>
+                        {
+                            m1.userHeadTwinkle((uint)message.sendUser, 0);
+                        }));
+                    }
+                    else
+                    {
+                        s1.Invoke(new Action(() =>
+                        {
+                            s1.AddMessage(message);
+                        }));
+                    }
                 }
             }
         }
@@ -348,19 +388,29 @@ namespace onlineChat
                     m1.userHeadTwinkle((uint)message.sendUser,1);
                 }));
             }
-            else if(g1.groupID != (uint)message.sendUser)
+            else if(g1.groupID != (uint)message.target)
             {
                 m1.Invoke(new Action(() =>
                 {
                     m1.userHeadTwinkle((uint)message.sendUser,1);
                 }));
             }
-            else
+            else if (g1.groupID == (uint)message.target)
             {
-                g1.Invoke(new Action(() =>
+                if(g1.IsDisposed)
                 {
-                    g1.AddMessage(message);
-                }));
+                    m1.Invoke(new Action(() =>
+                    {
+                        m1.userHeadTwinkle((uint)message.sendUser, 1);
+                    }));
+                }
+                else
+                {
+                    g1.Invoke(new Action(() =>
+                    {
+                        g1.AddMessage(message);
+                    }));
+                }
             }
         }
 
@@ -384,19 +434,29 @@ namespace onlineChat
                     m1.userHeadTwinkle((uint)message.sendUser,1);
                 }));
             }
-            else if(g1.groupID != (uint)message.sendUser)
+            else if(g1.groupID != (uint)message.target)
             {
                 m1.Invoke(new Action(() =>
                 {
                     m1.userHeadTwinkle((uint)message.sendUser,1);
                 }));
             }
-            else
+            else if (g1.groupID == (uint)message.target)
             {
-                g1.Invoke(new Action(() =>
+                if (g1.IsDisposed)
                 {
-                    g1.AddMessage(message);
-                }));
+                    m1.Invoke(new Action(() =>
+                    {
+                        m1.userHeadTwinkle((uint)message.sendUser, 1);
+                    }));
+                }
+                else
+                {
+                    g1.Invoke(new Action(() =>
+                    {
+                        g1.AddMessage(message);
+                    }));
+                }
             }
         }
     }
