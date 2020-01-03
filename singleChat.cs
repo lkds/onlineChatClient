@@ -25,6 +25,15 @@ namespace onlineChat
             Text = "单人聊天【To：" + targetUserName + "】";
             targetUserID = userID;
             userName.Text = name;
+            int avatarNum = 0;
+            foreach(user i in publicClass.recentChatList)
+            {
+                if(i.id==targetUserID)
+                {
+                    avatarNum = i.avatar;
+                }
+            }
+            userAvatar.Image= System.Drawing.Image.FromFile("../..//src/img/avatar" + avatarNum + ".png");
             DrawMessage();
         }
 

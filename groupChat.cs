@@ -26,6 +26,7 @@ namespace onlineChat
             groupID = ID;
             Text = "群组聊天【In：" + groupName + "】";
             chatGroupName.Text = name;
+            groupAvatar.Image = System.Drawing.Image.FromFile("../..//src/img/groupAvatar.png");
             DrawMessage();
             drawList();
         }
@@ -162,6 +163,7 @@ namespace onlineChat
                 }
                 sub.DisplayName = i.userName;
                 sub.PersonalMsg = i.IPAddress;
+                sub.HeadImage = System.Drawing.Image.FromFile("../..//src/img/avatar" + i.avatar + ".png");
                 groupMember.SubItems.Add(sub);
             }
             this.groupMemberListBox.Items.Add(groupMember);

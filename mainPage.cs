@@ -24,6 +24,7 @@ namespace onlineChat
             InitializeComponent();
             mainUserIPLabel.Text = publicClass.mainUser.IPAddress;
             mainUserNameLabel.Text = publicClass.mainUser.userName;
+            mainUserAvatarBox.Image=System.Drawing.Image.FromFile("../..//src/img/avatar" + publicClass.mainUser.avatar + ".png");
 
         }
 
@@ -67,9 +68,7 @@ namespace onlineChat
                         sub.Status = ChatListSubItem.UserStatus.OffLine;
                     }
                     sub.ID = (uint)i.id;
-                    var rnd = new Random();
-                    int randomNum=rnd.Next(4);
-                    sub.HeadImage = System.Drawing.Image.FromFile("../..//src/img/avatar"+randomNum+".png");
+                    sub.HeadImage = System.Drawing.Image.FromFile("../..//src/img/avatar"+i.avatar+".png");
                     sub.DisplayName = i.userName;
                     sub.PersonalMsg = i.IPAddress;
                     onlineUser.SubItems.Add(sub);
@@ -93,9 +92,7 @@ namespace onlineChat
                         sub.Status = ChatListSubItem.UserStatus.OffLine;
                     }
                     sub.ID = (uint)i.id;
-                    var rnd = new Random();
-                    int randomNum = rnd.Next(4);
-                    sub.HeadImage = System.Drawing.Image.FromFile("../..//src/img/avatar" + randomNum + ".png");
+                    sub.HeadImage = System.Drawing.Image.FromFile("../..//src/img/avatar" + i.avatar + ".png");
                     sub.DisplayName = i.userName;
                     sub.PersonalMsg = i.IPAddress;
                     recentChat.SubItems.Add(sub);
