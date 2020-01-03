@@ -205,14 +205,14 @@ namespace onlineChat
                 {
                     m1.Invoke(new Action(() =>
                     {
-                        m1.userHeadTwinkle((uint)message.sendUser);
+                        m1.userHeadTwinkle((uint)message.sendUser,0);
                     }));
                 }
                 else if(s1.targetUserID != (uint)message.sendUser)
                 {
                     m1.Invoke(new Action(() =>
                     {
-                        m1.userHeadTwinkle((uint)message.sendUser);
+                        m1.userHeadTwinkle((uint)message.sendUser,0);
                     }));
                 }
                 else
@@ -230,14 +230,14 @@ namespace onlineChat
                 {
                     m1.Invoke(new Action(() =>
                     {
-                        m1.userHeadTwinkle((uint)message.sendUser);
+                        m1.userHeadTwinkle((uint)message.sendUser,0);
                     }));
                 }
                 else if (s1.targetUserID != (uint)message.sendUser)
                 {
                     m1.Invoke(new Action(() =>
                     {
-                        m1.userHeadTwinkle((uint)message.sendUser);
+                        m1.userHeadTwinkle((uint)message.sendUser,0);
                     }));
                 }
                 else
@@ -282,14 +282,14 @@ namespace onlineChat
                 {
                     m1.Invoke(new Action(() =>
                     {
-                        m1.userHeadTwinkle((uint)message.sendUser);
+                        m1.userHeadTwinkle((uint)message.sendUser,0);
                     }));
                 }
                 else if (s1.targetUserID != (uint)message.sendUser)
                 {
                     m1.Invoke(new Action(() =>
                     {
-                        m1.userHeadTwinkle((uint)message.sendUser);
+                        m1.userHeadTwinkle((uint)message.sendUser,0);
                     }));
                 }
                 else
@@ -307,14 +307,14 @@ namespace onlineChat
                 {
                     m1.Invoke(new Action(() =>
                     {
-                        m1.userHeadTwinkle((uint)message.sendUser);
+                        m1.userHeadTwinkle((uint)message.sendUser,0);
                     }));
                 }
                 else if(s1.targetUserID != (uint)message.sendUser)
                 {
                     m1.Invoke(new Action(() =>
                     {
-                        m1.userHeadTwinkle((uint)message.sendUser);
+                        m1.userHeadTwinkle((uint)message.sendUser,0);
                     }));
                 }
                 else
@@ -345,14 +345,14 @@ namespace onlineChat
             {
                 m1.Invoke(new Action(() =>
                 {
-                    m1.userHeadTwinkle((uint)message.sendUser);
+                    m1.userHeadTwinkle((uint)message.sendUser,1);
                 }));
             }
             else if(g1.groupID != (uint)message.sendUser)
             {
                 m1.Invoke(new Action(() =>
                 {
-                    m1.userHeadTwinkle((uint)message.sendUser);
+                    m1.userHeadTwinkle((uint)message.sendUser,1);
                 }));
             }
             else
@@ -381,14 +381,14 @@ namespace onlineChat
             {
                 m1.Invoke(new Action(() =>
                 {
-                    m1.userHeadTwinkle((uint)message.sendUser);
+                    m1.userHeadTwinkle((uint)message.sendUser,1);
                 }));
             }
             else if(g1.groupID != (uint)message.sendUser)
             {
                 m1.Invoke(new Action(() =>
                 {
-                    m1.userHeadTwinkle((uint)message.sendUser);
+                    m1.userHeadTwinkle((uint)message.sendUser,1);
                 }));
             }
             else
