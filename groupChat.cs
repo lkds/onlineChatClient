@@ -33,7 +33,10 @@ namespace onlineChat
 
         public void DrawMessage()
         {
-            ArrayList messages=publicClass.groupList.Find(s=>s.id==(int)groupID).messageList;
+            try
+            {
+                ArrayList messages = publicClass.groupList.Find(s => s.id == (int)groupID).messageList;
+
             foreach(group i in publicClass.groupList)
             {
                 if(i.id==groupID)
@@ -72,6 +75,11 @@ namespace onlineChat
                     groupChatMessageBox.SelectionBullet = false;
                     groupChatMessageBox.Text = groupChatMessageBox.Text + "\r\n" + "【图片/文件消息  点击查看】";
                 }
+            }
+            }
+            catch
+            {
+
             }
         }
 
