@@ -30,6 +30,7 @@ namespace onlineChat
                     sub.NicName = "未选择";
                     sub.Status = ChatListSubItem.UserStatus.OffLine;
                     sub.ID = (uint)i.id;
+                    sub.HeadImage = System.Drawing.Image.FromFile("../..//src/img/avatar" + i.avatar + ".png");
                     sub.DisplayName = i.userName;
                     sub.PersonalMsg = i.IPAddress;
                     onlineUser.SubItems.Add(sub);
