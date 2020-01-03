@@ -68,7 +68,7 @@ namespace onlineChat
                     }
                     sub.ID = (uint)i.id;
                     var rnd = new Random();
-                    int randomNum=rnd.Next(5);
+                    int randomNum=rnd.Next(4);
                     sub.HeadImage = System.Drawing.Image.FromFile("../..//src/img/avatar"+randomNum+".png");
                     sub.DisplayName = i.userName;
                     sub.PersonalMsg = i.IPAddress;
@@ -94,7 +94,7 @@ namespace onlineChat
                     }
                     sub.ID = (uint)i.id;
                     var rnd = new Random();
-                    int randomNum = rnd.Next(5);
+                    int randomNum = rnd.Next(4);
                     sub.HeadImage = System.Drawing.Image.FromFile("../..//src/img/avatar" + randomNum + ".png");
                     sub.DisplayName = i.userName;
                     sub.PersonalMsg = i.IPAddress;
