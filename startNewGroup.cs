@@ -59,30 +59,6 @@ namespace onlineChat
             }
         }
 
-
-        private void selectUserBox_DoubleClickSubItem(object sender, ChatListEventArgs e)
-        {
-            if(e.SelectSubItem.Status == ChatListSubItem.UserStatus.OffLine)
-            {
-                e.SelectSubItem.Status = ChatListSubItem.UserStatus.Online;
-                e.SelectSubItem.NicName = "已选择";
-                selectedUserID.Add((int)e.SelectSubItem.ID);
-            }
-            else if(e.SelectSubItem.Status == ChatListSubItem.UserStatus.Online)
-            {
-                e.SelectSubItem.Status = ChatListSubItem.UserStatus.OffLine;
-                e.SelectSubItem.NicName = "未选择";
-                foreach(int i in selectedUserID)
-                {
-                    if(i== (int)e.SelectSubItem.ID)
-                    {
-                        selectedUserID.Remove(i);
-                        break;
-                    }
-                }
-            }
-        }
-
         private void label2_Click(object sender, EventArgs e)
         {
 
@@ -91,6 +67,29 @@ namespace onlineChat
         private void selectUserBox_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void selectUserBox_DoubleClickSubItem(object sender, ChatListEventArgs e, MouseEventArgs es)
+        {
+            if (e.SelectSubItem.Status == ChatListSubItem.UserStatus.OffLine)
+            {
+                e.SelectSubItem.Status = ChatListSubItem.UserStatus.Online;
+                e.SelectSubItem.NicName = "已选择";
+                selectedUserID.Add((int)e.SelectSubItem.ID);
+            }
+            else if (e.SelectSubItem.Status == ChatListSubItem.UserStatus.Online)
+            {
+                e.SelectSubItem.Status = ChatListSubItem.UserStatus.OffLine;
+                e.SelectSubItem.NicName = "未选择";
+                foreach (int i in selectedUserID)
+                {
+                    if (i == (int)e.SelectSubItem.ID)
+                    {
+                        selectedUserID.Remove(i);
+                        break;
+                    }
+                }
+            }
         }
     }
 }
