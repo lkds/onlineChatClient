@@ -90,6 +90,7 @@
             this.selectUserBox.SubItemMenu = null;
             this.selectUserBox.TabIndex = 5;
             this.selectUserBox.Text = "chatListBox1";
+            this.selectUserBox.DoubleClickSubItem += new CCWin.SkinControl.ChatListBox.ChatListEventHandler(this.selectUserBox_DoubleClickSubItem);
             this.selectUserBox.Click += new System.EventHandler(this.selectUserBox_Click);
             // 
             // label3
