@@ -609,20 +609,27 @@ namespace onlineChat
         {
             while (publicClass.isRun)
             {
-                byte[] textRec = new byte[4096];//创建接收消息的buffer
-                int length;
-                length = cSockets[0].Receive(textRec);//接收消息长度计数
-                //try
-                //{
-                string strMsg = System.Text.Encoding.UTF8.GetString(textRec, 1, length - 1);// 将接受到的字节数据转化成字符串
-                command c1 = JsonConvert.DeserializeObject<command>(strMsg);//解析
-                if (textRec[0] == 0)
+                try
                 {
-                    publicClass.decodeCommand(c1);
+                    byte[] textRec = new byte[4096];//创建接收消息的buffer
+                    int length;
+                    length = cSockets[0].Receive(textRec);//接收消息长度计数
+                                                          //try
+                                                          //{
+                    string strMsg = System.Text.Encoding.UTF8.GetString(textRec, 1, length - 1);// 将接受到的字节数据转化成字符串
+                    command c1 = JsonConvert.DeserializeObject<command>(strMsg);//解析
+                    if (textRec[0] == 0)
+                    {
+                        publicClass.decodeCommand(c1);
+                    }
+                    else if (textRec[0] == 1)
+                    {
+                        AcceptMgs(c1);
+                    }
                 }
-                else if(textRec[0]==1)
+                catch
                 {
-                    AcceptMgs(c1);
+                   //退出登录
                 }
                     
                 //}
