@@ -87,13 +87,33 @@ namespace onlineChat
                 singleChatMessageBox.SelectionColor = System.Drawing.Color.Purple;
                 singleChatMessageBox.SelectionIndent = 2;
                 singleChatMessageBox.SelectionBullet = true;
-            singleChatMessageBox.AppendText(publicClass.onlineUserList.Find(s => s.id == message.sendUser).userName + "  [" + message.sendTime + "]\r\n");
+                singleChatMessageBox.AppendText(publicClass.onlineUserList.Find(s => s.id == message.sendUser).userName + "  [" + message.sendTime + "]\r\n");
 
                 singleChatMessageBox.SelectionFont = new Font("宋体", 9, FontStyle.Regular);
                 singleChatMessageBox.SelectionColor = System.Drawing.Color.Black;
                 singleChatMessageBox.SelectionIndent = 19;
                 singleChatMessageBox.SelectionBullet = false;
                 singleChatMessageBox.AppendText(((textMessage)message).content+"\r\n");
+        }
+
+        public void showImageFileMessage(imageFileMessage message)
+        {
+            singleChatMessageBox.SelectionFont = new Font("黑体", 9, FontStyle.Bold);
+            singleChatMessageBox.SelectionColor = System.Drawing.Color.Purple;
+            singleChatMessageBox.SelectionIndent = 2;
+            singleChatMessageBox.SelectionBullet = true;
+            singleChatMessageBox.AppendText(publicClass.onlineUserList.Find(s => s.id == message.sendUser).userName + "  [" + message.sendTime + "]\r\n");
+
+            singleChatMessageBox.SelectionFont = new Font("宋体", 9, FontStyle.Regular);
+            singleChatMessageBox.SelectionColor = System.Drawing.Color.Blue;
+            singleChatMessageBox.SelectionIndent = 19;
+            singleChatMessageBox.SelectionBullet = false;
+            Clipboard.Clear();   //清空剪贴板
+            Bitmap bmp = new Bitmap(message.fileName);  //创建Bitmap类对象
+            Clipboard.SetImage(bmp);  //将Bitmap类对象写入剪贴板
+            singleChatMessageBox.Paste();   //将剪贴板中的对象粘贴到RichTextBox1
+            Clipboard.Clear();
+            singleChatMessageBox.AppendText("\r\n");
         }
 
         public void AddMessage(imageFileMessage message)
@@ -117,6 +137,7 @@ namespace onlineChat
             Clipboard.SetImage(bmp);  //将Bitmap类对象写入剪贴板
             singleChatMessageBox.Paste();   //将剪贴板中的对象粘贴到RichTextBox1
             Clipboard.Clear();
+            singleChatMessageBox.AppendText("\r\n");
         }
 
         private void SingleUserBox1_Load(object sender, EventArgs e)
@@ -159,7 +180,6 @@ namespace onlineChat
                 }
                 string sendMessage = JsonConvert.SerializeObject(new command() { data = message, type = 1, subType = "singleChatTextMessage", res = "" });//序列化
                 publicClass.cSocket.sendSysMsg(sendMessage,0);
-                inputBox.Clear();
             }
         }
         private void button1_Click(object sender, EventArgs e)
@@ -174,6 +194,7 @@ namespace onlineChat
                 publicClass.cSocket.SendBigFile(publicClass.sendFileName,publicClass.mainUser.id,l1,"singleChatImageFileMsg");
             }
             publicClass.sendMsgStatus = 0;
+            inputBox.Clear();
         }
 
         private void SingleChat_KeyDown(object sender, KeyEventArgs e)

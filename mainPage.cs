@@ -53,43 +53,53 @@ namespace onlineChat
             groupChat.SubItems.Clear();
             foreach (user i in onlineUserList)  //绘制在线列表
             {
-                ChatListSubItem sub = new ChatListSubItem();
-                if(i.isOnline)
+                if(i.id!=publicClass.mainUser.id)
                 {
-                    sub.NicName = "在线";
-                    sub.Status = ChatListSubItem.UserStatus.Online;
+                    ChatListSubItem sub = new ChatListSubItem();
+                    if (i.isOnline)
+                    {
+                        sub.NicName = "在线";
+                        sub.Status = ChatListSubItem.UserStatus.Online;
+                    }
+                    else
+                    {
+                        sub.NicName = "下线";
+                        sub.Status = ChatListSubItem.UserStatus.OffLine;
+                    }
+                    sub.ID = (uint)i.id;
+                    var rnd = new Random();
+                    int randomNum=rnd.Next(5);
+                    sub.HeadImage = System.Drawing.Image.FromFile("../..//src/img/avatar"+randomNum+".png");
+                    sub.DisplayName = i.userName;
+                    sub.PersonalMsg = i.IPAddress;
+                    onlineUser.SubItems.Add(sub);
                 }
-                else
-                {
-                    sub.NicName = "下线";
-                    sub.Status = ChatListSubItem.UserStatus.OffLine;
-                }
-                sub.ID = (uint)i.id;
-                sub.HeadImage = System.Drawing.Image.FromFile("../..//src/img/avatar.png");
-                sub.DisplayName = i.userName;
-                sub.PersonalMsg = i.IPAddress;
-                onlineUser.SubItems.Add(sub);
             }
             this.onlineUserListBox.Items.Add(onlineUser);
 
             foreach (user i in recentChatList)  //绘制最近聊列表
             {
-                ChatListSubItem sub = new ChatListSubItem();
-                if (i.isOnline)
+                if (i.id != publicClass.mainUser.id)
                 {
-                    sub.NicName = "在线";
-                    sub.Status = ChatListSubItem.UserStatus.Online;
+                    ChatListSubItem sub = new ChatListSubItem();
+                    if (i.isOnline)
+                    {
+                        sub.NicName = "在线";
+                        sub.Status = ChatListSubItem.UserStatus.Online;
+                    }
+                    else
+                    {
+                        sub.NicName = "下线";
+                        sub.Status = ChatListSubItem.UserStatus.OffLine;
+                    }
+                    sub.ID = (uint)i.id;
+                    var rnd = new Random();
+                    int randomNum = rnd.Next(5);
+                    sub.HeadImage = System.Drawing.Image.FromFile("../..//src/img/avatar" + randomNum + ".png");
+                    sub.DisplayName = i.userName;
+                    sub.PersonalMsg = i.IPAddress;
+                    recentChat.SubItems.Add(sub);
                 }
-                else
-                {
-                    sub.NicName = "下线";
-                    sub.Status = ChatListSubItem.UserStatus.OffLine;
-                }
-                sub.ID = (uint)i.id;
-                sub.HeadImage = System.Drawing.Image.FromFile("../..//src/img/avatar.png");
-                sub.DisplayName = i.userName;
-                sub.PersonalMsg = i.IPAddress;
-                recentChat.SubItems.Add(sub);
             }
             this.recentChatListBox.Items.Add(recentChat);
 
@@ -99,7 +109,7 @@ namespace onlineChat
                 sub.NicName = "群组";
                 sub.DisplayName = i.groupName;
                 sub.ID = (uint)i.id;
-                sub.HeadImage = System.Drawing.Image.FromFile("../..//src/img/avatar2.png");
+                sub.HeadImage = System.Drawing.Image.FromFile("../..//src/img/groupAvatar.png");
                 sub.PersonalMsg = "";
                 sub.Status = ChatListSubItem.UserStatus.QMe;
                 groupChat.SubItems.Add(sub);
