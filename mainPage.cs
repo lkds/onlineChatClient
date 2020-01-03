@@ -115,13 +115,19 @@ namespace onlineChat
         }
 
         //头像闪动
-        public void userHeadTwinkle(uint id)
+        public void userHeadTwinkle(uint id,int type)
         {
             try
             {
-                this.onlineUserListBox.GetSubItemsById(id)[0].IsTwinkle = true;
-                this.recentChatListBox.GetSubItemsById(id)[0].IsTwinkle = true;
-                this.groupChatListBox.GetSubItemsById(id)[0].IsTwinkle = true;
+                if(type==0)
+                {
+                    this.onlineUserListBox.GetSubItemsById(id)[0].IsTwinkle = true;
+                    this.recentChatListBox.GetSubItemsById(id)[0].IsTwinkle = true;
+                }
+                else
+                {
+                    this.groupChatListBox.GetSubItemsById(id)[0].IsTwinkle = true;
+                }
             }
             catch
             {
@@ -130,13 +136,19 @@ namespace onlineChat
         }
 
         //头像停止闪动
-        public void userHeadNotTwinkle(uint id)
+        public void userHeadNotTwinkle(uint id, int type)
         {
             try
             {
-                this.onlineUserListBox.GetSubItemsById(id)[0].IsTwinkle = false;
-                this.recentChatListBox.GetSubItemsById(id)[0].IsTwinkle = false;
-                this.groupChatListBox.GetSubItemsById(id)[0].IsTwinkle = false;
+                if (type == 0)
+                {
+                    this.onlineUserListBox.GetSubItemsById(id)[0].IsTwinkle = false;
+                    this.recentChatListBox.GetSubItemsById(id)[0].IsTwinkle = false;
+                }
+                else
+                {
+                    this.groupChatListBox.GetSubItemsById(id)[0].IsTwinkle = false;
+                }
             }
             catch
             {
@@ -183,7 +195,7 @@ namespace onlineChat
 
         private void onlineUserListBox_DoubleClickSubItem(object sender, ChatListEventArgs e, MouseEventArgs es)
         {
-            userHeadNotTwinkle(e.SelectSubItem.ID);
+            userHeadNotTwinkle(e.SelectSubItem.ID,0);
             if (publicClass.s1 == null )
             {
                 publicClass.s1 = new singleChat(e.SelectSubItem.ID,e.SelectSubItem.DisplayName);
@@ -208,7 +220,7 @@ namespace onlineChat
 
         private void recentChatListBox_DoubleClickSubItem(object sender, ChatListEventArgs e, MouseEventArgs es)
         {
-            userHeadNotTwinkle(e.SelectSubItem.ID);
+            userHeadNotTwinkle(e.SelectSubItem.ID,0);
             if (publicClass.s1 == null)
             {
                 publicClass.s1 = new singleChat(e.SelectSubItem.ID, e.SelectSubItem.DisplayName);
@@ -233,7 +245,7 @@ namespace onlineChat
 
         private void groupChatListBox_DoubleClickSubItem(object sender, ChatListEventArgs e, MouseEventArgs es)
         {
-            userHeadNotTwinkle(e.SelectSubItem.ID);
+            userHeadNotTwinkle(e.SelectSubItem.ID,1);
             if (publicClass.g1 == null)
             {
                 publicClass.g1 = new groupChat(e.SelectSubItem.ID, e.SelectSubItem.DisplayName);
