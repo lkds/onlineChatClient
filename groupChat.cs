@@ -32,7 +32,7 @@ namespace onlineChat
 
         public void DrawMessage()
         {
-            ArrayList messages=null;
+            ArrayList messages=publicClass.groupList.Find(s=>s.id==(int)groupID).messageList;
             foreach(group i in publicClass.groupList)
             {
                 if(i.id==groupID)

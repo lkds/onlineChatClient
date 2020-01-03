@@ -183,8 +183,8 @@ namespace onlineChat
         public static void decodeCreateGroupAnswer(command cComand)
         {
             JArray data = (JArray)cComand.data;//转化为Jobject
-            ArrayList newGroupMessage = data.ToObject<ArrayList>();
-            group newGroup = new group((int)newGroupMessage[0],(string)newGroupMessage[1],(List<user>)newGroupMessage[2]);
+            //ArrayList newGroupMessage = data.ToObject<ArrayList>();
+            group newGroup = new group(data[0].ToObject<int>(),data[1].ToObject<string>(),data[2].ToObject<List<user>>());
             groupList.Add(newGroup);
             if(m1!=null)
                 m1.drawList();
@@ -408,6 +408,7 @@ namespace onlineChat
             groupName = cGroupName;
             groupUserList = cGroupUserList;
             //groupAvatar = cGroupAvatar;
+            messageList = new ArrayList();
         }
 
         //添加一个用户
