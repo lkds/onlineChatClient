@@ -18,13 +18,19 @@ namespace onlineChat
     {
         public string targetUserName;
         public uint targetUserID;
-        public singleChat(uint userID,string name)
+        public singleChat(uint userID)
         {
             InitializeComponent();
-            targetUserName = name;
+            foreach(user i in publicClass.onlineUserList)
+            {
+                if(i.id==userID)
+                {
+                    targetUserName = i.userName;
+                }
+            }
             Text = "单人聊天【To：" + targetUserName + "】";
             targetUserID = userID;
-            userName.Text = name;
+            userName.Text = targetUserName;
             int avatarNum = 0;
             foreach(user i in publicClass.recentChatList)
             {
@@ -228,6 +234,11 @@ namespace onlineChat
         }
 
         private void InputBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void singleChat_Load(object sender, EventArgs e)
         {
 
         }

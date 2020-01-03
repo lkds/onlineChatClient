@@ -196,24 +196,27 @@ namespace onlineChat
         private void onlineUserListBox_DoubleClickSubItem(object sender, ChatListEventArgs e, MouseEventArgs es)
         {
             userHeadNotTwinkle(e.SelectSubItem.ID,0);
-            if (publicClass.s1 == null )
+            if (e.SelectSubItem.Status != ChatListSubItem.UserStatus.OffLine)
             {
-                publicClass.s1 = new singleChat(e.SelectSubItem.ID,e.SelectSubItem.DisplayName);
-                publicClass.s1.Show();
-            }
-            else if(e.SelectSubItem.ID != publicClass.s1.targetUserID)
-            {
-                publicClass.s1.Close();
-                publicClass.s1 = new singleChat(e.SelectSubItem.ID, e.SelectSubItem.DisplayName);
-                publicClass.s1.Show();
-
-            }
-            else
-            {
-                if (publicClass.s1.IsDisposed)
+                if (publicClass.s1 == null)
                 {
-                    publicClass.s1 = new singleChat(e.SelectSubItem.ID, e.SelectSubItem.DisplayName);
+                    publicClass.s1 = new singleChat(e.SelectSubItem.ID);
                     publicClass.s1.Show();
+                }
+                else if (e.SelectSubItem.ID != publicClass.s1.targetUserID)
+                {
+                    publicClass.s1.Close();
+                    publicClass.s1 = new singleChat(e.SelectSubItem.ID);
+                    publicClass.s1.Show();
+
+                }
+                else
+                {
+                    if (publicClass.s1.IsDisposed)
+                    {
+                        publicClass.s1 = new singleChat(e.SelectSubItem.ID);
+                        publicClass.s1.Show();
+                    }
                 }
             }
         }
@@ -221,24 +224,27 @@ namespace onlineChat
         private void recentChatListBox_DoubleClickSubItem(object sender, ChatListEventArgs e, MouseEventArgs es)
         {
             userHeadNotTwinkle(e.SelectSubItem.ID,0);
-            if (publicClass.s1 == null)
+            if (e.SelectSubItem.Status != ChatListSubItem.UserStatus.OffLine)
             {
-                publicClass.s1 = new singleChat(e.SelectSubItem.ID, e.SelectSubItem.DisplayName);
-                publicClass.s1.Show();
-            }
-            else if (e.SelectSubItem.ID != publicClass.s1.targetUserID)
-            {
-                publicClass.s1.Close();
-                publicClass.s1 = new singleChat(e.SelectSubItem.ID, e.SelectSubItem.DisplayName);
-                publicClass.s1.Show();
-
-            }
-            else
-            {
-                if (publicClass.s1.IsDisposed)
+                if (publicClass.s1 == null)
                 {
-                    publicClass.s1 = new singleChat(e.SelectSubItem.ID, e.SelectSubItem.DisplayName);
+                    publicClass.s1 = new singleChat(e.SelectSubItem.ID);
                     publicClass.s1.Show();
+                }
+                else if (e.SelectSubItem.ID != publicClass.s1.targetUserID)
+                {
+                    publicClass.s1.Close();
+                    publicClass.s1 = new singleChat(e.SelectSubItem.ID);
+                    publicClass.s1.Show();
+
+                }
+                else
+                {
+                    if (publicClass.s1.IsDisposed)
+                    {
+                        publicClass.s1 = new singleChat(e.SelectSubItem.ID);
+                        publicClass.s1.Show();
+                    }
                 }
             }
         }
